@@ -10,25 +10,27 @@ extents = Vector2( 4, 2 )
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 2 )
 
-[node name="Pivot" type="Node2D" parent="."]
+[node name="Pivot" type="YSort" parent="."]
 
 [node name="Body" type="Sprite" parent="Pivot"]
-position = Vector2( 0, -15 )
+position = Vector2( 0, -10 )
 texture = ExtResource( 1 )
+offset = Vector2( 0, -6 )
 
-[node name="WandPivot" type="Node2D" parent="Pivot"]
-position = Vector2( 0, -6 )
+[node name="WandPivot" type="YSort" parent="Pivot"]
+position = Vector2( 0, -8 )
 
 [node name="Wand" type="Sprite" parent="Pivot/WandPivot"]
-position = Vector2( 6, -3 )
+position = Vector2( 9, 0 )
 texture = ExtResource( 3 )
 
 [node name="CastPoint" type="Position2D" parent="Pivot/WandPivot/Wand"]
-position = Vector2( 13, -3 )
+position = Vector2( 0, -8 )
 
 [node name="Pushbox" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -1 )
 shape = SubResource( 1 )
 
 [node name="AttackCooldown" type="Timer" parent="."]
-wait_time = 0.5
+wait_time = 0.3
 one_shot = true
