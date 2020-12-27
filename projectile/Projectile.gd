@@ -1,18 +1,15 @@
 extends Area2D
 
-export(int) var projectile_speed = 200
+export(int) var projectile_speed = 128
 
-var velocity = Vector2.ZERO
-
+var direction := Vector2.ZERO
 
 func _physics_process(delta):
-	velocity.x = 1
-	velocity.y = 0
-	velocity *= projectile_speed
-	position += velocity * delta
+	position += direction * projectile_speed * delta
 
+func setup_projectile(direction: Vector2):
+	self.direction = direction
 
 func _on_VisibilityNotifier2D_screen_exited():
-	print("left")
+	print("Projectile destroyed!")
 	queue_free()
-	
