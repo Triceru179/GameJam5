@@ -9,7 +9,6 @@ export(int) var speed = 200
 
 var velocity := Vector2.ZERO
 var input_vector := Vector2.ZERO
-
 var cast_direction := Vector2.ZERO
 
 onready var cast_point := $Pivot/WandPivot/Wand/CastPoint
@@ -17,6 +16,7 @@ onready var wand_pivot := $Pivot/WandPivot
 onready var wand_sprite := $Pivot/WandPivot/Wand
 
 onready var attack_cooldown_timer := $AttackCooldown
+
 
 func _process(_delta):
 	_update_look_direction()

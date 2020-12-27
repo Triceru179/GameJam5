@@ -1,6 +1,6 @@
 extends Area2D
 
-export(int) var projectile_speed = 128
+export(int) var projectile_speed = 100
 
 var direction := Vector2.ZERO
 
