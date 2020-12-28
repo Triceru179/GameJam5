@@ -1,7 +1,7 @@
 extends Area2D
 
-export(int) var projectile_speed = 100
 
+export(int) var projectile_speed = 100
 var direction := Vector2.ZERO
 
 func _physics_process(delta):

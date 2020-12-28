@@ -9,11 +9,6 @@ export(int) var speed = 200
 
 var velocity := Vector2.ZERO
 var input_vector := Vector2.ZERO
-var cast_direction := Vector2.ZERO
-
-onready var cast_point := $Pivot/WandPivot/Wand/CastPoint
-onready var wand_pivot := $Pivot/WandPivot
-onready var wand_sprite := $Pivot/WandPivot/Wand
 
 onready var attack_cooldown_timer := $AttackCooldown
 
@@ -42,16 +37,8 @@ func _attack():
 func _update_look_direction():
 	var mouse_direction = (get_global_mouse_position() - $Pivot.global_position).normalized()
 	
-	_rotate_wand(mouse_direction)
+	_rotate_weapon(mouse_direction)
 	_flip(mouse_direction.x)
-
-func _rotate_wand(direction: Vector2):
-	var wand_rotation = Vector2.RIGHT.angle_to(direction)
-	
-	wand_pivot.rotation = lerp_angle(wand_pivot.rotation, wand_rotation, 0.2)
-	wand_sprite.rotation = -wand_pivot.rotation
-	
-	cast_direction = (get_global_mouse_position() - cast_point.global_position).normalized()
 
 func _get_input():
 	input_vector.x = Input.get_action_strength(Globals.ACTION_RIGHT) - Input.get_action_strength(Globals.ACTION_LEFT)
