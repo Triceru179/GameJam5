@@ -1,7 +1,6 @@
 extends Resource
-class_name ProjectileStats
+class_name ProjectileData
 
-export(int) var projectile_speed = 100
-export(int) var DAMAGE = 1
+export(float) var speed = 0
+export(int) var damage = 1
 export(int) var index = 0
-var direction := Vector2.ZERO

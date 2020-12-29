@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/eye_sheet.png-b783cf407e5bca10cb40c244a2ea4424.stex"
+path="res://.import/eye_sheet.png-e14f22091a610658e3b8e72aad9fee3d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://actor/player/sprites/eye_sheet.png"
-dest_files=[ "res://.import/eye_sheet.png-b783cf407e5bca10cb40c244a2ea4424.stex" ]
+source_file="res://actors/player/sprites/eye_sheet.png"
+dest_files=[ "res://.import/eye_sheet.png-e14f22091a610658e3b8e72aad9fee3d.stex" ]
 
 [params]
 

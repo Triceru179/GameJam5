@@ -6,13 +6,13 @@
 [sub_resource type="CircleShape2D" id=1]
 radius = 7.0
 
-[sub_resource type="CanvasItemMaterial" id=3]
+[sub_resource type="CanvasItemMaterial" id=2]
 particles_animation = true
 particles_anim_h_frames = 3
 particles_anim_v_frames = 1
 particles_anim_loop = true
 
-[sub_resource type="ParticlesMaterial" id=2]
+[sub_resource type="ParticlesMaterial" id=3]
 emission_shape = 1
 emission_sphere_radius = 1.0
 flag_disable_z = true
@@ -28,9 +28,9 @@ script = ExtResource( 1 )
 shape = SubResource( 1 )
 
 [node name="Particles2D" type="Particles2D" parent="."]
-material = SubResource( 3 )
+material = SubResource( 2 )
 amount = 1
-process_material = SubResource( 2 )
+process_material = SubResource( 3 )
 texture = ExtResource( 2 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]

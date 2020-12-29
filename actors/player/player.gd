@@ -1,20 +1,21 @@
 extends Actor
 
-const ACCELERATION = 1024
-const MAX_SPEED = 128
-const FRICTION = 512
+enum State {
+	IDLE = 0,
+	WALK = 1,
+}
+
 const PROJECTILE_SCENE = preload("res://projectile/Projectile.tscn") 
 
-export(int) var speed = 200
+var look_direction := Vector2.ZERO
+var attack_direction := Vector2.ZERO
+var velocity := Vector2.ZERO
+var input_vector := Vector2.ZERO
+var current_state: int = State.IDLE
 
 onready var weapon_pivot := $Pivot/WeaponPivot
 onready var weapon_sprite := $Pivot/WeaponPivot/Weapon
 onready var attack_point := $Pivot/WeaponPivot/Weapon/AttackPoint
-
-var attack_direction := Vector2.ZERO
-var velocity := Vector2.ZERO
-var input_vector := Vector2.ZERO
-
 onready var attack_cooldown_timer := $AttackCooldown
 
 func _process(_delta):
@@ -27,10 +28,18 @@ func _process(_delta):
 func _physics_process(delta):
 	_get_input()
 	
-	if input_vector != Vector2.ZERO:
-		velocity = velocity.move_toward(input_vector * MAX_SPEED, ACCELERATION * delta)
-	else:
-		velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
+	match current_state:
+		State.IDLE:
+			_idle_logic()
+			
+			if input_vector != Vector2.ZERO:
+				current_state = State.WALK
+		
+		State.WALK:
+			_walk_logic()
+			
+			if velocity.length_squared() == 0:
+				current_state = State.IDLE
 	
 	velocity = move_and_slide(velocity)
 
@@ -39,10 +48,8 @@ func _attack():
 	_restart_timer()
 
 func _update_look_direction():
-	var mouse_direction = (get_global_mouse_position() - $Pivot.global_position).normalized()
-	
-	_rotate_weapon(mouse_direction)
-	_flip(mouse_direction.x)
+	look_direction = (get_global_mouse_position() - $Pivot.global_position).normalized()
+	_rotate_weapon(look_direction)
 
 func _get_input():
 	input_vector.x = Input.get_action_strength(Globals.ACTION_RIGHT) - Input.get_action_strength(Globals.ACTION_LEFT)
@@ -66,3 +73,22 @@ func _rotate_weapon(direction: Vector2):
 
 func _restart_timer():
 	attack_cooldown_timer.start()
+
+func _idle_logic():
+	if anim_player.current_animation != Globals.ANIM_IDLE:
+		anim_player.play(Globals.ANIM_IDLE)
+	
+	_flip(look_direction.x)
+
+func _walk_logic():
+	if anim_player.current_animation != Globals.ANIM_WALK:
+		anim_player.play(Globals.ANIM_WALK)
+	
+	_flip(velocity.x)
+	
+	if input_vector != Vector2.ZERO:
+		velocity = velocity.move_toward(input_vector * actor_data.max_speed,
+			actor_data.acceleration * get_physics_process_delta_time())
+	else:
+		velocity = velocity.move_toward(Vector2.ZERO, actor_data.friction
+			* get_physics_process_delta_time())

@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://actors/player/crosshair/crosshair.gd" type="Script" id=1]
+[ext_resource path="res://actors/player/crosshair/crosshair.png" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 8, 8 )
+
+[node name="Crosshair" type="Area2D"]
+z_index = 1000
+monitorable = false
+collision_layer = 0
+collision_mask = 516
+script = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+hframes = 2
+[connection signal="area_entered" from="." to="." method="_on_Crosshair_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_Crosshair_area_exited"]
