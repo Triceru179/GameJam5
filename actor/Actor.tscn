@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://actor/actor.png" type="Texture" id=1]
+[ext_resource path="res://actor/actor.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+resource_local_to_scene = true
+extents = Vector2( 4, 2 )
+
+[node name="Actor" type="KinematicBody2D"]
+script = ExtResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="Pivot" type="YSort" parent="."]
+
+[node name="BodyPivot" type="YSort" parent="Pivot"]
+
+[node name="Body" type="Sprite" parent="Pivot/BodyPivot"]
+position = Vector2( 0, -10 )
+texture = ExtResource( 1 )
+offset = Vector2( 0, -6 )
+
+[node name="Pushbox" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -1 )
+shape = SubResource( 1 )

@@ -7,11 +7,15 @@ const PROJECTILE_SCENE = preload("res://projectile/Projectile.tscn")
 
 export(int) var speed = 200
 
+onready var weapon_pivot := $Pivot/WeaponPivot
+onready var weapon_sprite := $Pivot/WeaponPivot/Weapon
+onready var attack_point := $Pivot/WeaponPivot/Weapon/AttackPoint
+
+var attack_direction := Vector2.ZERO
 var velocity := Vector2.ZERO
 var input_vector := Vector2.ZERO
 
 onready var attack_cooldown_timer := $AttackCooldown
-
 
 func _process(_delta):
 	_update_look_direction()
@@ -47,10 +51,18 @@ func _get_input():
 
 func _create_projectile():
 	var projectile = PROJECTILE_SCENE.instance()
-	projectile.setup_projectile(cast_direction)
+	projectile.setup_projectile(attack_direction)
 	
 	get_parent().add_child(projectile)
-	projectile.position = cast_point.global_position
+	projectile.position = attack_point.global_position
+
+func _rotate_weapon(direction: Vector2):
+	var weapon_rotation = Vector2.RIGHT.angle_to(direction)
+	
+	weapon_pivot.rotation = lerp_angle(weapon_pivot.rotation, weapon_rotation, 0.2)
+	weapon_sprite.rotation = -weapon_pivot.rotation
+	
+	attack_direction = (get_global_mouse_position() - attack_point.global_position).normalized()
 
 func _restart_timer():
 	attack_cooldown_timer.start()
