@@ -7,6 +7,8 @@ enum State {
 
 const PROJECTILE_SCENE = preload("res://projectile/Projectile.tscn") 
 
+export(Resource) var current_projectile_data = null
+
 var look_direction := Vector2.ZERO
 var attack_direction := Vector2.ZERO
 var velocity := Vector2.ZERO
@@ -58,7 +60,7 @@ func _get_input():
 
 func _create_projectile():
 	var projectile = PROJECTILE_SCENE.instance()
-	projectile.setup_projectile(attack_direction)
+	projectile.setup_projectile(attack_direction, current_projectile_data)
 	
 	get_parent().add_child(projectile)
 	projectile.position = attack_point.global_position

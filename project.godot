@@ -23,11 +23,29 @@ _global_script_classes=[ {
 "class": "ProjectileData",
 "language": "GDScript",
 "path": "res://projectile/projectile_data.gd"
+}, {
+"base": "Node",
+"class": "State",
+"language": "GDScript",
+"path": "res://actors/finite_state_machine/state.gd"
+}, {
+"base": "Node",
+"class": "StateMachine",
+"language": "GDScript",
+"path": "res://actors/finite_state_machine/state_machine.gd"
+}, {
+"base": "Reference",
+"class": "Transition",
+"language": "GDScript",
+"path": "res://actors/finite_state_machine/transition.gd"
 } ]
 _global_script_class_icons={
 "Actor": "",
 "ActorData": "",
-"ProjectileData": ""
+"ProjectileData": "",
+"State": "",
+"StateMachine": "",
+"Transition": ""
 }
 
 [application]
