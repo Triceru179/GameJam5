@@ -1,15 +1,41 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://actors/Actor.tscn" type="PackedScene" id=1]
+[ext_resource path="res://shader/color_swap.shader" type="Shader" id=2]
+[ext_resource path="res://actors/palette_swapper/PaletteSwapper.tscn" type="PackedScene" id=3]
+[ext_resource path="res://actors/enemies/enemy.gd" type="Script" id=4]
+[ext_resource path="res://actors/enemies/player_detector.gd" type="Script" id=5]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 2 )
+
+[sub_resource type="RectangleShape2D" id=2]
 resource_local_to_scene = true
-extents = Vector2( 4, 2 )
+extents = Vector2( 5, 2 )
+
+[sub_resource type="RectangleShape2D" id=3]
+resource_local_to_scene = true
+extents = Vector2( 4, 8 )
 
 [node name="Enemy" instance=ExtResource( 1 )]
+script = ExtResource( 4 )
+
+[node name="Body" parent="Pivot/BodyPivot" index="0"]
+material = SubResource( 1 )
 
 [node name="Pushbox" parent="." index="2"]
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="Hurtbox" parent="." index="3"]
 collision_layer = 512
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+shape = SubResource( 3 )
+
+[node name="BodyPaletteSwapper" parent="." index="4" instance=ExtResource( 3 )]
+target_sprite = NodePath("../Pivot/BodyPivot/Body")
+
+[node name="PlayerDetector" type="Node" parent="." index="5"]
+script = ExtResource( 5 )
+
+[editable path="Hurtbox"]

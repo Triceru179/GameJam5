@@ -1,12 +1,17 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=21 format=2]
 
-[ext_resource path="res://actors/player/sprites/eye_sheet.png" type="Texture" id=1]
+[ext_resource path="res://actors/player/palettes/palette_player_purple.png" type="Texture" id=1]
 [ext_resource path="res://actors/player/sprites/wand_sheet.png" type="Texture" id=2]
 [ext_resource path="res://actors/player/player.gd" type="Script" id=3]
 [ext_resource path="res://actors/Actor.tscn" type="PackedScene" id=4]
 [ext_resource path="res://actors/player/sprites/player_sheet.png" type="Texture" id=5]
 [ext_resource path="res://projectile/projectiles_data/Fast.tres" type="Resource" id=6]
 [ext_resource path="res://actors/player/actor_data_player.tres" type="Resource" id=7]
+[ext_resource path="res://materials/material_color_swap.tres" type="Material" id=8]
+[ext_resource path="res://actors/palette_swapper/PaletteSwapper.tscn" type="PackedScene" id=9]
+[ext_resource path="res://actors/player/palettes/palette_wand_blue.png" type="Texture" id=10]
+[ext_resource path="res://actors/player/palettes/palette_wand_red.png" type="Texture" id=11]
+[ext_resource path="res://actors/player/palettes/palette_wand_yellow.png" type="Texture" id=12]
 
 [sub_resource type="Animation" id=1]
 resource_name = "idle"
@@ -22,18 +27,6 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ 0, 1 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Pivot/BodyPivot/Eyes:offset")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ Vector2( 2, -14 ), Vector2( 2, -15 ) ]
 }
 
 [sub_resource type="Animation" id=2]
@@ -52,24 +45,64 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 2, 3, 4, 5 ]
 }
-tracks/1/type = "value"
-tracks/1/path = NodePath("Pivot/BodyPivot/Eyes:offset")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
+
+[sub_resource type="Shader" id=3]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+
+uniform sampler2D palette;
+
+void fragment() {
+	vec4 rgba = texture(TEXTURE, UV);
+	vec4 final_color = texture(palette, vec2(rgba.r, rgba.g));
+	final_color.a = rgba.a;
+	
+	COLOR = final_color;
+}"
+
+[sub_resource type="ShaderMaterial" id=4]
+resource_local_to_scene = true
+shader = SubResource( 3 )
+shader_param/palette = ExtResource( 1 )
+
+[sub_resource type="Animation" id=5]
+resource_name = "idle"
+length = 0.9
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Weapon:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45, 0.6, 0.75 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5 ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "shake"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Weapon:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ Vector2( 2, -15 ), Vector2( 2, -14 ), Vector2( 2, -15 ), Vector2( 2, -14 ) ]
+"values": [ 6, 7, 8, 9 ]
 }
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=7]
 resource_local_to_scene = true
 extents = Vector2( 4, 2 )
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=8]
 resource_local_to_scene = true
 extents = Vector2( 4, 8 )
 
@@ -83,26 +116,34 @@ anims/idle = SubResource( 1 )
 anims/walk = SubResource( 2 )
 
 [node name="Body" parent="Pivot/BodyPivot" index="0"]
+material = SubResource( 4 )
 texture = ExtResource( 5 )
 hframes = 6
 
-[node name="Eyes" type="Sprite" parent="Pivot/BodyPivot" index="1"]
-texture = ExtResource( 1 )
-offset = Vector2( 2, -14 )
-hframes = 3
+[node name="WeaponPivot" type="Node2D" parent="Pivot" index="1"]
+position = Vector2( 0, 5 )
 
-[node name="WeaponPivot" type="YSort" parent="Pivot" index="1"]
-position = Vector2( 0, -12 )
+[node name="Anchor" type="Position2D" parent="Pivot/WeaponPivot" index="0"]
+position = Vector2( 0, -19 )
 
-[node name="Weapon" type="Sprite" parent="Pivot/WeaponPivot" index="0"]
-position = Vector2( 13, 0 )
+[node name="Weapon" type="Sprite" parent="Pivot/WeaponPivot" index="1"]
+material = ExtResource( 8 )
+position = Vector2( 14, -22 )
 texture = ExtResource( 2 )
+offset = Vector2( 0, 4 )
+hframes = 10
 
 [node name="AttackPoint" type="Position2D" parent="Pivot/WeaponPivot/Weapon" index="0"]
-position = Vector2( 0, -8 )
+position = Vector2( 0, -4 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Pivot/WeaponPivot" index="2"]
+anims/idle = SubResource( 5 )
+anims/shake = SubResource( 6 )
 
 [node name="Pushbox" parent="." index="2"]
-shape = SubResource( 3 )
+visible = true
+position = Vector2( 0, -2 )
+shape = SubResource( 7 )
 
 [node name="AttackCooldown" type="Timer" parent="." index="3"]
 wait_time = 0.4
@@ -112,6 +153,12 @@ one_shot = true
 collision_layer = 128
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
-shape = SubResource( 4 )
+shape = SubResource( 8 )
+
+[node name="WeaponPaletteSwapper" parent="." index="5" instance=ExtResource( 9 )]
+target_sprite = NodePath("../Pivot/WeaponPivot/Weapon")
+palette_red = ExtResource( 11 )
+palette_blue = ExtResource( 10 )
+palette_yellow = ExtResource( 12 )
 
 [editable path="Hurtbox"]

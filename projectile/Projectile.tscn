@@ -14,7 +14,7 @@ region = Rect2( 0, 0, 16, 16 )
 atlas = ExtResource( 3 )
 region = Rect2( 16, 0, 16, 16 )
 
-[sub_resource type="SpriteFrames" id=6]
+[sub_resource type="SpriteFrames" id=4]
 animations = [ {
 "frames": [ SubResource( 2 ), SubResource( 3 ) ],
 "loop": true,
@@ -23,6 +23,7 @@ animations = [ {
 } ]
 
 [node name="Projectile" type="Area2D"]
+z_index = 10
 script = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -34,6 +35,7 @@ visible = false
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 z_index = -1
-frames = SubResource( 6 )
+frames = SubResource( 4 )
+frame = 1
 playing = true
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

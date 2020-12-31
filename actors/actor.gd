@@ -3,9 +3,10 @@ class_name Actor
 
 export(Resource) var actor_data = null
 
+var current_color_index = 0
+
 onready var body_pivot := $Pivot/BodyPivot
 onready var anim_player := $AnimationPlayer
 
-func _flip(value):
-	if value != 0:
-		body_pivot.scale.x = lerp(body_pivot.scale.x, sign(value), 0.7)
+func _flip(value: float):
+	Globals.flip(body_pivot, value, Vector2.RIGHT, 0.7)

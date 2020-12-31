@@ -3,8 +3,6 @@ extends Area2D
 var dir := Vector2.ZERO
 var data: ProjectileData = null
 
-onready var lifetime_timer := $Lifetime
-
 func _physics_process(delta):
 	position += dir * data.speed * delta
 
