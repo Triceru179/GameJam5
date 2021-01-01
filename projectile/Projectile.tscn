@@ -38,6 +38,5 @@ visible = false
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 z_index = -1
 frames = SubResource( 4 )
-frame = 1
 playing = true
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

@@ -5,6 +5,6 @@
 
 [resource]
 script = ExtResource( 1 )
-rotation_speed = 180.0
+rotation_per_attack = 0.0
 inbetween_delay = 0.5
 attack_datas = [ ExtResource( 2 ), ExtResource( 2 ), ExtResource( 2 ) ]
