@@ -4,7 +4,7 @@
 [ext_resource path="res://actors/actor.gd" type="Script" id=2]
 [ext_resource path="res://actors/hurtbox_and_hitbox/Hurtbox.tscn" type="PackedScene" id=3]
 [ext_resource path="res://shader/color_swap.shader" type="Shader" id=4]
-[ext_resource path="res://world/AttackSpawner.tscn" type="PackedScene" id=5]
+[ext_resource path="res://actors/attacks/attack_spawner/AttackSpawner.tscn" type="PackedScene" id=5]
 
 [sub_resource type="ShaderMaterial" id=1]
 resource_local_to_scene = true
@@ -23,15 +23,14 @@ script = ExtResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 
-[node name="Pivot" type="YSort" parent="."]
+[node name="Pivot" type="Node2D" parent="."]
 
-[node name="BodyPivot" type="YSort" parent="Pivot"]
+[node name="BodyPivot" type="Node2D" parent="Pivot"]
 
 [node name="Body" type="Sprite" parent="Pivot/BodyPivot"]
 material = SubResource( 1 )
-position = Vector2( 0, -10 )
 texture = ExtResource( 1 )
-offset = Vector2( 0, -6 )
+offset = Vector2( 0, -16 )
 
 [node name="Pushbox" type="CollisionShape2D" parent="."]
 visible = false

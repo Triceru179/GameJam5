@@ -24,7 +24,7 @@ const ACTION_COLOR_SWAP_LEFT = "action_color_swap_left"
 
 const ANIM_IDLE = "idle"
 const ANIM_WALK = "walk"
-const ANIM_JUMP = "attack"
+const ANIM_ATTACK = "attack"
 const ANIM_PREPARE = "prepare"
 const ANIM_SHAKE = "shake"
 
@@ -34,3 +34,6 @@ func flip(target: Node2D, value: float, flip_vec: Vector2, weigth: float):
 	
 	if value != 0 && abs(sign(flip_vec.y)) == 1:
 		target.scale.y = lerp(target.scale.y, sign(value), weigth)
+
+func angle_to_vector(angle_rad: float) -> Vector2:
+	return Vector2(cos(angle_rad), sin(angle_rad))

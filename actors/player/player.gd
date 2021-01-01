@@ -59,8 +59,6 @@ func _physics_process(_delta):
 			if velocity.length_squared() == 0:
 				current_state = State.IDLE
 
-	velocity = move_and_slide(velocity)
-
 func _cycle_color(value: int):
 	var index = current_color_index
 	index += sign(value)
@@ -94,7 +92,7 @@ func _create_projectile():
 	var attack_direction = ((get_global_mouse_position()
 		- $Pivot/WeaponPivot/Weapon/AttackPoint.global_position).normalized())
 	
-	var p = load("res://actors/attacks/attack_patterns/TripleCircle.tres")
+	var p = load("res://actors/attacks/attack_datas/CircleAttack1.tres")
 	
 	attack_spawner.execute_attack(p, attack_direction,
 		$Pivot/WeaponPivot/Weapon/AttackPoint.global_position,
@@ -117,7 +115,7 @@ func _idle_logic():
 	_flip(look_direction.x)
 
 func _move_logic():
-	_flip(velocity.x)
+	_flip(input_vector.x)
 	
 	if input_vector != Vector2.ZERO:
 		velocity = velocity.move_toward(input_vector * actor_data.max_speed,
@@ -125,3 +123,5 @@ func _move_logic():
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, actor_data.friction
 			* get_physics_process_delta_time())
+	
+	velocity = move_and_slide(velocity)

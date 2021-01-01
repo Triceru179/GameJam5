@@ -18,6 +18,8 @@ resource_local_to_scene = true
 extents = Vector2( 4, 8 )
 
 [node name="Enemy" instance=ExtResource( 1 )]
+collision_layer = 4
+collision_mask = 7
 script = ExtResource( 4 )
 
 [node name="Body" parent="Pivot/BodyPivot" index="0"]
@@ -37,5 +39,12 @@ target_sprite = NodePath("../Pivot/BodyPivot/Body")
 
 [node name="PlayerDetector" type="Node" parent="." index="5"]
 script = ExtResource( 5 )
+
+[node name="AttackCooldown" type="Timer" parent="." index="7"]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[node name="AttackPoint" type="Position2D" parent="." index="8"]
 
 [editable path="Hurtbox"]
