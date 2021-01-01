@@ -15,22 +15,21 @@ func execute_attack(pattern: AttackPatternData, direction: Vector2, position: Ve
 		var rotation_step = 0
 		var proj_initial_rot = 0
 		
-		if attack_data.spread == 360:
-			rotation_step = attack_data.spread / attack_data.projectiles.size()
-			proj_initial_rot = dir.angle()
-		else:
-			rotation_step = attack_data.spread / (attack_data.projectiles.size() - 1)
-			proj_initial_rot = dir.angle() - deg2rad(attack_data.spread / 2)
+		rotation_step = deg2rad(attack_data.spread / attack_data.number_of_projectiles)
+		proj_initial_rot = dir.angle()
+		proj_initial_rot += (0 if attack_data.number_of_projectiles % 2 != 0
+				else rotation_step / 2)
 		
-		for i in range(attack_data.projectiles.size()):
+		for i in range(-attack_data.number_of_projectiles / 2,
+				attack_data.number_of_projectiles / 2 + attack_data.number_of_projectiles % 2):
 			var proj = PROJECTILE_SCENE.instance()
-			var angle = proj_initial_rot + deg2rad(rotation_step * i)
+			var angle = proj_initial_rot + rotation_step * i
 			var rot_vec = Vector2(cos(angle), sin(angle))
 			
 			proj_node.add_child(proj)
 			
 			proj.position = position
-			proj.setup_projectile(attack_data.projectiles[i],
+			proj.setup_projectile(attack_data.projectile_data,
 				rot_vec, collision_layer)
 		
 		dir = dir.rotated(deg2rad(pattern.rotation_per_attack))

@@ -1,9 +1,10 @@
 [gd_resource type="Resource" load_steps=3 format=2]
 
 [ext_resource path="res://actors/attacks/attack_data.gd" type="Script" id=1]
-[ext_resource path="res://projectile/projectiles_data/Slow.tres" type="Resource" id=2]
+[ext_resource path="res://projectile/projectiles_data/Fast.tres" type="Resource" id=2]
 
 [resource]
 script = ExtResource( 1 )
-projectiles = [ ExtResource( 2 ), ExtResource( 2 ), ExtResource( 2 ), ExtResource( 2 ), ExtResource( 2 ) ]
+projectile_data = ExtResource( 2 )
+number_of_projectiles = 12
 spread = 360.0
