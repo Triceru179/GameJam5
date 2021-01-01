@@ -6,7 +6,6 @@ enum State {
 	STAGGER,
 }
 
-const PROJECTILE_SCENE = preload("res://projectile/Projectile.tscn")
 const WEAPON_DISTANCE = 13
 
 export(Resource) var current_projectile_data = null
@@ -92,14 +91,14 @@ func _get_input():
 	input_vector = input_vector.normalized()
 
 func _create_projectile():
-	var projectile = PROJECTILE_SCENE.instance()
 	var attack_direction = ((get_global_mouse_position()
 		- $Pivot/WeaponPivot/Weapon/AttackPoint.global_position).normalized())
 	
-	projectile.setup_projectile(attack_direction, current_projectile_data)
+	var p = load("res://actors/attacks/attack_patterns/TripleCircle.tres")
 	
-	get_parent().add_child(projectile)
-	projectile.position = $Pivot/WeaponPivot/Weapon/AttackPoint.global_position
+	attack_spawner.execute_attack(p, attack_direction,
+		$Pivot/WeaponPivot/Weapon/AttackPoint.global_position,
+		Globals.CollisionLayers.PlayerHitbox)
 
 func _rotate_weapon():
 	var direction = (get_global_mouse_position() - weapon_anchor.global_position).normalized()

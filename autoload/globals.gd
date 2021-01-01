@@ -7,6 +7,11 @@ enum Colors {
 	YELLOW = 2,
 }
 
+enum CollisionLayers {
+	PlayerHitbox = 6,
+	EnemyHitbox = 8,
+}
+
 const COLOR_COUNT = 3
 
 const ACTION_UP = "action_up"
