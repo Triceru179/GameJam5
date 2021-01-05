@@ -1,43 +1,42 @@
 extends MarginContainer
 
-const first_scene = preload("res://menu/FirstScene.tscn")
-
-onready var selector_one = $CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer/HBoxContainer/Selector
-onready var selector_two = $CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer2/HBoxContainer/Selector
-onready var selector_three = $CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer3/HBoxContainer/Selector
+const FIRST_SCENE = preload("res://menu/FirstScene.tscn")
 
 var current_selection = 0
+
+onready var selectors = [
+	$CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer/HBoxContainer/Selector,
+	$CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer2/HBoxContainer/Selector,
+	$CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer3/HBoxContainer/Selector,
+]
 
 func _ready():
 	set_current_selection(0)
 
 func _process(_delta):
-	if Input.is_action_just_pressed(Globals.ACTION_DOWN) and current_selection < 2:
-		current_selection += 1
+	if Input.is_action_just_pressed("action_down"):
+		current_selection = wrapi(current_selection + 1, 0, 3)
 		set_current_selection(current_selection)
-	elif Input.is_action_just_pressed(Globals.ACTION_UP) and current_selection > 0:
-		current_selection -= 1
+	elif Input.is_action_just_pressed("action_up"):
+		current_selection = wrapi(current_selection - 1, 0, 3)
 		set_current_selection(current_selection)
-	elif Input.is_action_just_pressed("ui_accept"):
+	elif Input.is_action_just_pressed("action_accept"):
 		handle_selection(current_selection)
 
 func handle_selection(_current_selection):
-	if _current_selection == 0:
-		get_parent().add_child(first_scene.instance())
-		queue_free()
-	elif _current_selection == 1:
-		print("Add options!")
-	elif _current_selection == 2:
-		get_tree().quit()
+	match _current_selection:
+		0:
+			get_parent().add_child(FIRST_SCENE.instance())
+			queue_free()
+		1:
+			print("Add options!")
+		2:
+			get_tree().quit()
 
 func set_current_selection(_current_selection):
-	selector_one.text = ""
-	selector_two.text = ""
-	selector_three.text = ""
-	if _current_selection == 0:
-		selector_one.text = ">"
-	elif _current_selection == 1:
-		selector_two.text = ">"
-	elif _current_selection == 2:
-		selector_three.text = ">"
-
+	for s in selectors:
+		s.text = ""
+	
+	for i in range(selectors.size()):
+		if _current_selection == i:
+			selectors[i].text = ">"
