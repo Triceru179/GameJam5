@@ -1,11 +1,11 @@
 [gd_resource type="Resource" load_steps=3 format=2]
 
 [ext_resource path="res://projectile/projectile_data.gd" type="Script" id=1]
-[ext_resource path="res://projectile/sprites/projectile_magic_medium_missile.png" type="Texture" id=2]
+[ext_resource path="res://projectile/sprites/projectile_magic_small_missile.png" type="Texture" id=2]
 
 [resource]
 script = ExtResource( 1 )
 texture = ExtResource( 2 )
 hitbox_radius = 2
-speed = 102.0
+speed = 152.0
 rotation_speed = 0.0

@@ -42,6 +42,9 @@ func angle_to_vector(angle_rad: float) -> Vector2:
 	return Vector2(cos(angle_rad), sin(angle_rad))
 
 func blink_white(palette_swapper, duration: float = 0.1):
+	if !palette_swapper:
+		return
+	
 	var previous_index = palette_swapper.current_palette_index
 	
 	palette_swapper.change_palette(Globals.Colors.WHITE)

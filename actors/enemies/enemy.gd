@@ -37,7 +37,6 @@ func _on_Hurtbox_area_entered(area):
 	if p != null && p.color_i == current_color_index:
 		p.destroy_projectile()
 		
-		Globals.blink_white($BodyPaletteSwapper)
 		$Health.do_damage(1)
 		$InvincibilityTimer.start()
 
@@ -45,3 +44,5 @@ func _on_Health_changed(current_health):
 	if current_health <= 0:
 		emit_signal("killed")
 		queue_free()
+	else:
+		Globals.blink_white($BodyPaletteSwapper)

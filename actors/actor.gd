@@ -26,7 +26,6 @@ func _on_Hurtbox_area_entered(area):
 	if !$InvincibilityTimer.is_stopped():
 		return
 	
-	Globals.blink_white($BodyPaletteSwapper)
 	$Health.do_damage(1)
 	$InvincibilityTimer.start()
 	
@@ -36,3 +35,5 @@ func _on_Hurtbox_area_entered(area):
 func _on_Health_changed(current_health):
 	if current_health <= 0:
 		queue_free()
+	else:
+		Globals.blink_white($BodyPaletteSwapper)
