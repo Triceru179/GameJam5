@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://world/tower/Tower.tscn" type="PackedScene" id=1]
 [ext_resource path="res://actors/player/Player.tscn" type="PackedScene" id=2]
@@ -11,10 +11,52 @@
 [ext_resource path="res://world/waves/wave_spawner.gd" type="Script" id=9]
 [ext_resource path="res://world/waves/wave_datas/Wave_01.tres" type="Resource" id=10]
 [ext_resource path="res://world/waves/wave_datas/Wave_03.tres" type="Resource" id=11]
+[ext_resource path="res://hud/HUD.tscn" type="PackedScene" id=12]
+[ext_resource path="res://world/detail/Grass.tscn" type="PackedScene" id=13]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 340, 10 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 10, 190 )
 
 [node name="Main" type="Node"]
 
 [node name="World" type="YSort" parent="."]
+
+[node name="MapBounds" type="Node2D" parent="World"]
+
+[node name="BoundTop" type="StaticBody2D" parent="World/MapBounds"]
+position = Vector2( 0, -180 )
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/MapBounds/BoundTop"]
+shape = SubResource( 1 )
+
+[node name="BoundBottom" type="StaticBody2D" parent="World/MapBounds"]
+position = Vector2( 0, 190 )
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/MapBounds/BoundBottom"]
+shape = SubResource( 1 )
+
+[node name="BoundLeft" type="StaticBody2D" parent="World/MapBounds"]
+position = Vector2( -330, 0 )
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/MapBounds/BoundLeft"]
+shape = SubResource( 2 )
+
+[node name="BoundRight" type="StaticBody2D" parent="World/MapBounds"]
+position = Vector2( 330, 0 )
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/MapBounds/BoundRight"]
+shape = SubResource( 2 )
 
 [node name="Background" type="Sprite" parent="World"]
 position = Vector2( 0, -0.529739 )
@@ -35,11 +77,131 @@ position = Vector2( 0, 25 )
 [node name="RockSmall" parent="World/Rocks" instance=ExtResource( 5 )]
 position = Vector2( -81, 68 )
 
+[node name="RockSmall2" parent="World/Rocks" instance=ExtResource( 5 )]
+position = Vector2( 53, 134 )
+
+[node name="RockSmall3" parent="World/Rocks" instance=ExtResource( 5 )]
+position = Vector2( 61, 139 )
+
+[node name="RockSmall4" parent="World/Rocks" instance=ExtResource( 5 )]
+position = Vector2( -219, 133 )
+
+[node name="RockSmall7" parent="World/Rocks" instance=ExtResource( 5 )]
+position = Vector2( -221, -108 )
+
+[node name="RockSmall8" parent="World/Rocks" instance=ExtResource( 5 )]
+position = Vector2( 133, -141 )
+
+[node name="RockSmall9" parent="World/Rocks" instance=ExtResource( 5 )]
+position = Vector2( 278, -88 )
+
+[node name="RockSmall5" parent="World/Rocks" instance=ExtResource( 5 )]
+position = Vector2( -99, -71 )
+
+[node name="RockSmall6" parent="World/Rocks" instance=ExtResource( 5 )]
+position = Vector2( 173, 32 )
+
 [node name="RockMedium" parent="World/Rocks" instance=ExtResource( 8 )]
 position = Vector2( 148, -64 )
 
+[node name="RockMedium3" parent="World/Rocks" instance=ExtResource( 8 )]
+position = Vector2( 183, 22 )
+
+[node name="RockMedium4" parent="World/Rocks" instance=ExtResource( 8 )]
+position = Vector2( -253, -11 )
+
+[node name="RockMedium5" parent="World/Rocks" instance=ExtResource( 8 )]
+position = Vector2( -94, 169 )
+
+[node name="RockMedium6" parent="World/Rocks" instance=ExtResource( 8 )]
+position = Vector2( -232, -115 )
+
+[node name="RockMedium7" parent="World/Rocks" instance=ExtResource( 8 )]
+position = Vector2( 134, -149 )
+
+[node name="RockMedium8" parent="World/Rocks" instance=ExtResource( 8 )]
+position = Vector2( 272, -73 )
+
+[node name="RockMedium2" parent="World/Rocks" instance=ExtResource( 8 )]
+position = Vector2( -72, 64 )
+
 [node name="RockBig" parent="World/Rocks" instance=ExtResource( 7 )]
 position = Vector2( 62, 131 )
+
+[node name="RockBig2" parent="World/Rocks" instance=ExtResource( 7 )]
+position = Vector2( -229, 132 )
+
+[node name="RockBig3" parent="World/Rocks" instance=ExtResource( 7 )]
+position = Vector2( -95, -58 )
+
+[node name="RockBig4" parent="World/Rocks" instance=ExtResource( 7 )]
+position = Vector2( 256, 62 )
+
+[node name="Grasses" type="YSort" parent="World"]
+z_index = -2
+
+[node name="Grass" parent="World/Grasses" instance=ExtResource( 13 )]
+position = Vector2( 79, 53 )
+
+[node name="Grass2" parent="World/Grasses" instance=ExtResource( 13 )]
+position = Vector2( 126, 100 )
+
+[node name="Grass3" parent="World/Grasses" instance=ExtResource( 13 )]
+position = Vector2( -37, 130 )
+
+[node name="Grass4" parent="World/Grasses" instance=ExtResource( 13 )]
+position = Vector2( -162, 79 )
+
+[node name="Grass5" parent="World/Grasses" instance=ExtResource( 13 )]
+position = Vector2( -204, -34 )
+
+[node name="Grass6" parent="World/Grasses" instance=ExtResource( 13 )]
+position = Vector2( -103, -61 )
+
+[node name="Grass7" parent="World/Grasses" instance=ExtResource( 13 )]
+position = Vector2( -249, -134 )
+
+[node name="Grass8" parent="World/Grasses" instance=ExtResource( 13 )]
+position = Vector2( -301, 47 )
+
+[node name="Grass9" parent="World/Grasses" instance=ExtResource( 13 )]
+position = Vector2( -259, 146 )
+
+[node name="Grass10" parent="World/Grasses" instance=ExtResource( 13 )]
+position = Vector2( -88, -145 )
+
+[node name="Grass11" parent="World/Grasses" instance=ExtResource( 13 )]
+position = Vector2( -177, -102 )
+
+[node name="Grass12" parent="World/Grasses" instance=ExtResource( 13 )]
+position = Vector2( 57, -141 )
+
+[node name="Grass13" parent="World/Grasses" instance=ExtResource( 13 )]
+position = Vector2( -40, -86 )
+
+[node name="Grass14" parent="World/Grasses" instance=ExtResource( 13 )]
+position = Vector2( 107, 1 )
+
+[node name="Grass15" parent="World/Grasses" instance=ExtResource( 13 )]
+position = Vector2( 285, -111 )
+
+[node name="Grass16" parent="World/Grasses" instance=ExtResource( 13 )]
+position = Vector2( 157, -166 )
+
+[node name="Grass17" parent="World/Grasses" instance=ExtResource( 13 )]
+position = Vector2( 266, 39 )
+
+[node name="Grass18" parent="World/Grasses" instance=ExtResource( 13 )]
+position = Vector2( 206, 106 )
+
+[node name="Grass19" parent="World/Grasses" instance=ExtResource( 13 )]
+position = Vector2( 294, 142 )
+
+[node name="Grass20" parent="World/Grasses" instance=ExtResource( 13 )]
+position = Vector2( 224, -31 )
+
+[node name="Grass21" parent="World/Grasses" instance=ExtResource( 13 )]
+position = Vector2( 237, -156 )
 
 [node name="WaveSpawner" type="Node" parent="World"]
 script = ExtResource( 9 )
@@ -48,4 +210,6 @@ waves = [ ExtResource( 10 ), ExtResource( 6 ), ExtResource( 11 ) ]
 [node name="RestTime" type="Timer" parent="World/WaveSpawner"]
 wait_time = 5.0
 one_shot = true
+
+[node name="HUD" parent="." instance=ExtResource( 12 )]
 [connection signal="timeout" from="World/WaveSpawner/RestTime" to="World/WaveSpawner" method="_on_RestTime_timeout"]

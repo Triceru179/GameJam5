@@ -103,7 +103,7 @@ extents = Vector2( 4, 2 )
 
 [sub_resource type="RectangleShape2D" id=8]
 resource_local_to_scene = true
-extents = Vector2( 3, 2 )
+extents = Vector2( 3, 7 )
 
 [node name="Player" instance=ExtResource( 4 )]
 collision_layer = 2
@@ -157,7 +157,6 @@ collision_layer = 128
 collision_mask = 256
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
-position = Vector2( 0, -2 )
 shape = SubResource( 8 )
 
 [node name="WeaponPaletteSwapper" parent="." index="5" instance=ExtResource( 9 )]
@@ -174,7 +173,6 @@ limit_right = 320
 limit_bottom = 180
 limit_smoothed = true
 smoothing_enabled = true
-editor_draw_limits = true
 
 [node name="BodyPaletteSwapper" parent="." index="10"]
 palette_default = ExtResource( 1 )
