@@ -13,9 +13,10 @@ var current_state: int = State.IDLE
 var jump_direction := Vector2.ZERO
 
 func _ready():
-	setup_enemy(Globals.Colors.RED)
+	._ready()
+	$AttackCooldown.wait_time += (randf() - 0.5) * 2
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	match current_state:
 		State.IDLE:
 			if anim_player.current_animation != Globals.ANIM_IDLE:

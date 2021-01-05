@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://world/waves/wave_data.gd" type="Script" id=1]
+[ext_resource path="res://actors/enemies/slime/Slime.tscn" type="PackedScene" id=2]
+
+[resource]
+script = ExtResource( 1 )
+enemies_scene = [ ExtResource( 2 ) ]
+enemies_quantity = [ 14 ]

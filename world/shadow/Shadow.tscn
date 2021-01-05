@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://actors/actor.png" type="Texture" id=1]
+[ext_resource path="res://world/shadow/shadow.gd" type="Script" id=2]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform vec4 shadow_color: hint_color;
+
+void fragment() {
+	vec4 rgba = texture(TEXTURE, UV);
+	vec4 c = shadow_color;
+	c.a = rgba.a;
+	
+	COLOR = c;
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/shadow_color = Color( 0.133333, 0.384314, 0.180392, 1 )
+
+[node name="Shadow" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+material = SubResource( 2 )
+scale = Vector2( 1, -1 )
+z_index = -5
+texture = ExtResource( 1 )
+offset = Vector2( 0, -16 )

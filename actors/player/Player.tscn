@@ -1,11 +1,10 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://actors/player/palettes/palette_player_purple.png" type="Texture" id=1]
 [ext_resource path="res://actors/player/sprites/wand_sheet.png" type="Texture" id=2]
 [ext_resource path="res://actors/player/player.gd" type="Script" id=3]
 [ext_resource path="res://actors/Actor.tscn" type="PackedScene" id=4]
 [ext_resource path="res://actors/player/sprites/player_sheet.png" type="Texture" id=5]
-[ext_resource path="res://projectile/projectiles_data/Fast.tres" type="Resource" id=6]
 [ext_resource path="res://actors/player/actor_data_player.tres" type="Resource" id=7]
 [ext_resource path="res://materials/material_color_swap.tres" type="Material" id=8]
 [ext_resource path="res://actors/palette_swapper/PaletteSwapper.tscn" type="PackedScene" id=9]
@@ -104,24 +103,25 @@ extents = Vector2( 4, 2 )
 
 [sub_resource type="RectangleShape2D" id=8]
 resource_local_to_scene = true
-extents = Vector2( 4, 8 )
+extents = Vector2( 3, 2 )
 
 [node name="Player" instance=ExtResource( 4 )]
 collision_layer = 2
-collision_mask = 7
+collision_mask = 15
 script = ExtResource( 3 )
 actor_data = ExtResource( 7 )
-current_projectile_data = ExtResource( 6 )
 
 [node name="AnimationPlayer" parent="." index="0"]
 anims/idle = SubResource( 1 )
 anims/walk = SubResource( 2 )
 
-[node name="Body" parent="Pivot/BodyPivot" index="0"]
+[node name="BodyShadow" parent="Pivot/BodyPivot" index="0"]
+reference_sprite = NodePath("../Body")
+
+[node name="Body" parent="Pivot/BodyPivot" index="1"]
 material = SubResource( 4 )
 texture = ExtResource( 5 )
 hframes = 6
-frame = 1
 
 [node name="WeaponPivot" type="Node2D" parent="Pivot" index="1"]
 position = Vector2( 0, 5 )
@@ -154,8 +154,10 @@ one_shot = true
 
 [node name="Hurtbox" parent="." index="4"]
 collision_layer = 128
+collision_mask = 256
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
+position = Vector2( 0, -2 )
 shape = SubResource( 8 )
 
 [node name="WeaponPaletteSwapper" parent="." index="5" instance=ExtResource( 9 )]
@@ -163,5 +165,18 @@ target_sprite = NodePath("../Pivot/WeaponPivot/Weapon")
 palette_red = ExtResource( 11 )
 palette_blue = ExtResource( 10 )
 palette_yellow = ExtResource( 12 )
+
+[node name="Camera2D" type="Camera2D" parent="." index="8"]
+current = true
+limit_left = -320
+limit_top = -180
+limit_right = 320
+limit_bottom = 180
+limit_smoothed = true
+smoothing_enabled = true
+editor_draw_limits = true
+
+[node name="BodyPaletteSwapper" parent="." index="10"]
+palette_default = ExtResource( 1 )
 
 [editable path="Hurtbox"]

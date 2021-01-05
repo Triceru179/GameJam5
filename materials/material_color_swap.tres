@@ -1,6 +1,4 @@
-[gd_resource type="ShaderMaterial" load_steps=3 format=2]
-
-[ext_resource path="res://actors/player/palettes/palette_wand_red.png" type="Texture" id=1]
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
 
 [sub_resource type="Shader" id=1]
 resource_local_to_scene = true
@@ -19,4 +17,3 @@ void fragment() {
 [resource]
 resource_local_to_scene = true
 shader = SubResource( 1 )
-shader_param/palette = ExtResource( 1 )

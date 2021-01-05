@@ -3,11 +3,12 @@ class_name AttackSpawner
 
 const PROJECTILE_SCENE = preload("res://projectile/Projectile.tscn")
 
-func execute_attack(attack_data: AttackData, direction: Vector2, position: Vector2, collision_layer: int):
+func execute_attack(attack_data: AttackData, direction: Vector2, position: Vector2,
+		collision_layer: int, color_index: int):
 	var proj_node = get_tree().get_root().get_node_or_null("Main/World/Projectiles")
 	
 	if proj_node == null:
-		var n = Node.new()
+		var n = YSort.new()
 		n.name = "Projectiles"
 		get_tree().get_root().get_node("Main/World").add_child(n)
 		proj_node = n
@@ -28,5 +29,6 @@ func execute_attack(attack_data: AttackData, direction: Vector2, position: Vecto
 		proj_node.add_child(proj)
 		
 		proj.position = position
+		proj.rotation = angle
 		proj.setup_projectile(attack_data.projectile_data,
-			rot_vec, collision_layer)
+			rot_vec, collision_layer, color_index)

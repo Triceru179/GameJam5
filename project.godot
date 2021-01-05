@@ -29,7 +29,12 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://actors/attacks/attack_spawner/attack_spawner.gd"
 }, {
-"base": "Area2D",
+"base": "Actor",
+"class": "Enemy",
+"language": "GDScript",
+"path": "res://actors/enemies/enemy.gd"
+}, {
+"base": "YSort",
 "class": "Projectile",
 "language": "GDScript",
 "path": "res://projectile/projectile.gd"
@@ -38,14 +43,21 @@ _global_script_classes=[ {
 "class": "ProjectileData",
 "language": "GDScript",
 "path": "res://projectile/projectile_data.gd"
+}, {
+"base": "Resource",
+"class": "WaveData",
+"language": "GDScript",
+"path": "res://world/waves/wave_data.gd"
 } ]
 _global_script_class_icons={
 "Actor": "",
 "ActorData": "",
 "AttackData": "",
 "AttackSpawner": "",
+"Enemy": "",
 "Projectile": "",
-"ProjectileData": ""
+"ProjectileData": "",
+"WaveData": ""
 }
 
 [application]
@@ -165,6 +177,7 @@ action_color_swap_right={
 2d_physics/layer_1="World"
 2d_physics/layer_2="Player"
 2d_physics/layer_3="Enemies"
+2d_physics/layer_4="Environment"
 2d_physics/layer_7="PlayerHitbox"
 2d_physics/layer_8="PlayerHurtbox"
 2d_physics/layer_9="EnemyHitbox"
