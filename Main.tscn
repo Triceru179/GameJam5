@@ -17,6 +17,7 @@
 [node name="World" type="YSort" parent="."]
 
 [node name="Background" type="Sprite" parent="World"]
+position = Vector2( 0, -0.529739 )
 z_index = -10
 texture = ExtResource( 4 )
 region_enabled = true

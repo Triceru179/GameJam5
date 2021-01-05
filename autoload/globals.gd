@@ -16,6 +16,7 @@ enum CollisionLayers {
 
 const COLOR_COUNT = 3
 
+const ACTION_ACCEPT = "action_accept"
 const ACTION_UP = "action_up"
 const ACTION_DOWN = "action_down"
 const ACTION_RIGHT = "action_right"
