@@ -175,7 +175,7 @@ palette_blue = ExtResource( 3 )
 palette_yellow = ExtResource( 5 )
 
 [node name="AttackCooldown" parent="." index="7"]
-wait_time = 2.0
+wait_time = 4.0
 
 [node name="AttackPoint" parent="." index="8"]
 position = Vector2( 0, -1 )
