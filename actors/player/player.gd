@@ -12,7 +12,6 @@ enum State {
 const COLOR_DEFAULT = Color(1.0, 1.0, 1.0, 1.0)
 const COLOR_TRASPARENT = Color(1.0, 1.0, 1.0, 0.5)
 const WEAPON_DISTANCE = 13
-const PAUSE_SCENE = preload("res://world/pause/Pause.tscn")
 const DASH_SPEED = 252
 
 var look_direction := Vector2.ZERO
@@ -35,9 +34,6 @@ func _ready():
 	_update_weapon_color()
 	
 	$BodyPaletteSwapper.change_palette(Globals.Colors.DEFAULT)
-	
-	var GrabedInstance = PAUSE_SCENE.instance()
-	self.add_child(GrabedInstance)
 
 func _process(_delta):
 	look_direction = (get_global_mouse_position() - body_pivot.global_position).normalized()
