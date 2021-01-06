@@ -20,8 +20,6 @@ func attack(_rotation_offset: float = 0):
 func _flip(value: float):
 	Globals.flip(body_pivot, value, Vector2.RIGHT, 0.7)
 
-
-
 func _on_Hurtbox_area_entered(area):
 	if !$InvincibilityTimer.is_stopped():
 		return

@@ -28,9 +28,6 @@ func _physics_process(_delta):
 		State.PREPARE:
 			if anim_player.current_animation != Globals.ANIM_PREPARE:
 				anim_player.play(Globals.ANIM_PREPARE)
-			
-			if player_detector.player != null:
-				jump_direction = -player_detector.get_player_direction_to(self.global_position)
 		
 		State.ATTACK:
 			if anim_player.current_animation != Globals.ANIM_ATTACK:
@@ -45,6 +42,10 @@ func _physics_process(_delta):
 				$Tween.start()
 			
 			var _er = move_and_slide(actor_data.max_speed * jump_direction)
+
+func get_jump_direction():
+	if player_detector.player != null:
+		jump_direction = -player_detector.get_player_direction_to(self.global_position)
 
 func reset_jump_direction():
 	jump_direction = Vector2.ZERO

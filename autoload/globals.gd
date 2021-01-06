@@ -24,6 +24,7 @@ const ACTION_LEFT = "action_left"
 const ACTION_ATTACK_1 = "action_primary_attack"
 const ACTION_COLOR_SWAP_RIGHT = "action_color_swap_right"
 const ACTION_COLOR_SWAP_LEFT = "action_color_swap_left"
+const ACTION_DASH = "action_dash"
 
 const ANIM_IDLE = "idle"
 const ANIM_WALK = "walk"
