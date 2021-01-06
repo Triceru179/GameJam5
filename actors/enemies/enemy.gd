@@ -3,8 +3,8 @@ class_name Enemy
 
 signal killed
 
-onready var player_detector = $PlayerDetector
-onready var attack_cooldown_timer = $AttackCooldown
+onready var attack_cooldown_timer := $AttackCooldown
+onready var player_detector = get_tree().get_current_scene().get_node("World/PlayerDetector")
 
 func _ready():
 	._ready()

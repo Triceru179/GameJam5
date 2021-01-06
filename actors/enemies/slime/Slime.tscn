@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://actors/enemies/Enemy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://actors/enemies/slime/slime_sheet.png" type="Texture" id=2]
@@ -31,29 +31,30 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 1 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
 "values": [ {
-"args": [  ],
-"method": "reset_jump_direction"
+"args": [ 32.0, 1.0 ],
+"method": "start_jump"
+}, {
+"args": [ 0.0 ],
+"method": "attack"
 } ]
 }
-tracks/2/type = "method"
-tracks/2/path = NodePath(".")
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:collision_mask")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 1 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [ 0.0 ],
-"method": "attack"
-} ]
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 1, 7 ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath(".:collision_mask")
+tracks/3/path = NodePath(".:collision_layer")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -62,27 +63,15 @@ tracks/3/keys = {
 "times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 1, 7 ]
+"values": [ 0, 4 ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath(".:collision_layer")
+tracks/4/path = NodePath("Hurtbox:monitoring")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ 0, 4 ]
-}
-tracks/5/type = "value"
-tracks/5/path = NodePath("Hurtbox:monitoring")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
 "times": PoolRealArray( 0.1, 0.9 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
@@ -104,6 +93,73 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 0, 1, 2, 1 ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "move"
+length = 0.7
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Pivot/BodyPivot/Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.55, 0.7, 0.8, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 1, 2, 4, 5, 6, 3, 2, 1 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ 16.0, 0.5 ],
+"method": "start_jump"
+} ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:collision_mask")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.2, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 1, 7 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath(".:collision_layer")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.2, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 4 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Hurtbox:monitoring")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.3, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
 }
 
 [sub_resource type="Animation" id=3]
@@ -145,6 +201,7 @@ actor_data = ExtResource( 8 )
 playback_process_mode = 0
 anims/attack = SubResource( 1 )
 anims/idle = SubResource( 2 )
+anims/move = SubResource( 7 )
 anims/prepare = SubResource( 3 )
 
 [node name="BodyShadow" parent="Pivot/BodyPivot" index="0"]
@@ -155,7 +212,7 @@ material = SubResource( 4 )
 texture = ExtResource( 2 )
 offset = Vector2( 0, -14 )
 hframes = 7
-frame = 4
+frame = 2
 
 [node name="Pushbox" parent="." index="2"]
 visible = true
@@ -169,19 +226,26 @@ visible = false
 position = Vector2( 0, -5 )
 shape = SubResource( 6 )
 
-[node name="BodyPaletteSwapper" parent="." index="4"]
-palette_red = ExtResource( 4 )
-palette_blue = ExtResource( 3 )
-palette_yellow = ExtResource( 5 )
-
-[node name="AttackCooldown" parent="." index="7"]
+[node name="AttackCooldown" parent="." index="6"]
 wait_time = 4.0
 
-[node name="AttackPoint" parent="." index="8"]
+[node name="AttackPoint" parent="." index="7"]
 position = Vector2( 0, -1 )
 
 [node name="Tween" type="Tween" parent="." index="9"]
 playback_process_mode = 0
+
+[node name="BodyPaletteSwapper" parent="." index="10"]
+palette_red = ExtResource( 4 )
+palette_blue = ExtResource( 3 )
+palette_yellow = ExtResource( 5 )
+
+[node name="JumpDuration" type="Timer" parent="." index="11"]
+one_shot = true
+
+[node name="JumpCooldown" type="Timer" parent="." index="12"]
+wait_time = 0.3
+one_shot = true
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 
 [editable path="Hurtbox"]

@@ -27,7 +27,7 @@ const ACTION_COLOR_SWAP_LEFT = "action_color_swap_left"
 const ACTION_DASH = "action_dash"
 
 const ANIM_IDLE = "idle"
-const ANIM_WALK = "walk"
+const ANIM_MOVE = "move"
 const ANIM_ATTACK = "attack"
 const ANIM_PREPARE = "prepare"
 const ANIM_SHAKE = "shake"
