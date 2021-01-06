@@ -14,13 +14,13 @@ func _ready():
 	set_current_selection(0)
 
 func _process(_delta):
-	if Input.is_action_just_pressed("action_down"):
+	if Input.is_action_just_pressed("ui_down"):
 		current_selection = wrapi(current_selection + 1, 0, 3)
 		set_current_selection(current_selection)
-	elif Input.is_action_just_pressed("action_up"):
+	elif Input.is_action_just_pressed("ui_up"):
 		current_selection = wrapi(current_selection - 1, 0, 3)
 		set_current_selection(current_selection)
-	elif Input.is_action_just_pressed("action_accept"):
+	elif Input.is_action_just_pressed("ui_accept"):
 		handle_selection(current_selection)
 
 func handle_selection(_current_selection):

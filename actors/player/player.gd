@@ -64,8 +64,8 @@ func _physics_process(_delta):
 				current_state = State.MOVE
 
 		State.MOVE:
-			if anim_player.current_animation != Globals.ANIM_WALK:
-				anim_player.play(Globals.ANIM_WALK)
+			if anim_player.current_animation != Globals.ANIM_MOVE:
+				anim_player.play(Globals.ANIM_MOVE)
 			
 			_move_logic()
 			_try_attack()
@@ -147,7 +147,7 @@ func _try_dash():
 	if (!dash_input_buffer.is_stopped() && dash_cooldown_timer.is_stopped()
 			&& dash_duration_timer.is_stopped()):
 				
-		dash_direction = look_direction
+		dash_direction = input_vector
 		if dash_direction == Vector2.ZERO:
 			dash_direction = Vector2(sign(body_pivot.scale.x), 0)
 		

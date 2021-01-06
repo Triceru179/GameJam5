@@ -34,6 +34,7 @@ func setup_projectile(projectile_data: ProjectileData,
 	$PaletteSwapper.change_palette(color_index)
 
 func destroy_projectile():
+	dir = Vector2.ZERO
 	$AnimationPlayer.play(Globals.ANIM_DEATH)
 	yield($AnimationPlayer, "animation_finished")
 	

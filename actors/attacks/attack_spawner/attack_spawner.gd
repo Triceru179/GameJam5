@@ -10,7 +10,7 @@ func execute_attack(attack_data: AttackData, direction: Vector2, position: Vecto
 	if proj_node == null:
 		var n = YSort.new()
 		n.name = "Projectiles"
-		get_tree().get_root().get_node("Main/World").add_child(n)
+		get_tree().get_current_scene().get_node("World").add_child(n)
 		proj_node = n
 	
 	var rotation_step = 0
