@@ -12,11 +12,8 @@ enum State {
 const COLOR_DEFAULT = Color(1.0, 1.0, 1.0, 1.0)
 const COLOR_TRASPARENT = Color(1.0, 1.0, 1.0, 0.5)
 const WEAPON_DISTANCE = 13
-<<<<<<< HEAD
 const PAUSE_SCENE = preload("res://world/pause/Pause.tscn")
-=======
 const DASH_SPEED = 252
->>>>>>> 32b6829be9d43841bde060a91395d74b407ec4da
 
 var look_direction := Vector2.ZERO
 var dash_direction := Vector2.ZERO
