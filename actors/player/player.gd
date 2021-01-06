@@ -10,6 +10,7 @@ enum State {
 }
 
 const WEAPON_DISTANCE = 13
+const PAUSE_SCENE = preload("res://world/pause/Pause.tscn")
 
 var look_direction := Vector2.ZERO
 var velocity := Vector2.ZERO
@@ -27,6 +28,9 @@ func _ready():
 	_update_weapon_color()
 	
 	$BodyPaletteSwapper.change_palette(Globals.Colors.DEFAULT)
+	
+	var GrabedInstance = PAUSE_SCENE.instance()
+	self.add_child(GrabedInstance)
 
 func _process(_delta):
 	if (Input.is_action_just_pressed(Globals.ACTION_COLOR_SWAP_LEFT)):

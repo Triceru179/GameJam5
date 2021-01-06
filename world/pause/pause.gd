@@ -10,14 +10,14 @@ onready var selectors = [
 
 
 func _ready():
-	set_current_selection(0)
 	set_visible(false)
 
 func _input(event):
 	if event.is_action_pressed("action_accept"):
 		set_visible(!get_tree().paused)
 		get_tree().paused = !get_tree().paused
-		
+		set_current_selection(0)
+
 func _process(delta):
 	if get_tree().paused:
 		if Input.is_action_just_pressed("action_down"):

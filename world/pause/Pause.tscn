@@ -1,14 +1,14 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://autoload/pause.gd" type="Script" id=1]
-[ext_resource path="res://autoload/black_texture.png" type="Texture" id=2]
+[ext_resource path="res://world/pause/pause.gd" type="Script" id=1]
+[ext_resource path="res://world/pause/black_texture.png" type="Texture" id=2]
 [ext_resource path="res://menu/ChiKareGo2.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://menu/Chicago.tres" type="DynamicFont" id=4]
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 3 )
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=2]
 font_data = ExtResource( 3 )
 
 [node name="CanvasLayer" type="CanvasLayer"]
@@ -63,7 +63,7 @@ margin_bottom = 15.0
 margin_right = 7.0
 margin_bottom = 15.0
 rect_min_size = Vector2( 7, 0 )
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = ">"
 
@@ -72,7 +72,7 @@ margin_left = 11.0
 margin_right = 84.0
 margin_bottom = 15.0
 rect_min_size = Vector2( 73, 0 )
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "Continue"
 
@@ -90,7 +90,7 @@ margin_bottom = 15.0
 margin_right = 7.0
 margin_bottom = 15.0
 rect_min_size = Vector2( 7, 0 )
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = ">"
 
@@ -98,7 +98,7 @@ text = ">"
 margin_left = 11.0
 margin_right = 84.0
 margin_bottom = 15.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "Main Menu"
 
@@ -116,7 +116,7 @@ margin_bottom = 15.0
 margin_right = 7.0
 margin_bottom = 15.0
 rect_min_size = Vector2( 7, 0 )
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = ">"
 
@@ -125,6 +125,6 @@ margin_left = 11.0
 margin_right = 84.0
 margin_bottom = 15.0
 rect_min_size = Vector2( 73, 0 )
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "Exit"
