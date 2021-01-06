@@ -16,6 +16,10 @@ enum CollisionLayers {
 
 const COLOR_COUNT = 3
 
+const COLOR_DEFAULT = Color(1.0, 1.0, 1.0, 1.0)
+const COLOR_SEMI_TRASPARENT = Color(1.0, 1.0, 1.0, 0.5)
+const COLOR_TRASPARENT = Color(1.0, 1.0, 1.0, 0.0)
+
 const ACTION_ACCEPT = "action_accept"
 const ACTION_UP = "action_up"
 const ACTION_DOWN = "action_down"

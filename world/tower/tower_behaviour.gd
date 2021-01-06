@@ -15,9 +15,7 @@ func _on_Player_wand_color_changed(color_index):
 func _on_Player_damaged(current_health):
 	Globals.blink_white($Sphere/PaletteSwapper)
 	
-	print(current_health)
 	if current_health <= 0:
-		print("??")
 		var sphere_anim_p = $Sphere/AnimationPlayer
 		sphere_anim_p.play(Globals.ANIM_DEATH)
 		

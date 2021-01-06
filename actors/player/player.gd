@@ -9,8 +9,7 @@ enum State {
 	DASH,
 }
 
-const COLOR_DEFAULT = Color(1.0, 1.0, 1.0, 1.0)
-const COLOR_TRASPARENT = Color(1.0, 1.0, 1.0, 0.5)
+
 const WEAPON_DISTANCE = 13
 const DASH_SPEED = 252
 
@@ -47,7 +46,6 @@ func _process(_delta):
 		_cycle_color(1)
 	
 	_rotate_weapon()
-	_try_dash()
 
 func _physics_process(_delta):
 	_get_input()
@@ -59,6 +57,7 @@ func _physics_process(_delta):
 			
 			_idle_logic()
 			_try_attack()
+			_try_dash()
 
 			if input_vector != Vector2.ZERO:
 				current_state = State.MOVE
@@ -69,18 +68,22 @@ func _physics_process(_delta):
 			
 			_move_logic()
 			_try_attack()
+			_try_dash()
 
-			if velocity.length_squared() == 0:
+			if input_vector == Vector2.ZERO && velocity.length_squared() == 0:
 				current_state = State.IDLE
 		
 		State.DASH:
+			if anim_player.current_animation != Globals.ANIM_MOVE:
+				anim_player.play(Globals.ANIM_MOVE)
+			
 			_flip(dash_direction.x)
-			move_and_slide(dash_direction * DASH_SPEED)
+			var _er = move_and_slide(dash_direction * DASH_SPEED)
 			
 			dash_cooldown_timer.start()
 			if dash_duration_timer.is_stopped():
 				current_state = State.MOVE
-				$Pivot.modulate = COLOR_DEFAULT
+				$Pivot.modulate = Globals.COLOR_DEFAULT
 
 func _cycle_color(value: int):
 	var index = current_color_index
@@ -151,7 +154,7 @@ func _try_dash():
 		if dash_direction == Vector2.ZERO:
 			dash_direction = Vector2(sign(body_pivot.scale.x), 0)
 		
-		$Pivot.modulate = COLOR_TRASPARENT
+		$Pivot.modulate = Globals.COLOR_SEMI_TRASPARENT
 		
 		dash_duration_timer.start()
 		$InvincibilityTimer.start(dash_duration_timer.wait_time)
@@ -172,7 +175,8 @@ func _on_Health_changed(current_health):
 		$Hurtbox.monitoring = false
 		visible = false
 		
+		emit_signal("died")
 		yield(get_tree().create_timer(2), "timeout")
-		get_tree().reload_current_scene()
+		var _er = get_tree().reload_current_scene()
 	else:
 		Globals.blink_white($BodyPaletteSwapper)

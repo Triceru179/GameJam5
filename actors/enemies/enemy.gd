@@ -1,8 +1,6 @@
 extends Actor
 class_name Enemy
 
-signal killed
-
 onready var attack_cooldown_timer := $AttackCooldown
 onready var player_detector = get_tree().get_current_scene().get_node("World/PlayerDetector")
 
@@ -33,7 +31,6 @@ func _on_Hurtbox_area_entered(area):
 		return
 	
 	var p = area.get_parent() as Projectile
-	
 	if p != null && p.color_i == current_color_index:
 		p.destroy_projectile()
 		
@@ -42,7 +39,7 @@ func _on_Hurtbox_area_entered(area):
 
 func _on_Health_changed(current_health):
 	if current_health <= 0:
-		emit_signal("killed")
+		emit_signal("died")
 		queue_free()
 	else:
 		Globals.blink_white($BodyPaletteSwapper)

@@ -1,8 +1,6 @@
 extends YSort
 class_name Projectile
 
-signal destroyed(projectile)
-
 var dir := Vector2.ZERO
 var data: ProjectileData = null
 var color_i := 0

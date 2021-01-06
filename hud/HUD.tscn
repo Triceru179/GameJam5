@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://hud/color_hud_background.png" type="Texture" id=1]
 [ext_resource path="res://hud/health_hud_heart.png" type="Texture" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://hud/palettes/palette_orbs_yellow.png" type="Texture" id=8]
 [ext_resource path="res://hud/palettes/palette_orbs_red.png" type="Texture" id=9]
 [ext_resource path="res://hud/color_hud_orbs.png" type="Texture" id=10]
+[ext_resource path="res://menu/ChiKareGo2.ttf" type="DynamicFontData" id=11]
 
 [sub_resource type="Shader" id=1]
 resource_local_to_scene = true
@@ -28,6 +29,12 @@ void fragment() {
 [sub_resource type="ShaderMaterial" id=2]
 resource_local_to_scene = true
 shader = SubResource( 1 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 12
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 11 )
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource( 3 )
@@ -63,3 +70,23 @@ region_rect = Rect2( 0, 0, 64, 16 )
 [node name="PaletteSwapper" parent="HealthHUD" instance=ExtResource( 6 )]
 target_sprite = NodePath("../Sprite")
 palette_default = ExtResource( 5 )
+
+[node name="WaveHUD" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="WaveHUD"]
+margin_left = 238.0
+margin_right = 318.0
+margin_bottom = 20.0
+custom_fonts/font = SubResource( 3 )
+text = "Onda: 3/7"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="."]

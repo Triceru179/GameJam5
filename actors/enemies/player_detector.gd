@@ -11,7 +11,7 @@ func get_player_direction_to(point: Vector2):
 	if player != null:
 		return (point - player.global_position).normalized()
 	else:
-		return Vector2.ZERO
+		return Vector2(randf(), randf()).normalized()
 
 func get_player_sqr_distance_to(point: Vector2):
 	if player != null:

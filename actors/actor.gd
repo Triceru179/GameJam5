@@ -1,6 +1,8 @@
 extends KinematicBody2D
 class_name Actor
 
+signal died
+
 export(Resource) var actor_data = null
 
 var current_color_index = 0
@@ -32,6 +34,7 @@ func _on_Hurtbox_area_entered(area):
 
 func _on_Health_changed(current_health):
 	if current_health <= 0:
+		emit_signal("died")
 		queue_free()
 	else:
 		Globals.blink_white($BodyPaletteSwapper)

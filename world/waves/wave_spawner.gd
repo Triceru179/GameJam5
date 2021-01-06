@@ -1,7 +1,7 @@
 extends Node
 
-signal wave_started(wave_name)
-signal wave_finished(current_wave, remaining_waves)
+signal wave_started(wave_number, total_waves)
+signal all_waves_finished
 
 const MAP_BOUNDS = Vector2(640, 360)
 const COLORS = [Globals.Colors.RED, Globals.Colors.BLUE, Globals.Colors.YELLOW]
@@ -15,10 +15,6 @@ func _ready():
 	randomize()
 	$TimeBeforeFirstWave.start()
 	yield($TimeBeforeFirstWave, "timeout")
-	_spawn_wave(current_wave)
-
-func spawn_next_wave():
-	current_wave += 1
 	_spawn_wave(current_wave)
 
 func _spawn_wave(index):
@@ -42,28 +38,29 @@ func _spawn_wave(index):
 				
 				var r_color = randi() % COLORS.size()
 				enemy.setup_enemy(COLORS[r_color])
-				enemy.connect("killed", self, "_on_Enemy_killed")
+				enemy.connect("died", self, "_on_Enemy_died")
 				enemy.global_position = pos
 				
 				remaining_enemies += 1
 				
 				yield(get_tree().create_timer(randf() * 0.2), "timeout")
 		
-		var wave_name = str(current_wave + 1) if current_wave - waves.size() - 1 < 0 else "Final"
+		emit_signal("wave_started", str(current_wave + 1), waves.size())
 		
-		emit_signal("wave_started")
-		print("Wave " + wave_name + " started! Defeat them all!")
-	
 	else:
 		push_error("Wave data is null!")
 
-func _on_Enemy_killed():
+func _on_Enemy_died():
 	remaining_enemies -= 1
 	
 	if remaining_enemies <= 0:
 		remaining_enemies = 0
-		emit_signal("wave_finished", current_wave, current_wave - waves.size() - 1)
-		$RestTime.start()
+		current_wave += 1
+		
+		if current_wave < waves.size():
+			$RestTime.start()
+		else:
+			emit_signal("all_waves_finished")
 
 func _on_RestTime_timeout():
-	spawn_next_wave()
+	_spawn_wave(current_wave)
