@@ -69,6 +69,7 @@ config/icon="res://icon.png"
 [autoload]
 
 Globals="*res://autoload/globals.gd"
+Pause="*res://autoload/Pause.tscn"
 
 [display]
 
