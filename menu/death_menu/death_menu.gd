@@ -12,30 +12,29 @@ func _ready():
 	set_current_selection(0)
 	set_visible(false)
 	var player = get_tree().get_current_scene().get_node("World/Player")
-	player.connect("died", self, "on_player_died")
+	player.connect("died", self, "_on_player_died")
 
-func on_player_died():
-	var dead = true
-	if dead:
-		queue_free()
-
-func _input(event):
-	if event.is_action_pressed("ui_cancel"):
+func _on_player_died():
+	print("deadddd")
+	var death = true
+	if death:
 		_pause_unpause()
-	
+
+func _input(_InputEvent):
 	if get_tree().paused:
-		if event.is_action_pressed("ui_down"):
+		if Input.is_action_pressed("ui_down"):
 			current_selection = wrapi(current_selection + 1, 0, 3)
 			set_current_selection(current_selection)
-		elif event.is_action_pressed("ui_up"):
+		elif Input.is_action_pressed("ui_up"):
 			current_selection = wrapi(current_selection - 1, 0, 3)
 			set_current_selection(current_selection)
-		elif event.is_action_pressed("ui_accept"):
+		elif Input.is_action_pressed("ui_accept"):
 			handle_selection(current_selection)
 
 func handle_selection(_current_selection):
 	match _current_selection:
 		0:
+			var _er = get_tree().reload_current_scene()
 			_pause_unpause()
 		1:
 			print("Returning to main menu.")
@@ -58,3 +57,7 @@ func _pause_unpause():
 	set_current_selection(0)
 	set_visible(!get_tree().paused)
 	get_tree().paused = !get_tree().paused
+
+
+func _on_PauseMenu_tree_exited():
+	pause_mode = Node.PAUSE_MODE_PROCESS

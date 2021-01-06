@@ -4,9 +4,6 @@
 [ext_resource path="res://menu/Chicago.tres" type="DynamicFont" id=2]
 [ext_resource path="res://menu/main_menu/main_menu.gd" type="Script" id=3]
 
-
-
-
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 1 )
 

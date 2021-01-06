@@ -172,11 +172,8 @@ func _on_Health_changed(current_health):
 	if current_health <= 0:
 		set_process(false)
 		set_physics_process(false)
-		$Hurtbox.monitoring = false
+		$Hurtbox.set_deferred("monitoring", false)
 		visible = false
-		
 		emit_signal("died")
-		yield(get_tree().create_timer(2), "timeout")
-		var _er = get_tree().reload_current_scene()
 	else:
 		Globals.blink_white($BodyPaletteSwapper)
