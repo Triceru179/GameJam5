@@ -6,16 +6,23 @@ signal damaged(current_health)
 enum State {
 	IDLE,
 	MOVE,
-	STAGGER,
+	DASH,
 }
 
+const COLOR_DEFAULT = Color(1.0, 1.0, 1.0, 1.0)
+const COLOR_TRASPARENT = Color(1.0, 1.0, 1.0, 0.5)
 const WEAPON_DISTANCE = 13
+const DASH_SPEED = 252
 
 var look_direction := Vector2.ZERO
+var dash_direction := Vector2.ZERO
 var velocity := Vector2.ZERO
 var input_vector := Vector2.ZERO
 var current_state: int = State.IDLE
 
+onready var dash_input_buffer := $DashInputBuffer
+onready var dash_duration_timer := $DashDuration
+onready var dash_cooldown_timer := $DashCooldown
 onready var weapon_anchor := $Pivot/WeaponPivot/Anchor
 onready var weapon_pivot := $Pivot/WeaponPivot
 onready var weapon_sprite := $Pivot/WeaponPivot/Weapon
@@ -29,17 +36,18 @@ func _ready():
 	$BodyPaletteSwapper.change_palette(Globals.Colors.DEFAULT)
 
 func _process(_delta):
+	look_direction = (get_global_mouse_position() - body_pivot.global_position).normalized()
+	
+	if Input.is_action_pressed("action_dash"):
+		dash_input_buffer.start()
+	
 	if (Input.is_action_just_pressed(Globals.ACTION_COLOR_SWAP_LEFT)):
 		_cycle_color(-1)
 	elif (Input.is_action_just_pressed(Globals.ACTION_COLOR_SWAP_RIGHT)):
 		_cycle_color(1)
 	
-	_update_look_direction()
 	_rotate_weapon()
-	
-	if (Input.is_action_pressed(Globals.ACTION_ATTACK_1)
-			&& attack_cooldown_timer.is_stopped()):
-		attack()
+	_try_dash()
 
 func _physics_process(_delta):
 	_get_input()
@@ -50,6 +58,7 @@ func _physics_process(_delta):
 				anim_player.play(Globals.ANIM_IDLE)
 			
 			_idle_logic()
+			_try_attack()
 
 			if input_vector != Vector2.ZERO:
 				current_state = State.MOVE
@@ -59,9 +68,19 @@ func _physics_process(_delta):
 				anim_player.play(Globals.ANIM_WALK)
 			
 			_move_logic()
+			_try_attack()
 
 			if velocity.length_squared() == 0:
 				current_state = State.IDLE
+		
+		State.DASH:
+			_flip(dash_direction.x)
+			move_and_slide(dash_direction * DASH_SPEED)
+			
+			dash_cooldown_timer.start()
+			if dash_duration_timer.is_stopped():
+				current_state = State.MOVE
+				$Pivot.modulate = COLOR_DEFAULT
 
 func _cycle_color(value: int):
 	var index = current_color_index
@@ -88,11 +107,8 @@ func attack(rotation_offset: float = 0):
 	attack_spawner.execute_attack(actor_data.attack, dir,
 		$Pivot/WeaponPivot/Weapon/AttackPoint.global_position,
 		Globals.CollisionLayers.PlayerHitbox, current_color_index)
-
+	
 	_restart_timer()
-
-func _update_look_direction():
-	look_direction = (get_global_mouse_position() - body_pivot.global_position).normalized()
 
 func _get_input():
 	input_vector.x = Input.get_action_strength(Globals.ACTION_RIGHT) - Input.get_action_strength(Globals.ACTION_LEFT)
@@ -126,6 +142,26 @@ func _move_logic():
 			* get_physics_process_delta_time())
 	
 	velocity = move_and_slide(velocity)
+
+func _try_dash():
+	if (!dash_input_buffer.is_stopped() && dash_cooldown_timer.is_stopped()
+			&& dash_duration_timer.is_stopped()):
+				
+		dash_direction = look_direction
+		if dash_direction == Vector2.ZERO:
+			dash_direction = Vector2(sign(body_pivot.scale.x), 0)
+		
+		$Pivot.modulate = COLOR_TRASPARENT
+		
+		dash_duration_timer.start()
+		$InvincibilityTimer.start(dash_duration_timer.wait_time)
+		
+		current_state = State.DASH
+
+func _try_attack():
+	if (Input.is_action_pressed(Globals.ACTION_ATTACK_1)
+			&& attack_cooldown_timer.is_stopped()):
+		attack()
 
 func _on_Health_changed(current_health):
 	emit_signal("damaged", current_health)
