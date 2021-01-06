@@ -1,0 +1,65 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://hud/color_hud_background.png" type="Texture" id=1]
+[ext_resource path="res://hud/health_hud_heart.png" type="Texture" id=2]
+[ext_resource path="res://hud/hud.gd" type="Script" id=3]
+[ext_resource path="res://materials/material_color_swap.tres" type="Material" id=4]
+[ext_resource path="res://hud/palettes/palette_heart_red.png" type="Texture" id=5]
+[ext_resource path="res://actors/palette_swapper/PaletteSwapper.tscn" type="PackedScene" id=6]
+[ext_resource path="res://hud/palettes/palette_orbs_blue.png" type="Texture" id=7]
+[ext_resource path="res://hud/palettes/palette_orbs_yellow.png" type="Texture" id=8]
+[ext_resource path="res://hud/palettes/palette_orbs_red.png" type="Texture" id=9]
+[ext_resource path="res://hud/color_hud_orbs.png" type="Texture" id=10]
+
+[sub_resource type="Shader" id=1]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+
+uniform sampler2D palette;
+
+void fragment() {
+	vec4 rgba = texture(TEXTURE, UV);
+	vec4 final_color = texture(palette, vec2(rgba.r, rgba.g));
+	final_color.a = rgba.a;
+	
+	COLOR = final_color;
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+resource_local_to_scene = true
+shader = SubResource( 1 )
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource( 3 )
+
+[node name="ColorHUD" type="Sprite" parent="."]
+position = Vector2( 160, 162 )
+texture = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="ColorHUD"]
+material = SubResource( 2 )
+position = Vector2( 0, 4 )
+texture = ExtResource( 10 )
+region_rect = Rect2( 0, 0, 64, 16 )
+
+[node name="PaletteSwapper" parent="ColorHUD" instance=ExtResource( 6 )]
+target_sprite = NodePath("../Sprite")
+palette_red = ExtResource( 9 )
+palette_blue = ExtResource( 7 )
+palette_yellow = ExtResource( 8 )
+
+[node name="HealthHUD" type="Control" parent="."]
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="HealthHUD"]
+material = ExtResource( 4 )
+texture = ExtResource( 2 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 64, 16 )
+
+[node name="PaletteSwapper" parent="HealthHUD" instance=ExtResource( 6 )]
+target_sprite = NodePath("../Sprite")
+palette_default = ExtResource( 5 )

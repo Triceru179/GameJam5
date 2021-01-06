@@ -138,3 +138,5 @@ func _on_Health_changed(current_health):
 		
 		yield(get_tree().create_timer(2), "timeout")
 		get_tree().reload_current_scene()
+	else:
+		Globals.blink_white($BodyPaletteSwapper)
