@@ -12,6 +12,7 @@ onready var selectors = [
 func _ready():
 	set_current_selection(0)
 	active = true
+	visible = true
 
 func _process(_delta):
 	if !active:
@@ -35,7 +36,9 @@ func handle_selection(_current_selection):
 			active = false
 			Globals.change_scene(load("res://scenes/Introduction.tscn"))
 		1:
-			set_visible(false)
+			active = false
+			visible = false
+			get_parent().get_node("OptionsMenu").visible = true
 		2:
 			get_tree().quit()
 
