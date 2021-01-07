@@ -1,9 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://menu/death_menu/death_menu.gd" type="Script" id=1]
 [ext_resource path="res://world/white_texture.png" type="Texture" id=2]
 [ext_resource path="res://menu/ChiKareGo2.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://menu/Chicago.tres" type="DynamicFont" id=4]
+[ext_resource path="res://MenuAccept.tscn" type="PackedScene" id=5]
+[ext_resource path="res://MenuSelect.tscn" type="PackedScene" id=6]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 3 )
@@ -131,3 +133,7 @@ rect_min_size = Vector2( 73, 0 )
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "Exit"
+
+[node name="MenuSelect" parent="." instance=ExtResource( 6 )]
+
+[node name="MenuAccept" parent="." instance=ExtResource( 5 )]

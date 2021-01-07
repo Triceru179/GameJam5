@@ -56,3 +56,6 @@ func blink_white(palette_swapper, duration: float = 0.1):
 	palette_swapper.change_palette(Globals.Colors.WHITE)
 	yield(get_tree().create_timer(duration), "timeout")
 	palette_swapper.change_palette(previous_index)
+
+func change_scene(scene: PackedScene):
+	get_tree().change_scene_to(scene)

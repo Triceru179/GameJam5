@@ -1,6 +1,7 @@
 extends CanvasLayer
 
 var current_selection = 0
+var active = false
 
 onready var selectors = [
 	$CenterContainer/VBoxContainer/CenterContainer/HBoxContainer/Selector,
@@ -12,16 +13,10 @@ func _ready():
 	set_current_selection(0)
 	set_visible(false)
 	var player = get_tree().get_current_scene().get_node("World/Player")
-	player.connect("died", self, "_on_player_died")
-
-func _on_player_died():
-	print("deadddd")
-	var death = true
-	if death:
-		_pause_unpause()
+	player.connect("died", self, "_on_Player_died")
 
 func _input(_InputEvent):
-	if get_tree().paused:
+	if active:
 		if Input.is_action_pressed("ui_down"):
 			current_selection = wrapi(current_selection + 1, 0, 3)
 			set_current_selection(current_selection)
@@ -32,16 +27,21 @@ func _input(_InputEvent):
 			handle_selection(current_selection)
 
 func handle_selection(_current_selection):
+	if active:
+		$MenuAccept.play()
+	
 	match _current_selection:
 		0:
 			var _er = get_tree().reload_current_scene()
-			_pause_unpause()
 		1:
-			print("Returning to main menu.")
+			Globals.change_scene(load("res://scenes/MainMenu.tscn"))
 		2:
 			get_tree().quit()
 
 func set_current_selection(_current_selection):
+	if active:
+		$MenuSelect.play()
+	
 	for s in selectors:
 		s.text = ""
 
@@ -51,13 +51,9 @@ func set_current_selection(_current_selection):
 
 func set_visible(is_visible):
 	for node in get_children():
-		node.visible = is_visible
+		if node.get("visible"):
+			node.visible = is_visible
 
-func _pause_unpause():
+func _on_Player_died():
 	set_current_selection(0)
-	set_visible(!get_tree().paused)
-	get_tree().paused = !get_tree().paused
-
-
-func _on_PauseMenu_tree_exited():
-	pause_mode = Node.PAUSE_MODE_PROCESS
+	active = !active

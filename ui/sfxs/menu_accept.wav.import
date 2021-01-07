@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/menu_accept.wav-3593b32c6bdaec7dc4987bb778f48e34.sample"
+
+[deps]
+
+source_file="res://ui/sfxs/menu_accept.wav"
+dest_files=[ "res://.import/menu_accept.wav-3593b32c6bdaec7dc4987bb778f48e34.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
