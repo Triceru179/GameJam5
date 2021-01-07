@@ -31,7 +31,7 @@ func handle_selection(_current_selection):
 		0:
 			Globals.change_scene(load("res://scenes/Introduction.tscn"))
 		1:
-			print("Add options!")
+			set_visible(false)
 		2:
 			get_tree().quit()
 
