@@ -15,18 +15,18 @@ func _ready():
 	var player = get_tree().get_current_scene().get_node("World/Player")
 	player.connect("died", self, "_on_Player_died")
 
-func _input(event):
-	if event.is_action_pressed("ui_cancel"):
+func _process(_delta):
+	if Input.is_action_just_pressed("ui_cancel"):
 		_pause_unpause()
 	
 	if get_tree().paused:
-		if event.is_action_pressed("ui_down"):
+		if Input.is_action_just_pressed("ui_down"):
 			current_selection = wrapi(current_selection + 1, 0, 3)
 			set_current_selection(current_selection)
-		elif event.is_action_pressed("ui_up"):
+		elif Input.is_action_just_pressed("ui_up"):
 			current_selection = wrapi(current_selection - 1, 0, 3)
 			set_current_selection(current_selection)
-		elif event.is_action_pressed("ui_accept"):
+		elif Input.is_action_just_pressed("ui_accept"):
 			handle_selection(current_selection)
 
 func handle_selection(_current_selection):
@@ -37,7 +37,8 @@ func handle_selection(_current_selection):
 		0:
 			_pause_unpause()
 		1:
-			Globals.change_scene(load("res://scenes/MainMenu.tscn"))
+			_pause_unpause()
+			Globals.call_deferred("change_scene", load("res://scenes/MainMenu.tscn"))
 		2:
 			get_tree().quit()
 
@@ -54,14 +55,14 @@ func set_current_selection(_current_selection):
 
 func set_visible(is_visible):
 	for node in get_children():
-		if node.get("visible"):
+		if node.get_indexed("visible") != null:
 			node.visible = is_visible
 
 func _pause_unpause():
-	set_current_selection(0)
 	set_visible(!get_tree().paused)
 	get_tree().paused = !get_tree().paused
 	active = !active
+	set_current_selection(0)
 
 func _on_Player_died():
 	queue_free()

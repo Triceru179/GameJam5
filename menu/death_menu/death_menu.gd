@@ -51,9 +51,8 @@ func set_current_selection(_current_selection):
 
 func set_visible(is_visible):
 	for node in get_children():
-		if node.get("visible"):
+		if node.get_indexed("visible") != null:
 			node.visible = is_visible
 
 func _on_Player_died():
-	set_current_selection(0)
 	active = !active

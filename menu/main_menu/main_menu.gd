@@ -14,6 +14,9 @@ func _ready():
 	active = true
 
 func _process(_delta):
+	if !active:
+		return
+	
 	if Input.is_action_just_pressed("ui_down"):
 		current_selection = wrapi(current_selection + 1, 0, 3)
 		set_current_selection(current_selection)
@@ -29,6 +32,7 @@ func handle_selection(_current_selection):
 	
 	match _current_selection:
 		0:
+			active = false
 			Globals.change_scene(load("res://scenes/Introduction.tscn"))
 		1:
 			print("Add options!")

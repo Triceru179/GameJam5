@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://menu/Chicago.tres" type="DynamicFont" id=1]
 [ext_resource path="res://ui/transition_scene.gd" type="Script" id=2]
 [ext_resource path="res://scenes/Tutorial.tscn" type="PackedScene" id=3]
+[ext_resource path="res://MenuAccept.tscn" type="PackedScene" id=4]
 
 [node name="Introduction" type="ColorRect"]
 anchor_right = 1.0
@@ -27,3 +28,5 @@ margin_bottom = 105.0
 custom_fonts/font = ExtResource( 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "Colorful"
+
+[node name="MenuAccept" parent="." instance=ExtResource( 4 )]
