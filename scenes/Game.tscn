@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://world/tower/Tower.tscn" type="PackedScene" id=1]
 [ext_resource path="res://actors/player/Player.tscn" type="PackedScene" id=2]
@@ -16,12 +16,16 @@
 [ext_resource path="res://menu/pause_menu/PauseMenu.tscn" type="PackedScene" id=14]
 [ext_resource path="res://menu/death_menu/DeathMenu.tscn" type="PackedScene" id=15]
 [ext_resource path="res://actors/enemies/player_detector.gd" type="Script" id=16]
+[ext_resource path="res://world/sfx/wave_started.wav" type="AudioStream" id=17]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 340, 10 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 10, 190 )
+
+[sub_resource type="AudioStreamRandomPitch" id=3]
+audio_stream = ExtResource( 17 )
 
 [node name="Game" type="Node"]
 
@@ -215,8 +219,12 @@ wait_time = 5.0
 one_shot = true
 
 [node name="TimeBeforeFirstWave" type="Timer" parent="World/WaveSpawner"]
-wait_time = 5.0
+wait_time = 3.0
 one_shot = true
+
+[node name="WaveStarted" type="AudioStreamPlayer" parent="World/WaveSpawner"]
+stream = SubResource( 3 )
+bus = "Sound Effects"
 
 [node name="PlayerDetector" type="Node" parent="World"]
 script = ExtResource( 16 )
@@ -236,4 +244,3 @@ layer = 3
 [node name="DeathMenu" parent="UI" instance=ExtResource( 15 )]
 pause_mode = 1
 [connection signal="timeout" from="World/WaveSpawner/RestTime" to="World/WaveSpawner" method="_on_RestTime_timeout"]
-[connection signal="tree_exited" from="UI/PauseMenu" to="UI/DeathMenu" method="_on_PauseMenu_tree_exited"]

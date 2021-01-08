@@ -199,15 +199,20 @@ one_shot = true
 wait_time = 0.15
 one_shot = true
 
-[node name="SFX" parent="." index="14"]
+[node name="DashFadeShadowCD" type="Timer" parent="." index="14"]
+wait_time = 0.1
+one_shot = true
+
+[node name="SFX" parent="." index="15"]
 volume_db = 4.0
 
-[node name="CastSFX" type="AudioStreamPlayer2D" parent="." index="15"]
+[node name="CastSFX" type="AudioStreamPlayer2D" parent="." index="16"]
 stream = SubResource( 9 )
 volume_db = -6.0
 
-[node name="DashSFX" type="AudioStreamPlayer2D" parent="." index="16"]
+[node name="DashSFX" type="AudioStreamPlayer2D" parent="." index="17"]
 stream = SubResource( 10 )
 max_distance = 256.0
+[connection signal="timeout" from="DashFadeShadowCD" to="." method="_on_DashFadeShadowCD_timeout"]
 
 [editable path="Hurtbox"]

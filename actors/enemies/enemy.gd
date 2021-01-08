@@ -41,12 +41,14 @@ func _on_Health_changed(current_health):
 	$HurtSFX.play()
 	
 	if current_health <= 0:
-		emit_signal("died")
-		$Pushbox.disabled = true
+		pause_mode = PAUSE_MODE_STOP
+		$Hurtbox/CollisionShape2D.set_deferred("disabled", true)
 		visible = false
 		pause_mode = PAUSE_MODE_STOP
+		emit_signal("died")
 		
-		yield(get_tree().create_timer(0.2), "timeout")
+		_play_death_particles(Vector2.ZERO)
+		yield(get_tree().create_timer(0.5), "timeout")
 		
 		queue_free()
 	else:

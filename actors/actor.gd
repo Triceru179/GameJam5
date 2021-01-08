@@ -3,6 +3,8 @@ class_name Actor
 
 signal died
 
+const FX_EXPLOSION = preload("res://actors/fx/Explosion.tscn")
+
 export(Resource) var actor_data = null
 
 var current_color_index = 0
@@ -27,6 +29,13 @@ func play_sfx(audio_stream: AudioStream):
 func _flip(value: float):
 	Globals.flip(body_pivot, value, Vector2.RIGHT, 0.7)
 
+func _play_death_particles(offset):
+	var fx = FX_EXPLOSION.instance()
+	
+	get_parent().add_child(fx)
+	fx.global_position = global_position + offset
+	fx.emitting = true
+
 func _on_Hurtbox_area_entered(area):
 	if !$InvincibilityTimer.is_stopped():
 		return
@@ -39,6 +48,12 @@ func _on_Hurtbox_area_entered(area):
 
 func _on_Health_changed(current_health):
 	if current_health <= 0:
+		pause_mode = PAUSE_MODE_STOP
+		$Hurtbox/CollisionShape2D.set_deferred("disabled", true)
+		visible = false
+		emit_signal("died")
+		
+		_play_death_particles(Vector2.ZERO)
 		emit_signal("died")
 		queue_free()
 	else:

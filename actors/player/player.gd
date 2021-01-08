@@ -18,14 +18,25 @@ const HURT_SFX = [
 	preload("res://actors/player/sfxs/player_hurt_6.wav"),
 ]
 
+const FADE_SHADOW = preload("res://actors/player/fade_shadow/FadeShadow.tscn")
+
 const WEAPON_DISTANCE = 13
-const DASH_SPEED = 252
+const DASH_SPEED = 256
+
+const WAVE_ATTACK_UPGRADES = {
+	"1": "res://actors/attacks/attack_datas/AttackPlayerMagicMissile1.tres",
+	"3": "res://actors/attacks/attack_datas/AttackPlayerMagicMissile3.tres",
+	"7": "res://actors/attacks/attack_datas/AttackPlayerMagicMissile5.tres",
+}
+
+export(Color) var fade_shadow_color
 
 var look_direction := Vector2.ZERO
 var dash_direction := Vector2.ZERO
 var velocity := Vector2.ZERO
 var input_vector := Vector2.ZERO
 var current_state: int = State.IDLE
+var player_attack_data: AttackData = null
 
 onready var dash_input_buffer := $DashInputBuffer
 onready var dash_duration_timer := $DashDuration
@@ -39,6 +50,12 @@ func _ready():
 	._ready()
 	$Pivot/WeaponPivot/AnimationPlayer.play(Globals.ANIM_IDLE)
 	_update_weapon_color()
+	
+	var wave_s = get_tree().get_current_scene().get_node("World/WaveSpawner")
+	if wave_s:
+		wave_s.connect("wave_started", self, "_try_upgrade_player_attack")
+	
+	player_attack_data = actor_data.attack
 	
 	$BodyPaletteSwapper.change_palette(Globals.Colors.DEFAULT)
 
@@ -91,7 +108,6 @@ func _physics_process(_delta):
 			dash_cooldown_timer.start()
 			if dash_duration_timer.is_stopped():
 				current_state = State.MOVE
-				$Pivot.modulate = Globals.COLOR_DEFAULT
 
 func _cycle_color(value: int):
 	var index = current_color_index
@@ -117,11 +133,21 @@ func attack(rotation_offset: float = 0):
 	var angle = dir.angle() + deg2rad(rotation_offset)
 	dir = Globals.angle_to_vector(angle)
 	
-	attack_spawner.execute_attack(actor_data.attack, dir,
+	attack_spawner.execute_attack(player_attack_data, dir,
 		$Pivot/WeaponPivot/Weapon/AttackPoint.global_position,
 		Globals.CollisionLayers.PlayerHitbox, current_color_index)
 	
 	_restart_timer()
+
+func _spawn_dash_fade_shadow():
+	var shadow = FADE_SHADOW.instance()
+	get_parent().add_child(shadow)
+	
+	var sprite = $Pivot/BodyPivot/Body
+	
+	shadow.setup_sprite(sprite.texture, sprite.offset, sprite.global_position,
+		body_pivot.scale, sprite.hframes, sprite.vframes, sprite.frame)
+	shadow.start_fade(fade_shadow_color, 0.5, 0.25)
 
 func _get_input():
 	input_vector.x = Input.get_action_strength(Globals.ACTION_RIGHT) - Input.get_action_strength(Globals.ACTION_LEFT)
@@ -164,9 +190,10 @@ func _try_dash():
 		if dash_direction == Vector2.ZERO:
 			dash_direction = Vector2(sign(body_pivot.scale.x), 0)
 		
-		$Pivot.modulate = Globals.COLOR_SEMI_TRASPARENT
-		
 		dash_duration_timer.start()
+		_spawn_dash_fade_shadow()
+		$DashFadeShadowCD.start()
+		
 		$DashSFX.play()
 		$InvincibilityTimer.start(dash_duration_timer.wait_time)
 		
@@ -177,6 +204,10 @@ func _try_attack():
 			&& attack_cooldown_timer.is_stopped()):
 		attack()
 
+func _try_upgrade_player_attack(wave, _total):
+	if WAVE_ATTACK_UPGRADES.has(str(wave)):
+		player_attack_data = load(WAVE_ATTACK_UPGRADES.get(wave))
+
 func _on_Health_changed(current_health):
 	if !visible:
 		return
@@ -186,8 +217,9 @@ func _on_Health_changed(current_health):
 	
 	if current_health <= 0:
 		pause_mode = PAUSE_MODE_STOP
-		$Hurtbox/CollisionShape2D.disabled = true
+		$Hurtbox/CollisionShape2D.set_deferred("disabled", true)
 		visible = false
+		_play_death_particles(Vector2(0, -8))
 		emit_signal("died")
 		
 		var cam = $Camera2D
@@ -200,3 +232,8 @@ func _on_Health_changed(current_health):
 		queue_free()
 	else:
 		Globals.blink_white($BodyPaletteSwapper)
+
+func _on_DashFadeShadowCD_timeout():
+	_spawn_dash_fade_shadow()
+	if !dash_duration_timer.is_stopped():
+		$DashFadeShadowCD.start()

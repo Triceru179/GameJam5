@@ -46,6 +46,7 @@ func _spawn_wave(index):
 				yield(get_tree().create_timer(randf() * 0.2), "timeout")
 		
 		emit_signal("wave_started", str(current_wave + 1), waves.size())
+		$WaveStarted.play()
 		
 	else:
 		push_error("Wave data is null!")

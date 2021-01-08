@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://actors/actor.png" type="Texture" id=1]
+[ext_resource path="res://actors/player/fade_shadow/fade_shadow.gd" type="Script" id=2]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform vec4 shadow_color: hint_color;
+uniform float alpha = 1;
+
+void fragment() {
+	vec4 rgba = texture(TEXTURE, UV);
+	vec4 c = shadow_color;
+	
+	if (rgba.a == 0.0)
+		c.a = rgba.a;
+	else
+		c.a = alpha;
+	
+	COLOR = c;
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+resource_local_to_scene = true
+shader = SubResource( 1 )
+shader_param/shadow_color = Color( 0, 0, 0, 1 )
+shader_param/alpha = 1.0
+
+[node name="FadeShadow" type="Sprite"]
+material = SubResource( 2 )
+z_index = -1
+texture = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+[connection signal="timeout" from="Timer" to="." method="queue_free"]

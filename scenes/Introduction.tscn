@@ -21,12 +21,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="Label" type="Label" parent="CenterContainer"]
-margin_left = 106.0
+margin_left = 78.0
 margin_top = 75.0
-margin_right = 214.0
+margin_right = 242.0
 margin_bottom = 105.0
 custom_fonts/font = ExtResource( 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-text = "Colorful"
+text = "Introduction"
 
 [node name="MenuAccept" parent="." instance=ExtResource( 4 )]

@@ -66,4 +66,4 @@ func _pause_unpause():
 
 func _on_Player_died():
 	get_tree().paused = false
-	queue_free()
+	call_deferred("queue_free")

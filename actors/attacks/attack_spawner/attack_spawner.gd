@@ -5,7 +5,7 @@ const PROJECTILE_SCENE = preload("res://projectile/Projectile.tscn")
 
 func execute_attack(attack_data: AttackData, direction: Vector2, position: Vector2,
 		collision_layer: int, color_index: int):
-	var proj_node = get_tree().get_root().get_node_or_null("Main/World/Projectiles")
+	var proj_node = get_tree().get_current_scene().get_node_or_null("World/Projectiles")
 	
 	if proj_node == null:
 		var n = YSort.new()

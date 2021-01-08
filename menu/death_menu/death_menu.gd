@@ -60,3 +60,4 @@ func _on_Player_died():
 	ScreenAdjuster.adjust_screen_saturation(0, 1)
 	active = !active
 	set_visible(true)
+	$PlayerDeath.play()
