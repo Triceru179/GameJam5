@@ -7,7 +7,7 @@ enum State {
 	ATTACK,
 }
 
-const PLAYER_MIN_DISTANCE_TO_ATTACK = pow(6 * 16, 2)
+const PLAYER_MIN_DISTANCE_TO_ATTACK = pow(12 * 16, 2)
 
 var current_state: int = State.IDLE
 var jump_direction := Vector2.ZERO

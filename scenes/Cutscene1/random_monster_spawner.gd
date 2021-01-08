@@ -23,6 +23,7 @@ func _ready():
 			+ Vector2(320 / 2, 180 / 2) - Vector2(256, 0))
 		
 		m.setup_enemy(colors[randi() % colors.size()])
+		yield(get_tree().create_timer(0.05), "timeout")
 	
 	yield(get_tree(), "idle_frame")
 	$World/Player/Camera2D.queue_free()
