@@ -67,16 +67,16 @@ margin_right = 116.0
 margin_bottom = 100.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MainMenu/CenterContainer/VBoxContainer/CenterContainer2"]
-margin_left = 28.0
-margin_right = 88.0
+margin_left = 31.0
+margin_right = 85.0
 margin_bottom = 50.0
 
 [node name="CenterContainer" type="CenterContainer" parent="MainMenu/CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer"]
-margin_right = 60.0
+margin_right = 54.0
 margin_bottom = 14.0
 
 [node name="Start" type="HBoxContainer" parent="MainMenu/CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer"]
-margin_right = 60.0
+margin_right = 54.0
 margin_bottom = 14.0
 
 [node name="Selector" type="Label" parent="MainMenu/CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer/Start"]
@@ -89,21 +89,20 @@ text = ">"
 
 [node name="OptionName" type="Label" parent="MainMenu/CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer/Start"]
 margin_left = 11.0
-margin_right = 60.0
+margin_right = 54.0
 margin_bottom = 14.0
-rect_min_size = Vector2( 49, 0 )
+rect_min_size = Vector2( 43, 0 )
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "Start"
 
 [node name="CenterContainer2" type="CenterContainer" parent="MainMenu/CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer"]
 margin_top = 18.0
-margin_right = 60.0
+margin_right = 54.0
 margin_bottom = 32.0
 
 [node name="Options" type="HBoxContainer" parent="MainMenu/CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer2"]
-margin_left = 3.0
-margin_right = 57.0
+margin_right = 54.0
 margin_bottom = 14.0
 
 [node name="Selector" type="Label" parent="MainMenu/CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer2/Options"]
@@ -124,11 +123,11 @@ text = "Options"
 
 [node name="CenterContainer3" type="CenterContainer" parent="MainMenu/CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer"]
 margin_top = 36.0
-margin_right = 60.0
+margin_right = 54.0
 margin_bottom = 50.0
 
 [node name="Exit" type="HBoxContainer" parent="MainMenu/CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer3"]
-margin_right = 60.0
+margin_right = 54.0
 margin_bottom = 14.0
 
 [node name="Selector" type="Label" parent="MainMenu/CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer3/Exit"]
@@ -141,9 +140,9 @@ text = ">"
 
 [node name="OptionName" type="Label" parent="MainMenu/CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer3/Exit"]
 margin_left = 11.0
-margin_right = 60.0
+margin_right = 54.0
 margin_bottom = 14.0
-rect_min_size = Vector2( 49, 0 )
+rect_min_size = Vector2( 43, 0 )
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "Exit"
@@ -171,9 +170,9 @@ __meta__ = {
 
 [node name="VBoxContainer" type="VBoxContainer" parent="OptionsMenu/CenterContainer2"]
 margin_left = 67.0
-margin_top = 12.0
+margin_top = 36.0
 margin_right = 252.0
-margin_bottom = 119.0
+margin_bottom = 143.0
 custom_constants/separation = 20
 
 [node name="Title" type="CenterContainer" parent="OptionsMenu/CenterContainer2/VBoxContainer"]
@@ -206,18 +205,20 @@ margin_bottom = 24.0
 margin_right = 185.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 185, 0 )
+alignment = 1
 
 [node name="OptionName" type="Label" parent="OptionsMenu/CenterContainer2/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer/Fullscreen"]
+margin_left = 48.0
 margin_top = 5.0
-margin_right = 61.0
+margin_right = 109.0
 margin_bottom = 19.0
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "Fullscreen"
 
 [node name="OptionFullscren" type="CheckBox" parent="OptionsMenu/CenterContainer2/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer/Fullscreen"]
-margin_left = 65.0
-margin_right = 89.0
+margin_left = 113.0
+margin_right = 137.0
 margin_bottom = 24.0
 focus_mode = 0
 enabled_focus_mode = 0
@@ -231,18 +232,20 @@ margin_bottom = 44.0
 margin_right = 185.0
 margin_bottom = 16.0
 rect_min_size = Vector2( 185, 0 )
+alignment = 2
 
 [node name="OptionName" type="Label" parent="OptionsMenu/CenterContainer2/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer3/MusicVolume"]
+margin_left = 35.0
 margin_top = 1.0
-margin_right = 81.0
+margin_right = 116.0
 margin_bottom = 15.0
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "Music Volume"
 
 [node name="MusicSlider" type="HSlider" parent="OptionsMenu/CenterContainer2/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer3/MusicVolume"]
-margin_left = 85.0
-margin_right = 135.0
+margin_left = 120.0
+margin_right = 170.0
 margin_bottom = 16.0
 rect_min_size = Vector2( 50, 0 )
 size_flags_vertical = 1
@@ -251,10 +254,11 @@ max_value = 1.0
 step = 0.05
 
 [node name="MusicVolume" type="Label" parent="OptionsMenu/CenterContainer2/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer3/MusicVolume"]
-margin_left = 139.0
+margin_left = 174.0
 margin_top = 1.0
-margin_right = 146.0
+margin_right = 185.0
 margin_bottom = 15.0
+rect_min_size = Vector2( 11, 0 )
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "0"
@@ -269,32 +273,34 @@ rect_min_size = Vector2( 157, 0 )
 margin_right = 185.0
 margin_bottom = 16.0
 rect_min_size = Vector2( 185, 0 )
+alignment = 2
 
 [node name="OptionName" type="Label" parent="OptionsMenu/CenterContainer2/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer4/FxVolume"]
+margin_left = 55.0
 margin_top = 1.0
-margin_right = 61.0
+margin_right = 116.0
 margin_bottom = 15.0
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "FX Volume"
 
 [node name="FxSlider" type="HSlider" parent="OptionsMenu/CenterContainer2/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer4/FxVolume"]
-margin_left = 65.0
-margin_right = 115.0
+margin_left = 120.0
+margin_right = 170.0
 margin_bottom = 16.0
 rect_min_size = Vector2( 50, 0 )
 max_value = 1.0
 step = 0.1
-value = 0.001
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="FxVolume" type="Label" parent="OptionsMenu/CenterContainer2/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer4/FxVolume"]
-margin_left = 119.0
+margin_left = 174.0
 margin_top = 1.0
-margin_right = 126.0
+margin_right = 185.0
 margin_bottom = 15.0
+rect_min_size = Vector2( 11, 0 )
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "0"
