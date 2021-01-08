@@ -3,7 +3,7 @@ extends Control
 export(PackedScene) var next_scene = null
 
 func _ready():
-	if $AnimationPlayer != null:
+	if get_node_or_null("AnimationPlayer") != null:
 		$AnimationPlayer.play(Globals.ANIM_IDLE)
 
 func _input(event):

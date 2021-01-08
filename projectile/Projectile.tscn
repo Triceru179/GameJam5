@@ -85,6 +85,7 @@ tracks/0/keys = {
 
 [sub_resource type="AudioStreamRandomPitch" id=4]
 audio_stream = ExtResource( 9 )
+random_pitch = 1.5
 
 [node name="Projectile" type="YSort"]
 z_index = 10
@@ -118,7 +119,7 @@ palette_purple = ExtResource( 4 )
 
 [node name="HitSFX" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource( 4 )
-volume_db = -8.0
+volume_db = -20.0
 max_distance = 196.0
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
 [connection signal="body_entered" from="Hitbox" to="." method="_on_Hitbox_body_entered"]

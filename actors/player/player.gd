@@ -181,10 +181,17 @@ func _on_Health_changed(current_health):
 	play_sfx(Globals.random_sfx_from_array(HURT_SFX))
 	
 	if current_health <= 0:
-		set_process(false)
-		set_physics_process(false)
-		$Hurtbox.set_deferred("monitoring", false)
+		pause_mode = PAUSE_MODE_STOP
+		$Hurtbox/CollisionShape2D.disabled = true
 		visible = false
 		emit_signal("died")
+		
+		var cam = $Camera2D
+		remove_child(cam)
+		get_parent().add_child(cam)
+		cam.global_position = global_position
+		
+		yield(get_tree().create_timer(0.5), "timeout")
+		queue_free()
 	else:
 		Globals.blink_white($BodyPaletteSwapper)

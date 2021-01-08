@@ -65,4 +65,5 @@ func _pause_unpause():
 	set_current_selection(0)
 
 func _on_Player_died():
+	get_tree().paused = false
 	queue_free()

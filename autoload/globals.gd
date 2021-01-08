@@ -57,8 +57,13 @@ func blink_white(palette_swapper, duration: float = 0.1):
 	yield(get_tree().create_timer(duration), "timeout")
 	palette_swapper.change_palette(previous_index)
 
-func change_scene(scene: PackedScene):
-	get_tree().change_scene_to(scene)
+func change_scene(scene: PackedScene, transition_duration: float = 0.5):
+	ScreenAdjuster.adjust_screen_brightness(0, transition_duration / 2)
+	yield(get_tree().create_timer(transition_duration / 2), "timeout")
+	
+	var _er = get_tree().change_scene_to(scene)
+	
+	ScreenAdjuster.adjust_screen_brightness(1, transition_duration / 2)
 
 func random_sfx_from_array(sfxs: Array) -> AudioStream:
 	return sfxs[randi() % sfxs.size()]

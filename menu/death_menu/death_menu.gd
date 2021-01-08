@@ -4,26 +4,27 @@ var current_selection = 0
 var active = false
 
 onready var selectors = [
-	$CenterContainer/VBoxContainer/CenterContainer/HBoxContainer/Selector,
-	$CenterContainer/VBoxContainer/CenterContainer2/HBoxContainer/Selector,
-	$CenterContainer/VBoxContainer/CenterContainer3/HBoxContainer/Selector,
+	$CenterContainer/VBoxContainer/VBoxContainer/CenterContainer/HBoxContainer/Selector,
+	$CenterContainer/VBoxContainer/VBoxContainer/CenterContainer2/HBoxContainer/Selector,
+	$CenterContainer/VBoxContainer/VBoxContainer/CenterContainer3/HBoxContainer/Selector,
 ]
 
 func _ready():
 	set_current_selection(0)
 	set_visible(false)
+	
 	var player = get_tree().get_current_scene().get_node("World/Player")
 	player.connect("died", self, "_on_Player_died")
 
-func _input(_InputEvent):
+func _process(_delta):
 	if active:
-		if Input.is_action_pressed("ui_down"):
+		if Input.is_action_just_pressed("ui_down"):
 			current_selection = wrapi(current_selection + 1, 0, 3)
 			set_current_selection(current_selection)
-		elif Input.is_action_pressed("ui_up"):
+		elif Input.is_action_just_pressed("ui_up"):
 			current_selection = wrapi(current_selection - 1, 0, 3)
 			set_current_selection(current_selection)
-		elif Input.is_action_pressed("ui_accept"):
+		elif Input.is_action_just_pressed("ui_accept"):
 			handle_selection(current_selection)
 
 func handle_selection(_current_selection):
@@ -32,8 +33,10 @@ func handle_selection(_current_selection):
 	
 	match _current_selection:
 		0:
+			ScreenAdjuster.reset_screen()
 			var _er = get_tree().reload_current_scene()
 		1:
+			ScreenAdjuster.reset_screen()
 			Globals.change_scene(load("res://scenes/MainMenu.tscn"))
 		2:
 			get_tree().quit()
@@ -54,5 +57,7 @@ func set_visible(is_visible):
 		if node.get_indexed("visible") != null:
 			node.visible = is_visible
 
-func _on_Player_died():
+func _on_Player_died():	
+	ScreenAdjuster.adjust_screen_saturation(0, 1)
 	active = !active
+	set_visible(true)
