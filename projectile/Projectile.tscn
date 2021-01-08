@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://projectile/projectile.gd" type="Script" id=1]
 [ext_resource path="res://projectile/sprites/projectile_magic_small_missile.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://projectile/sprites/palettes/palette_projectile_blue.png" type="Texture" id=6]
 [ext_resource path="res://projectile/sprites/palettes/palette_projectile_red.png" type="Texture" id=7]
 [ext_resource path="res://materials/material_color_swap.tres" type="Material" id=8]
+[ext_resource path="res://projectile/sfx/projectile_hit.wav" type="AudioStream" id=9]
 
 [sub_resource type="CircleShape2D" id=1]
 resource_local_to_scene = true
@@ -82,6 +83,9 @@ tracks/0/keys = {
 "values": [ 0, 1 ]
 }
 
+[sub_resource type="AudioStreamRandomPitch" id=4]
+audio_stream = ExtResource( 9 )
+
 [node name="Projectile" type="YSort"]
 z_index = 10
 script = ExtResource( 1 )
@@ -111,5 +115,10 @@ palette_red = ExtResource( 7 )
 palette_blue = ExtResource( 6 )
 palette_yellow = ExtResource( 5 )
 palette_purple = ExtResource( 4 )
+
+[node name="HitSFX" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource( 4 )
+volume_db = -8.0
+max_distance = 196.0
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
 [connection signal="body_entered" from="Hitbox" to="." method="_on_Hitbox_body_entered"]

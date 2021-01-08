@@ -59,3 +59,6 @@ func blink_white(palette_swapper, duration: float = 0.1):
 
 func change_scene(scene: PackedScene):
 	get_tree().change_scene_to(scene)
+
+func random_sfx_from_array(sfxs: Array) -> AudioStream:
+	return sfxs[randi() % sfxs.size()]

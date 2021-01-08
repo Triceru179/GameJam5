@@ -171,9 +171,9 @@ __meta__ = {
 
 [node name="VBoxContainer" type="VBoxContainer" parent="OptionsMenu/CenterContainer2"]
 margin_left = 67.0
-margin_top = 12.0
+margin_top = 36.0
 margin_right = 252.0
-margin_bottom = 119.0
+margin_bottom = 143.0
 custom_constants/separation = 20
 
 [node name="Title" type="CenterContainer" parent="OptionsMenu/CenterContainer2/VBoxContainer"]
@@ -285,7 +285,6 @@ margin_bottom = 16.0
 rect_min_size = Vector2( 50, 0 )
 max_value = 1.0
 step = 0.1
-value = 0.001
 __meta__ = {
 "_edit_use_anchors_": false
 }

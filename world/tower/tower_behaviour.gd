@@ -1,5 +1,11 @@
 extends StaticBody2D
 
+const SFXs = [
+	preload("res://world/tower/sfxs/glass_break_1.wav"),
+	preload("res://world/tower/sfxs/glass_break_2.wav"),
+	preload("res://world/tower/sfxs/glass_break_3.wav"),
+	preload("res://world/tower/sfxs/glass_break_4.wav"),
+]
 
 func _ready():
 	$Sphere/AnimationPlayer.play(Globals.ANIM_IDLE)
@@ -14,6 +20,10 @@ func _on_Player_wand_color_changed(color_index):
 
 func _on_Player_damaged(current_health):
 	Globals.blink_white($Sphere/PaletteSwapper)
+	
+	var audio_stream = $AudioStreamPlayer2D
+	audio_stream.stream = Globals.random_sfx_from_array(SFXs)
+	audio_stream.play()
 	
 	if current_health <= 0:
 		var sphere_anim_p = $Sphere/AnimationPlayer

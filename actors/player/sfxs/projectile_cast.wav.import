@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/projectile_cast.wav-74877d75f9dbc1f34332971f6e76597b.sample"
+
+[deps]
+
+source_file="res://actors/player/sfxs/projectile_cast.wav"
+dest_files=[ "res://.import/projectile_cast.wav-74877d75f9dbc1f34332971f6e76597b.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

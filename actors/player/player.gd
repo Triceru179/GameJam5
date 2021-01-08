@@ -9,6 +9,14 @@ enum State {
 	DASH,
 }
 
+const HURT_SFX = [
+	preload("res://actors/player/sfxs/player_hurt_1.wav"),
+	preload("res://actors/player/sfxs/player_hurt_2.wav"),
+	preload("res://actors/player/sfxs/player_hurt_3.wav"),
+	preload("res://actors/player/sfxs/player_hurt_4.wav"),
+	preload("res://actors/player/sfxs/player_hurt_5.wav"),
+	preload("res://actors/player/sfxs/player_hurt_6.wav"),
+]
 
 const WEAPON_DISTANCE = 13
 const DASH_SPEED = 252
@@ -102,6 +110,8 @@ func _update_weapon_color():
 	emit_signal("wand_color_changed", current_color_index)
 
 func attack(rotation_offset: float = 0):
+	$CastSFX.play()
+	
 	var dir = (get_global_mouse_position() -
 		$Pivot/WeaponPivot/Weapon/AttackPoint.global_position).normalized()
 	var angle = dir.angle() + deg2rad(rotation_offset)
@@ -168,6 +178,7 @@ func _try_attack():
 
 func _on_Health_changed(current_health):
 	emit_signal("damaged", current_health)
+	play_sfx(Globals.random_sfx_from_array(HURT_SFX))
 	
 	if current_health <= 0:
 		set_process(false)

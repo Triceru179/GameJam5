@@ -19,6 +19,11 @@ func _ready():
 func attack(_rotation_offset: float = 0):
 	pass
 
+func play_sfx(audio_stream: AudioStream):
+	var sfx = $SFX
+	sfx.stream.audio_stream = audio_stream
+	sfx.play()
+
 func _flip(value: float):
 	Globals.flip(body_pivot, value, Vector2.RIGHT, 0.7)
 

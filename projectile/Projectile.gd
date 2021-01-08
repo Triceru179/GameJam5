@@ -34,7 +34,13 @@ func setup_projectile(projectile_data: ProjectileData,
 func destroy_projectile():
 	dir = Vector2.ZERO
 	$AnimationPlayer.play(Globals.ANIM_DEATH)
+	$HitSFX.play()
 	yield($AnimationPlayer, "animation_finished")
+	
+	$Hitbox/CollisionShape2D.disabled = true
+	visible = false
+	pause_mode = PAUSE_MODE_STOP
+	yield(get_tree().create_timer(0.5),"timeout")
 	
 	queue_free()
 

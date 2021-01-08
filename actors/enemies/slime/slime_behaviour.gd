@@ -17,6 +17,7 @@ onready var jump_cooldown_timer := $JumpCooldown
 func _ready():
 	._ready()
 	attack_cooldown_timer.wait_time += (randf() - 0.5) * 2
+	jump_cooldown_timer.wait_time += (randf() / 5)
 
 func _physics_process(_delta):
 	match current_state:

@@ -41,4 +41,7 @@ autostart = true
 
 [node name="AttackPoint" type="Position2D" parent="." index="7"]
 
+[node name="HurtSFX" type="AudioStreamPlayer2D" parent="." index="11"]
+max_distance = 196.0
+
 [editable path="Hurtbox"]

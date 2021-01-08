@@ -10,11 +10,12 @@ func _ready():
 	get_node(slider_music).value = db2linear(AudioServer.get_bus_volume_db(2))
 
 func _adjust_bus_volume(bus, value):
-	print(linear2db(value))
 	AudioServer.set_bus_mute(bus, value <= 0)
 	if value > 0:
 		AudioServer.set_bus_volume_db(bus, linear2db(value))
-	get_node("MenuAccept").play()
+	
+	if visible:
+		get_node("MenuAccept").play()
 
 func _on_FxSlider_value_changed(value):
 	$CenterContainer2/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer4/FxVolume/FxVolume.text = str(int(value * 10))

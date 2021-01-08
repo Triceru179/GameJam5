@@ -19,6 +19,7 @@ hframes = 3
 position = Vector2( -1, -1 )
 rotation = 1.5708
 shape = SubResource( 1 )
+disabled = true
 
 [node name="Shadow" parent="." instance=ExtResource( 2 )]
 reference_sprite = NodePath("../Body")

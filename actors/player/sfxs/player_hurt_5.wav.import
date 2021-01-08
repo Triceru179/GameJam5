@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/player_hurt_5.wav-9fb5a43cefee2f70c15d40912a744f0a.sample"
+
+[deps]
+
+source_file="res://actors/player/sfxs/player_hurt_5.wav"
+dest_files=[ "res://.import/player_hurt_5.wav-9fb5a43cefee2f70c15d40912a744f0a.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

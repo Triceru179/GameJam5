@@ -38,8 +38,16 @@ func _on_Hurtbox_area_entered(area):
 		$InvincibilityTimer.start()
 
 func _on_Health_changed(current_health):
+	$HurtSFX.play()
+	
 	if current_health <= 0:
 		emit_signal("died")
+		$Pushbox.disabled = true
+		visible = false
+		pause_mode = PAUSE_MODE_STOP
+		
+		yield(get_tree().create_timer(0.2), "timeout")
+		
 		queue_free()
 	else:
 		Globals.blink_white($BodyPaletteSwapper)
