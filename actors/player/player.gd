@@ -167,6 +167,7 @@ func _try_dash():
 		$Pivot.modulate = Globals.COLOR_SEMI_TRASPARENT
 		
 		dash_duration_timer.start()
+		$DashSFX.play()
 		$InvincibilityTimer.start(dash_duration_timer.wait_time)
 		
 		current_state = State.DASH
@@ -177,6 +178,9 @@ func _try_attack():
 		attack()
 
 func _on_Health_changed(current_health):
+	if !visible:
+		return
+	
 	emit_signal("damaged", current_health)
 	play_sfx(Globals.random_sfx_from_array(HURT_SFX))
 	
@@ -187,9 +191,10 @@ func _on_Health_changed(current_health):
 		emit_signal("died")
 		
 		var cam = $Camera2D
-		remove_child(cam)
-		get_parent().add_child(cam)
-		cam.global_position = global_position
+		if cam:
+			remove_child(cam)
+			get_parent().add_child(cam)
+			cam.global_position = global_position
 		
 		yield(get_tree().create_timer(0.5), "timeout")
 		queue_free()

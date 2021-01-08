@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://actors/player/palettes/palette_player_purple.png" type="Texture" id=1]
 [ext_resource path="res://actors/player/sprites/wand_sheet.png" type="Texture" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://actors/player/palettes/palette_wand_blue.png" type="Texture" id=10]
 [ext_resource path="res://actors/player/palettes/palette_wand_red.png" type="Texture" id=11]
 [ext_resource path="res://actors/player/palettes/palette_wand_yellow.png" type="Texture" id=12]
+[ext_resource path="res://actors/player/sfxs/player_dash.wav" type="AudioStream" id=13]
 
 [sub_resource type="Animation" id=1]
 resource_name = "idle"
@@ -109,6 +110,10 @@ extents = Vector2( 3, 7 )
 [sub_resource type="AudioStreamRandomPitch" id=9]
 audio_stream = ExtResource( 6 )
 
+[sub_resource type="AudioStreamRandomPitch" id=10]
+audio_stream = ExtResource( 13 )
+random_pitch = 1.2
+
 [node name="Player" instance=ExtResource( 4 )]
 collision_layer = 2
 collision_mask = 15
@@ -200,5 +205,9 @@ volume_db = 4.0
 [node name="CastSFX" type="AudioStreamPlayer2D" parent="." index="15"]
 stream = SubResource( 9 )
 volume_db = -6.0
+
+[node name="DashSFX" type="AudioStreamPlayer2D" parent="." index="16"]
+stream = SubResource( 10 )
+max_distance = 256.0
 
 [editable path="Hurtbox"]

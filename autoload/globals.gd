@@ -62,7 +62,9 @@ func change_scene(scene: PackedScene, transition_duration: float = 0.5):
 	yield(get_tree().create_timer(transition_duration / 2), "timeout")
 	
 	var _er = get_tree().change_scene_to(scene)
+	ScreenAdjuster.reset_screen()
 	
+	ScreenAdjuster.adjust_screen_brightness(0)
 	ScreenAdjuster.adjust_screen_brightness(1, transition_duration / 2)
 
 func random_sfx_from_array(sfxs: Array) -> AudioStream:

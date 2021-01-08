@@ -6,6 +6,7 @@ export(NodePath) var slider_music = null
 func _ready():
 	visible = false
 	
+	$CenterContainer2/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer/Fullscreen/OptionFullscren.pressed = OS.window_fullscreen
 	get_node(slider_fx).value = db2linear(AudioServer.get_bus_volume_db(1))
 	get_node(slider_music).value = db2linear(AudioServer.get_bus_volume_db(2))
 

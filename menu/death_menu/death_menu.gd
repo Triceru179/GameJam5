@@ -36,7 +36,6 @@ func handle_selection(_current_selection):
 			ScreenAdjuster.reset_screen()
 			var _er = get_tree().reload_current_scene()
 		1:
-			ScreenAdjuster.reset_screen()
 			Globals.change_scene(load("res://scenes/MainMenu.tscn"))
 		2:
 			get_tree().quit()
