@@ -62,7 +62,7 @@ func _on_Enemy_died():
 			$RestTime.start()
 		else:
 			emit_signal("all_waves_finished")
-			Globals.change_scene(load("res://scenes/MainMenu.tscn"), 1)
+			Globals.change_scene(load("res://menu/victory_menu/VictoryMenu.tscn"), 1)
 
 func _on_RestTime_timeout():
 	_spawn_wave(current_wave)

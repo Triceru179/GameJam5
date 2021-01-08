@@ -24,8 +24,7 @@ func _ready():
 		
 		m.setup_enemy(colors[randi() % colors.size()])
 		yield(get_tree().create_timer(0.05), "timeout")
-	
-	yield(get_tree(), "idle_frame")
+
 	$World/Player/Camera2D.queue_free()
 
 func _on_TimeToTransition_timeout():
