@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://world/tower/Tower.tscn" type="PackedScene" id=1]
 [ext_resource path="res://actors/player/Player.tscn" type="PackedScene" id=2]
@@ -15,8 +15,10 @@
 [ext_resource path="res://world/detail/Grass.tscn" type="PackedScene" id=13]
 [ext_resource path="res://menu/pause_menu/PauseMenu.tscn" type="PackedScene" id=14]
 [ext_resource path="res://menu/death_menu/DeathMenu.tscn" type="PackedScene" id=15]
-[ext_resource path="res://actors/enemies/player_detector.gd" type="Script" id=16]
+[ext_resource path="res://world/PlayerDetector.tscn" type="PackedScene" id=16]
 [ext_resource path="res://world/sfx/wave_started.wav" type="AudioStream" id=17]
+[ext_resource path="res://world/waves/wave_datas/Wave_05.tres" type="Resource" id=18]
+[ext_resource path="res://world/waves/wave_datas/Wave_04.tres" type="Resource" id=19]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 340, 10 )
@@ -212,7 +214,7 @@ position = Vector2( 237, -156 )
 
 [node name="WaveSpawner" type="Node" parent="World"]
 script = ExtResource( 9 )
-waves = [ ExtResource( 10 ), ExtResource( 6 ), ExtResource( 11 ) ]
+waves = [ ExtResource( 10 ), ExtResource( 6 ), ExtResource( 11 ), ExtResource( 19 ), ExtResource( 18 ) ]
 
 [node name="RestTime" type="Timer" parent="World/WaveSpawner"]
 wait_time = 5.0
@@ -226,8 +228,7 @@ one_shot = true
 stream = SubResource( 3 )
 bus = "Sound Effects"
 
-[node name="PlayerDetector" type="Node" parent="World"]
-script = ExtResource( 16 )
+[node name="PlayerDetector" parent="World" instance=ExtResource( 16 )]
 
 [node name="HUD" parent="." instance=ExtResource( 12 )]
 

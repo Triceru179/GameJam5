@@ -26,7 +26,7 @@ const DASH_SPEED = 256
 const WAVE_ATTACK_UPGRADES = {
 	"1": "res://actors/attacks/attack_datas/AttackPlayerMagicMissile1.tres",
 	"3": "res://actors/attacks/attack_datas/AttackPlayerMagicMissile3.tres",
-	"7": "res://actors/attacks/attack_datas/AttackPlayerMagicMissile5.tres",
+	"5": "res://actors/attacks/attack_datas/AttackPlayerMagicMissile5.tres",
 }
 
 export(Color) var fade_shadow_color
@@ -51,7 +51,7 @@ func _ready():
 	$Pivot/WeaponPivot/AnimationPlayer.play(Globals.ANIM_IDLE)
 	_update_weapon_color()
 	
-	var wave_s = get_tree().get_current_scene().get_node("World/WaveSpawner")
+	var wave_s = get_tree().get_current_scene().get_node_or_null("World/WaveSpawner")
 	if wave_s:
 		wave_s.connect("wave_started", self, "_try_upgrade_player_attack")
 	

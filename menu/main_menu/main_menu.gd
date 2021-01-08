@@ -19,11 +19,11 @@ func _process(_delta):
 		return
 	
 	if Input.is_action_just_pressed("ui_down"):
-		current_selection = wrapi(current_selection + 1, 0, 3)
-		set_current_selection(current_selection)
+		set_current_selection(wrapi(current_selection + 1, 0, 3))
+	
 	elif Input.is_action_just_pressed("ui_up"):
-		current_selection = wrapi(current_selection - 1, 0, 3)
-		set_current_selection(current_selection)
+		set_current_selection(wrapi(current_selection - 1, 0, 3))
+	
 	elif Input.is_action_just_pressed("ui_accept"):
 		handle_selection(current_selection)
 
@@ -34,7 +34,7 @@ func handle_selection(_current_selection):
 	match _current_selection:
 		0:
 			active = false
-			Globals.change_scene(load("res://scenes/Introduction.tscn"))
+			Globals.change_scene(load("res://scenes/Introduction1.tscn"))
 		1:
 			active = false
 			visible = false
@@ -43,6 +43,7 @@ func handle_selection(_current_selection):
 			get_tree().quit()
 
 func set_current_selection(_current_selection):
+	current_selection = _current_selection
 	if active:
 		$MenuSelect.play()
 	

@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://scenes/Cutscene1/random_monster_spawner.gd" type="Script" id=1]
+[ext_resource path="res://world/PlayerDetector.tscn" type="PackedScene" id=2]
+[ext_resource path="res://actors/player/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://ui/transition_scene.gd" type="Script" id=4]
+[ext_resource path="res://scenes/Introduction2.tscn" type="PackedScene" id=5]
+[ext_resource path="res://MenuAccept.tscn" type="PackedScene" id=6]
+
+[node name="Cutscene1" type="Control"]
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+next_scene = ExtResource( 5 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 320.0
+margin_bottom = 180.0
+color = Color( 0.113725, 0.105882, 0.133333, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="World" type="Node2D" parent="."]
+
+[node name="Player" parent="World" instance=ExtResource( 3 )]
+position = Vector2( 10000, 90 )
+
+[node name="PlayerDetector" parent="World" instance=ExtResource( 2 )]
+
+[node name="Monsters" type="YSort" parent="."]
+
+[node name="Transition" type="Control" parent="."]
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+next_scene = ExtResource( 5 )
+
+[node name="MenuAccept" parent="Transition" instance=ExtResource( 6 )]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="TimeToTransition" type="Timer" parent="."]
+wait_time = 15.0
+one_shot = true
+[connection signal="timeout" from="TimeToTransition" to="." method="_on_TimeToTransition_timeout"]
