@@ -1,5 +1,6 @@
 extends Node
 
+signal enemy_count_changed(count)
 signal wave_started(wave_number, total_waves)
 signal all_waves_finished
 
@@ -42,8 +43,9 @@ func _spawn_wave(index):
 				enemy.global_position = pos
 				
 				remaining_enemies += 1
+				emit_signal("enemy_count_changed", remaining_enemies)
 				
-				yield(get_tree().create_timer(randf() * 0.2), "timeout")
+				yield(get_tree().create_timer(randf() * 0.1), "timeout")
 		
 		emit_signal("wave_started", str(current_wave + 1), waves.size())
 		$WaveStarted.play()
@@ -53,6 +55,8 @@ func _spawn_wave(index):
 
 func _on_Enemy_died():
 	remaining_enemies -= 1
+	
+	emit_signal("enemy_count_changed", remaining_enemies)
 	
 	if remaining_enemies <= 0:
 		remaining_enemies = 0

@@ -181,6 +181,7 @@ action_dash={
 2d_physics/layer_2="Player"
 2d_physics/layer_3="Enemies"
 2d_physics/layer_4="Environment"
+2d_physics/layer_5="Body"
 2d_physics/layer_7="PlayerHitbox"
 2d_physics/layer_8="PlayerHurtbox"
 2d_physics/layer_9="EnemyHitbox"

@@ -10,6 +10,7 @@ onready var default_collision_mask = $Hitbox.collision_mask
 
 func _ready():
 	$AnimationPlayer.play(Globals.ANIM_IDLE)
+	$TimeTilDestroy.start()
 
 func _physics_process(delta):
 	if !data:
@@ -47,5 +48,13 @@ func destroy_projectile():
 func _on_VisibilityNotifier2D_screen_exited():
 	queue_free()
 
-func _on_Hitbox_body_entered(_body):
+func _on_Hitbox_body_entered(body):
+	destroy_projectile()
+
+func _on_Hitbox_area_entered(area):
+	var actor = area.get_parent()
+	if actor && actor.has_method("try_damaging"):
+		actor.try_damaging(self)
+
+func _on_TimeTilDestroy_timeout():
 	destroy_projectile()

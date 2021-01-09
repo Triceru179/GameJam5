@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://world/shadow/Shadow.tscn" type="PackedScene" id=1]
 [ext_resource path="res://actors/palette_swapper/PaletteSwapper.tscn" type="PackedScene" id=2]
@@ -8,13 +8,14 @@
 [ext_resource path="res://world/tower/palettes/palette_sphere_blue.png" type="Texture" id=6]
 [ext_resource path="res://world/tower/palettes/palette_sphere_yellow.png" type="Texture" id=7]
 [ext_resource path="res://world/tower/sphere_sheet.png" type="Texture" id=8]
+[ext_resource path="res://world/tower/tower_base_shadow.png" type="Texture" id=9]
 [ext_resource path="res://world/tower/tower_behaviour.gd" type="Script" id=10]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 20.0
 height = 28.0
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=2]
 resource_name = "death"
 length = 0.4
 tracks/0/type = "value"
@@ -60,8 +61,15 @@ tracks/0/keys = {
 [sub_resource type="AudioStreamRandomPitch" id=4]
 random_pitch = 1.2
 
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 30, 56 )
+
 [node name="Tower" type="StaticBody2D"]
 script = ExtResource( 10 )
+
+[node name="BaseShadow" type="Sprite" parent="."]
+position = Vector2( 1, -10 )
+texture = ExtResource( 9 )
 
 [node name="Body" type="Sprite" parent="."]
 texture = ExtResource( 3 )
@@ -91,7 +99,7 @@ palette_blue = ExtResource( 6 )
 palette_yellow = ExtResource( 7 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sphere"]
-anims/death = SubResource( 5 )
+anims/death = SubResource( 2 )
 anims/idle = SubResource( 3 )
 
 [node name="SphereShadow" parent="Sphere" instance=ExtResource( 1 )]
@@ -103,3 +111,16 @@ stream = SubResource( 4 )
 volume_db = -6.0
 max_distance = 256.0
 bus = "Sound Effects"
+
+[node name="CheckBodiesInside" type="Area2D" parent="."]
+position = Vector2( 0, -86 )
+monitorable = false
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CheckBodiesInside"]
+shape = SubResource( 5 )
+[connection signal="area_entered" from="CheckBodiesInside" to="." method="_on_CheckBodiesInside_area_entered"]
+[connection signal="area_exited" from="CheckBodiesInside" to="." method="_on_CheckBodiesInside_area_exited"]
+[connection signal="body_entered" from="CheckBodiesInside" to="." method="_on_CheckBodiesInside_body_entered"]
+[connection signal="body_exited" from="CheckBodiesInside" to="." method="_on_CheckBodiesInside_body_exited"]

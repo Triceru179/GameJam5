@@ -5,8 +5,8 @@
 
 [resource]
 script = ExtResource( 1 )
-health = 4
+health = 3
 acceleration = 0.0
-max_speed = 72.0
+max_speed = 80.0
 friction = 0.0
 attack = ExtResource( 2 )

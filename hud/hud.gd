@@ -20,6 +20,9 @@ func _update_wave_text(wave_number, total_waves):
 func _update_health(value):
 	$HealthHUD/Sprite.region_rect = Rect2(0, 0, 16 * value, 16)
 
+func _on_WaveSpawner_enemy_count_changed(value):
+	$EnemyCountHUD/Label.text = str(value)
+
 func _on_Player_wand_color_changed(color_index):
 	$ColorHUD/PaletteSwapper.change_palette(color_index)
 

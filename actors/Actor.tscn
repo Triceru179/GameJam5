@@ -24,6 +24,7 @@ extents = Vector2( 4, 8 )
 [sub_resource type="AudioStreamRandomPitch" id=4]
 
 [node name="Actor" type="KinematicBody2D"]
+collision_layer = 17
 collision_mask = 9
 script = ExtResource( 2 )
 
@@ -67,7 +68,6 @@ target_sprite = NodePath("../Pivot/BodyPivot/Body")
 stream = SubResource( 4 )
 max_distance = 256.0
 bus = "Sound Effects"
-[connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="changed" from="Health" to="." method="_on_Health_changed"]
 
 [editable path="Hurtbox"]

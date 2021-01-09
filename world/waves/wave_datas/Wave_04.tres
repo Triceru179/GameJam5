@@ -6,4 +6,4 @@
 [resource]
 script = ExtResource( 1 )
 enemies_scene = [ ExtResource( 2 ) ]
-enemies_quantity = [ 32 ]
+enemies_quantity = [ 16 ]

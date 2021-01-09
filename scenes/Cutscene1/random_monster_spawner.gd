@@ -19,11 +19,10 @@ func _ready():
 	for _i in range(32):
 		var m = monsters[randi() % monsters.size()].instance()
 		$Monsters.add_child(m)
-		m.global_position = (Vector2(randf() - 0.5, randf() - 0.5) * 128
-			+ Vector2(320 / 2, 180 / 2) - Vector2(256, 0))
+		m.global_position = (Vector2(randf() - 0.5, randf() - 0.5) * 148
+			+ Vector2(320 / 2, 180 / 2) - Vector2(312, 0))
 		
 		m.setup_enemy(colors[randi() % colors.size()])
-		yield(get_tree().create_timer(0.05), "timeout")
 
 	$World/Player/Camera2D.queue_free()
 

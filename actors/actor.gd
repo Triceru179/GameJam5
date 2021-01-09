@@ -26,6 +26,15 @@ func play_sfx(audio_stream: AudioStream):
 	sfx.stream.audio_stream = audio_stream
 	sfx.play()
 
+func try_damaging(proj):
+	if !$InvincibilityTimer.is_stopped():
+		return
+	
+	$Health.do_damage(1)
+	$InvincibilityTimer.start()
+	
+	proj.destroy_projectile()
+
 func _flip(value: float):
 	Globals.flip(body_pivot, value, Vector2.RIGHT, 0.7)
 
@@ -35,16 +44,6 @@ func _play_death_particles(offset):
 	get_parent().add_child(fx)
 	fx.global_position = global_position + offset
 	fx.emitting = true
-
-func _on_Hurtbox_area_entered(area):
-	if !$InvincibilityTimer.is_stopped():
-		return
-	
-	$Health.do_damage(1)
-	$InvincibilityTimer.start()
-	
-	if area.get_parent().has_method("destroy_projectile"):
-		area.get_parent().destroy_projectile()
 
 func _on_Health_changed(current_health):
 	if current_health <= 0:

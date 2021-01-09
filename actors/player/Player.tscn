@@ -115,8 +115,8 @@ audio_stream = ExtResource( 13 )
 random_pitch = 1.2
 
 [node name="Player" instance=ExtResource( 4 )]
-collision_layer = 2
-collision_mask = 15
+collision_layer = 18
+collision_mask = 11
 script = ExtResource( 3 )
 actor_data = ExtResource( 7 )
 
@@ -159,7 +159,7 @@ position = Vector2( 0, -2 )
 shape = SubResource( 7 )
 
 [node name="AttackCooldown" type="Timer" parent="." index="3"]
-wait_time = 0.4
+wait_time = 0.5
 one_shot = true
 
 [node name="Hurtbox" parent="." index="4"]

@@ -37,7 +37,7 @@ func _physics_process(_delta):
 			if anim_player.current_animation != Globals.ANIM_MOVE:
 				anim_player.play(Globals.ANIM_MOVE)
 			
-			var _er = move_and_slide(actor_data.max_speed * jump_direction)
+			move(jump_direction)
 		
 		State.PREPARE:
 			if anim_player.current_animation != Globals.ANIM_PREPARE:
@@ -47,7 +47,7 @@ func _physics_process(_delta):
 			if anim_player.current_animation != Globals.ANIM_ATTACK:
 				anim_player.play(Globals.ANIM_ATTACK)
 			
-			var _er = move_and_slide(actor_data.max_speed * jump_direction)
+			move(jump_direction)
 
 func start_jump(height: float, duration: float):
 	_get_jump_direction()

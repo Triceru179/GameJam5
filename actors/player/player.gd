@@ -24,9 +24,14 @@ const WEAPON_DISTANCE = 13
 const DASH_SPEED = 256
 
 const WAVE_ATTACK_UPGRADES = {
-	"1": "res://actors/attacks/attack_datas/AttackPlayerMagicMissile1.tres",
-	"3": "res://actors/attacks/attack_datas/AttackPlayerMagicMissile3.tres",
-	"5": "res://actors/attacks/attack_datas/AttackPlayerMagicMissile5.tres",
+	"2": {"atk_cd_redu": 0.1},
+	"3": {"proj_speed": 32},
+	"4": {"number": 2, "spread": 15},
+	"5": {"atk_cd_redu": 0.1},
+	"6": {"number": 2, "spread": 15},
+	"7": {"proj_speed": 16, "atk_cd_redu": 0.1},
+	
+	"default": {"proj_speed": 0, "number": 0, "spread": 0, "atk_cd": 0},
 }
 
 export(Color) var fade_shadow_color
@@ -36,7 +41,8 @@ var dash_direction := Vector2.ZERO
 var velocity := Vector2.ZERO
 var input_vector := Vector2.ZERO
 var current_state: int = State.IDLE
-var player_attack_data: AttackData = null
+
+var player_attack_data: AttackData = AttackData.new()
 
 onready var dash_input_buffer := $DashInputBuffer
 onready var dash_duration_timer := $DashDuration
@@ -44,10 +50,13 @@ onready var dash_cooldown_timer := $DashCooldown
 onready var weapon_anchor := $Pivot/WeaponPivot/Anchor
 onready var weapon_pivot := $Pivot/WeaponPivot
 onready var weapon_sprite := $Pivot/WeaponPivot/Weapon
+
 onready var attack_cooldown_timer := $AttackCooldown
+onready var player_attack_projectile: ProjectileData = actor_data.attack.projectile_data
 
 func _ready():
 	._ready()
+	
 	$Pivot/WeaponPivot/AnimationPlayer.play(Globals.ANIM_IDLE)
 	_update_weapon_color()
 	
@@ -206,7 +215,21 @@ func _try_attack():
 
 func _try_upgrade_player_attack(wave, _total):
 	if WAVE_ATTACK_UPGRADES.has(str(wave)):
-		player_attack_data = load(WAVE_ATTACK_UPGRADES.get(wave))
+		var dict = WAVE_ATTACK_UPGRADES.get(str(wave))
+		
+		if dict.has("proj_speed"):
+			player_attack_data.projectile_data.speed += dict["proj_speed"]
+		
+		if dict.has("number"):
+			player_attack_data.number_of_projectiles += dict["number"]
+		
+		if dict.has("spread"):
+			player_attack_data.spread += dict["spread"]
+		
+		if dict.has("atk_cd_redu"):
+			var atk_cd = $AttackCooldown
+			atk_cd.wait_time = max(atk_cd.wait_time - dict["atk_cd_redu"], 0.1)
+		
 
 func _on_Health_changed(current_health):
 	if !visible:
