@@ -13,11 +13,14 @@ func _ready():
 func move(direction: Vector2):
 	var _er = move_and_slide(direction * actor_data.max_speed * rnd_spd)
 
-func setup_enemy(color_index: int, actual_wave: int = 0):
+func setup_enemy(color_index: int):
 	$BodyPaletteSwapper.change_palette(color_index)
 	current_color_index = color_index
 
 func attack(rotation_offset: float = 0):
+	if is_dead:
+		return
+	
 	var dir = Vector2.RIGHT
 	if player_detector.player != null:
 		dir = -player_detector.get_player_direction_to(self.global_position)
@@ -51,6 +54,7 @@ func _on_Health_changed(current_health):
 		anim_player.stop()
 		visible = false
 		pause_mode = PAUSE_MODE_STOP
+		is_dead = true
 		emit_signal("died")
 		
 		_play_death_particles(Vector2.ZERO)

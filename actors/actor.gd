@@ -8,6 +8,7 @@ const FX_EXPLOSION = preload("res://actors/fx/Explosion.tscn")
 export(Resource) var actor_data = null
 
 var current_color_index = 0
+var is_dead = false
 
 onready var body_pivot := $Pivot/BodyPivot
 onready var anim_player := $AnimationPlayer
@@ -50,10 +51,10 @@ func _on_Health_changed(current_health):
 		pause_mode = PAUSE_MODE_STOP
 		$Hurtbox/CollisionShape2D.set_deferred("disabled", true)
 		visible = false
+		is_dead = true
 		emit_signal("died")
 		
 		_play_death_particles(Vector2.ZERO)
-		emit_signal("died")
 		queue_free()
 	else:
 		Globals.blink_white($BodyPaletteSwapper)

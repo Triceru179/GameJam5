@@ -21,7 +21,7 @@ const HURT_SFX = [
 
 const FADE_SHADOW = preload("res://actors/player/fade_shadow/FadeShadow.tscn")
 
-const WEAPON_DISTANCE = 13
+const WEAPON_DISTANCE = 8
 const DASH_SPEED = 256
 
 const WAVE_ATTACK_UPGRADES = {
@@ -242,6 +242,7 @@ func _on_Health_changed(current_health):
 		$Hurtbox/CollisionShape2D.set_deferred("disabled", true)
 		visible = false
 		_play_death_particles(Vector2(0, -8))
+		is_dead = true
 		emit_signal("died")
 		
 		var cam = $Camera2D

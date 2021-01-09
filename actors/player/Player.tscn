@@ -137,7 +137,7 @@ frame = 2
 position = Vector2( 0, 5 )
 
 [node name="Anchor" type="Position2D" parent="Pivot/WeaponPivot" index="0"]
-position = Vector2( 0, -24 )
+position = Vector2( 0, -19 )
 
 [node name="Weapon" type="Sprite" parent="Pivot/WeaponPivot" index="1"]
 material = ExtResource( 8 )
@@ -209,10 +209,13 @@ volume_db = 4.0
 [node name="CastSFX" type="AudioStreamPlayer2D" parent="." index="16"]
 stream = SubResource( 9 )
 volume_db = -6.0
+max_distance = 256.0
+bus = "Sound Effects"
 
 [node name="DashSFX" type="AudioStreamPlayer2D" parent="." index="17"]
 stream = SubResource( 10 )
 max_distance = 256.0
+bus = "Sound Effects"
 [connection signal="timeout" from="DashFadeShadowCD" to="." method="_on_DashFadeShadowCD_timeout"]
 
 [editable path="Hurtbox"]

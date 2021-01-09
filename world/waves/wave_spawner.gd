@@ -41,7 +41,7 @@ func _spawn_wave(index):
 				pos.y *= y_rand if y_rand != 0 else 1
 				
 				var r_color = randi() % COLORS.size()
-				enemy.setup_enemy(COLORS[r_color], current_wave + 1)
+				enemy.setup_enemy(COLORS[r_color])
 				enemy.connect("died", self, "_on_Enemy_died")
 				enemy.global_position = pos
 				
