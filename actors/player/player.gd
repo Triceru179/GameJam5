@@ -1,6 +1,7 @@
 extends Actor
 
 signal wand_color_changed(color_index)
+signal magic_upgraded
 signal damaged(current_health)
 
 enum State {
@@ -25,11 +26,9 @@ const DASH_SPEED = 256
 
 const WAVE_ATTACK_UPGRADES = {
 	"2": {"atk_cd_redu": 0.1},
-	"3": {"proj_speed": 32},
-	"4": {"number": 2, "spread": 15},
-	"5": {"atk_cd_redu": 0.1},
-	"6": {"number": 2, "spread": 15},
-	"7": {"proj_speed": 16, "atk_cd_redu": 0.1},
+	"4": {"number": 2, "spread": 15, "proj_speed": 32},
+	"6": {"proj_speed": 16, "number": 2, "spread": 15, "atk_cd_redu": 0.1},
+	"8": {"atk_cd_redu": 0.1},
 	
 	"default": {"proj_speed": 0, "number": 0, "spread": 0, "atk_cd": 0},
 }
@@ -230,6 +229,7 @@ func _try_upgrade_player_attack(wave, _total):
 			var atk_cd = $AttackCooldown
 			atk_cd.wait_time = max(atk_cd.wait_time - dict["atk_cd_redu"], 0.1)
 		
+		emit_signal("magic_upgraded")
 
 func _on_Health_changed(current_health):
 	if !visible:

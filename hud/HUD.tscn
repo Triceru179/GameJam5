@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://hud/color_hud_background.png" type="Texture" id=1]
 [ext_resource path="res://hud/health_hud_heart.png" type="Texture" id=2]
@@ -31,10 +31,12 @@ void fragment() {
 resource_local_to_scene = true
 shader = SubResource( 1 )
 
-[sub_resource type="DynamicFont" id=3]
-size = 12
-outline_size = 1
-outline_color = Color( 0, 0, 0, 1 )
+[sub_resource type="DynamicFont" id=5]
+size = 24
+font_data = ExtResource( 11 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 10
 font_data = ExtResource( 11 )
 
 [sub_resource type="DynamicFont" id=4]
@@ -77,19 +79,43 @@ target_sprite = NodePath("../Sprite")
 palette_default = ExtResource( 5 )
 
 [node name="WaveHUD" type="Control" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="ColorRect" type="ColorRect" parent="WaveHUD"]
+margin_top = 75.0
+margin_right = 320.0
+margin_bottom = 105.0
+color = Color( 0, 0, 0, 0.45098 )
+
 [node name="Label" type="Label" parent="WaveHUD"]
-margin_left = 238.0
-margin_right = 318.0
-margin_bottom = 20.0
-custom_fonts/font = SubResource( 3 )
-text = "Onda: 3/7"
-align = 2
+margin_top = 75.0
+margin_right = 320.0
+margin_bottom = 105.0
+custom_fonts/font = SubResource( 5 )
+text = "Wave 3 of 7231"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="UpgradeHUD" type="Control" parent="."]
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UpgradeHUD"]
+margin_top = 105.0
+margin_right = 320.0
+margin_bottom = 125.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = SubResource( 6 )
+text = "You feel your magic power getting stronger..."
+align = 1
+clip_text = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
