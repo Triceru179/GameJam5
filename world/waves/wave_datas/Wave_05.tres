@@ -1,9 +1,12 @@
-[gd_resource type="Resource" load_steps=3 format=2]
+[gd_resource type="Resource" load_steps=6 format=2]
 
 [ext_resource path="res://world/waves/wave_data.gd" type="Script" id=1]
 [ext_resource path="res://actors/enemies/slime/Slime.tscn" type="PackedScene" id=2]
+[ext_resource path="res://actors/enemies/ghost/Ghost.tscn" type="PackedScene" id=3]
+[ext_resource path="res://actors/enemies/demon/Demon.tscn" type="PackedScene" id=4]
+[ext_resource path="res://actors/enemies/golem/Golem.tscn" type="PackedScene" id=5]
 
 [resource]
 script = ExtResource( 1 )
-enemies_scene = [ ExtResource( 2 ) ]
-enemies_quantity = [ 16 ]
+enemies_scene = [ ExtResource( 2 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 3 ) ]
+enemies_quantity = [ 2, 10, 0, 0 ]
