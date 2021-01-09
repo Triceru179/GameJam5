@@ -72,15 +72,18 @@ collision_mask = 33
 script = ExtResource( 10 )
 
 [node name="BaseShadow" type="Sprite" parent="."]
-position = Vector2( 1, -1 )
+position = Vector2( 1, 2 )
 texture = ExtResource( 9 )
 
 [node name="Body" type="Sprite" parent="."]
 texture = ExtResource( 3 )
 offset = Vector2( 0, -36 )
 
-[node name="BodyShadow" parent="." instance=ExtResource( 1 )]
-reference_sprite = NodePath("../Body")
+[node name="ShadowOffset" type="Node2D" parent="."]
+position = Vector2( 0, 4 )
+
+[node name="BodyShadow" parent="ShadowOffset" instance=ExtResource( 1 )]
+reference_sprite = NodePath("../../Body")
 
 [node name="Pushbox" type="CollisionShape2D" parent="."]
 position = Vector2( 1, -1 )
@@ -88,6 +91,7 @@ rotation = 1.5708
 shape = SubResource( 1 )
 
 [node name="PushboxProj" type="StaticBody2D" parent="."]
+visible = false
 position = Vector2( 1, -10 )
 collision_layer = 32
 collision_mask = 0
@@ -124,6 +128,7 @@ max_distance = 256.0
 bus = "Sound Effects"
 
 [node name="CheckBodiesInside" type="Area2D" parent="."]
+visible = false
 position = Vector2( 0, -77 )
 monitorable = false
 collision_layer = 0
