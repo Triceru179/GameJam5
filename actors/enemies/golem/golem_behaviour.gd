@@ -13,7 +13,7 @@ func _ready():
 	attack_cooldown_timer.wait_time += (randf() - 0.2) * 5
 	player_min_distance_to_attack = pow((12 + randi() % 4 + 1) * 16, 2)
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	_flip_to_player()
 	
 	match(current_state):
@@ -48,6 +48,10 @@ func _physics_process(delta):
 		State.ATTACK:
 			if anim_player.current_animation != Globals.ANIM_ATTACK:
 				anim_player.play(Globals.ANIM_ATTACK)
+
+func change_golem_color():
+	var i = randi() % 2 + 1
+	change_color(wrapi(current_color_index + i, 0, 3))
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	match anim_name:

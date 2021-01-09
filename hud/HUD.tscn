@@ -1,13 +1,14 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
+[ext_resource path="res://hud/palettes/palette_color_default.png" type="Texture" id=1]
 [ext_resource path="res://hud/health_hud_heart.png" type="Texture" id=2]
 [ext_resource path="res://hud/hud.gd" type="Script" id=3]
 [ext_resource path="res://materials/material_color_swap.tres" type="Material" id=4]
 [ext_resource path="res://hud/palettes/palette_heart_red.png" type="Texture" id=5]
 [ext_resource path="res://actors/palette_swapper/PaletteSwapper.tscn" type="PackedScene" id=6]
-[ext_resource path="res://hud/palettes/palette_orbs_blue.png" type="Texture" id=7]
-[ext_resource path="res://hud/palettes/palette_orbs_yellow.png" type="Texture" id=8]
-[ext_resource path="res://hud/palettes/palette_orbs_red.png" type="Texture" id=9]
+[ext_resource path="res://hud/palettes/palette_color_red.png" type="Texture" id=7]
+[ext_resource path="res://hud/palettes/palette_color_blue.png" type="Texture" id=8]
+[ext_resource path="res://hud/palettes/palette_color_yellow.png" type="Texture" id=9]
 [ext_resource path="res://hud/color_hud_orbs.png" type="Texture" id=10]
 [ext_resource path="res://menu/ChiKareGo2.ttf" type="DynamicFontData" id=11]
 [ext_resource path="res://hud/enemy_count_hud.png" type="Texture" id=12]
@@ -29,6 +30,7 @@ void fragment() {
 [sub_resource type="ShaderMaterial" id=2]
 resource_local_to_scene = true
 shader = SubResource( 1 )
+shader_param/palette = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=3]
 size = 24
@@ -53,9 +55,10 @@ region_rect = Rect2( 0, 0, 64, 16 )
 
 [node name="PaletteSwapper" parent="ColorHUD" instance=ExtResource( 6 )]
 target_sprite = NodePath("..")
-palette_red = ExtResource( 9 )
-palette_blue = ExtResource( 7 )
-palette_yellow = ExtResource( 8 )
+palette_default = ExtResource( 1 )
+palette_red = ExtResource( 7 )
+palette_blue = ExtResource( 8 )
+palette_yellow = ExtResource( 9 )
 
 [node name="HealthHUD" type="Control" parent="."]
 __meta__ = {

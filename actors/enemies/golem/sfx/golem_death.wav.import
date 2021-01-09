@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/golem_death.wav-321b12c139d1fb3685b112c91bdf425f.sample"
+
+[deps]
+
+source_file="res://actors/enemies/golem/sfx/golem_death.wav"
+dest_files=[ "res://.import/golem_death.wav-321b12c139d1fb3685b112c91bdf425f.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

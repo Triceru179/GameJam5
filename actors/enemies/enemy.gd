@@ -16,8 +16,7 @@ func move(direction: Vector2, spd_mod: float = 1):
 	var _er = move_and_slide(direction * actor_data.max_speed * spd_mod * rnd_spd)
 
 func setup_enemy(color_index: int):
-	$BodyPaletteSwapper.change_palette(color_index)
-	current_color_index = color_index
+	change_color(color_index)
 
 func attack(rotation_offset: float = 0):
 	if is_dead:
@@ -32,6 +31,10 @@ func attack(rotation_offset: float = 0):
 	
 	attack_spawner.execute_attack(actor_data.attack, dir, $AttackPoint.global_position,
 		Globals.CollisionLayers.EnemyHitbox, Globals.Colors.PURPLE)
+
+func change_color(color_index):
+	$BodyPaletteSwapper.change_palette(color_index)
+	current_color_index = color_index
 
 func _flip_to_player():
 	if player_detector.player != null:

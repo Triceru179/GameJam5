@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/golem_hurt.wav-638ac79d6a98b1dbb38a9820a990013c.sample"
+
+[deps]
+
+source_file="res://actors/enemies/golem/sfx/golem_hurt.wav"
+dest_files=[ "res://.import/golem_hurt.wav-638ac79d6a98b1dbb38a9820a990013c.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
