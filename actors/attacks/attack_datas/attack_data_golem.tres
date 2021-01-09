@@ -6,5 +6,5 @@
 [resource]
 script = ExtResource( 2 )
 projectile_data = ExtResource( 1 )
-number_of_projectiles = 7
-spread = 360.0
+number_of_projectiles = 2
+spread = 30.0
