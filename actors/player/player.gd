@@ -26,9 +26,8 @@ const DASH_SPEED = 256
 
 const WAVE_ATTACK_UPGRADES = {
 	"2": {"atk_cd_redu": 0.1},
-	"4": {"number": 2, "spread": 15, "proj_speed": 32},
-	"6": {"proj_speed": 16, "number": 2, "spread": 15, "atk_cd_redu": 0.1},
-	"8": {"atk_cd_redu": 0.1},
+	"4": {"number": 2, "spread": 15, "proj_speed": 16},
+	"6": {"proj_speed": 16, "atk_cd_redu": 0.1},
 	
 	"default": {"proj_speed": 0, "number": 0, "spread": 0, "atk_cd": 0},
 }

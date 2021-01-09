@@ -1,6 +1,12 @@
 extends Actor
 class_name Enemy
 
+const ENEMY_WAVE_UPGRADE = {
+	"3": 16,
+	"5": 16,
+	"7": 16,
+}
+
 var rnd_spd: float = 1
 
 onready var attack_cooldown_timer := $AttackCooldown
@@ -13,9 +19,12 @@ func _ready():
 func move(direction: Vector2):
 	var _er = move_and_slide(direction * actor_data.max_speed * rnd_spd)
 
-func setup_enemy(color_index: int):
+func setup_enemy(color_index: int, actual_wave: int = 0):
 	$BodyPaletteSwapper.change_palette(color_index)
 	current_color_index = color_index
+	
+	if ENEMY_WAVE_UPGRADE.has(str(actual_wave)):
+		actor_data.attack.projectile_data.speed += ENEMY_WAVE_UPGRADE[str(actual_wave)]
 
 func attack(rotation_offset: float = 0):
 	var dir = Vector2.RIGHT
@@ -53,7 +62,7 @@ func _on_Health_changed(current_health):
 		emit_signal("died")
 		
 		_play_death_particles(Vector2.ZERO)
-		yield(get_tree().create_timer(0.5), "timeout")
+		yield(get_tree().create_timer(1), "timeout")
 		
 		queue_free()
 	else:

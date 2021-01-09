@@ -4,6 +4,7 @@ class_name Projectile
 var dir := Vector2.ZERO
 var data: ProjectileData = null
 var color_i := 0
+var destroyed := false
 
 onready var sprite := $Sprite
 onready var default_collision_mask = $Hitbox.collision_mask
@@ -33,22 +34,18 @@ func setup_projectile(projectile_data: ProjectileData,
 	$PaletteSwapper.change_palette(color_index)
 
 func destroy_projectile():
+	if destroyed:
+		return
+	
+	destroyed = true
 	dir = Vector2.ZERO
 	$AnimationPlayer.play(Globals.ANIM_DEATH)
 	$HitSFX.play()
 	yield($AnimationPlayer, "animation_finished")
 	
-	$Hitbox/CollisionShape2D.disabled = true
-	visible = false
-	pause_mode = PAUSE_MODE_STOP
-	yield(get_tree().create_timer(0.5),"timeout")
-	
 	queue_free()
 
-func _on_VisibilityNotifier2D_screen_exited():
-	queue_free()
-
-func _on_Hitbox_body_entered(body):
+func _on_Hitbox_body_entered(_body):
 	destroy_projectile()
 
 func _on_Hitbox_area_entered(area):

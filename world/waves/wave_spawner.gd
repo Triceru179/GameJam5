@@ -26,6 +26,9 @@ func _spawn_wave(index):
 			push_error("The size of scene and quantity arrays are different!")
 			return
 		
+		emit_signal("wave_started", str(current_wave + 1), waves.size())
+		$WaveStarted.play()
+		
 		for i in range(0, w_data.enemies_scene.size()):
 			for _t in range(0, w_data.enemies_quantity[i]):
 				var enemy = w_data.enemies_scene[i].instance() as Enemy
@@ -38,7 +41,7 @@ func _spawn_wave(index):
 				pos.y *= y_rand if y_rand != 0 else 1
 				
 				var r_color = randi() % COLORS.size()
-				enemy.setup_enemy(COLORS[r_color])
+				enemy.setup_enemy(COLORS[r_color], current_wave + 1)
 				enemy.connect("died", self, "_on_Enemy_died")
 				enemy.global_position = pos
 				
@@ -46,10 +49,7 @@ func _spawn_wave(index):
 				emit_signal("enemy_count_changed", remaining_enemies)
 				
 				yield(get_tree().create_timer(randf() * 0.1), "timeout")
-		
-		emit_signal("wave_started", str(current_wave + 1), waves.size())
-		$WaveStarted.play()
-		
+	
 	else:
 		push_error("Wave data is null!")
 
