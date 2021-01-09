@@ -11,9 +11,7 @@ func setup_sprite(texture: Texture, offset: Vector2, global_position: Vector2,
 	self.vframes = vframes
 	self.frame = frame
 
-func start_fade(color: Color, init_alpha: float, duration: float):
-	material.set_shader_param("shadow_color", color)
-	
+func start_fade(init_alpha: float, duration: float):
 	$Tween.interpolate_property(material, "shader_param/alpha", init_alpha, 0, duration)
 	$Tween.start()
 	

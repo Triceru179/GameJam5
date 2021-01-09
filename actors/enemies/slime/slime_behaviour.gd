@@ -7,8 +7,6 @@ enum State {
 	ATTACK,
 }
 
-const PLAYER_MIN_DISTANCE_TO_ATTACK = pow(12 * 16, 2)
-
 var current_state: int = State.IDLE
 var jump_direction := Vector2.ZERO
 
@@ -18,6 +16,8 @@ func _ready():
 	._ready()
 	attack_cooldown_timer.wait_time += (randf() - 0.5) * 2
 	jump_cooldown_timer.wait_time += (randf() / 5)
+	
+	player_min_distance_to_attack = pow((12 + randi() % 4 + 1) * 16, 2)
 
 func _physics_process(_delta):
 	match current_state:
@@ -27,7 +27,7 @@ func _physics_process(_delta):
 			
 			if (attack_cooldown_timer.is_stopped()
 					&& player_detector.get_player_sqr_distance_to(global_position)
-					< PLAYER_MIN_DISTANCE_TO_ATTACK):
+					< player_min_distance_to_attack):
 				current_state = State.PREPARE
 				
 			elif jump_cooldown_timer.is_stopped():

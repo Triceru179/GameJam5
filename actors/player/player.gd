@@ -32,8 +32,6 @@ const WAVE_ATTACK_UPGRADES = {
 	"default": {"proj_speed": 0, "number": 0, "spread": 0, "atk_cd": 0},
 }
 
-export(Color) var fade_shadow_color
-
 var look_direction := Vector2.ZERO
 var dash_direction := Vector2.ZERO
 var velocity := Vector2.ZERO
@@ -154,7 +152,7 @@ func _spawn_dash_fade_shadow():
 	
 	shadow.setup_sprite(sprite.texture, sprite.offset, sprite.global_position,
 		body_pivot.scale, sprite.hframes, sprite.vframes, sprite.frame)
-	shadow.start_fade(fade_shadow_color, 0.5, 0.25)
+	shadow.start_fade(0.5, 0.25)
 
 func _get_input():
 	input_vector.x = Input.get_action_strength(Globals.ACTION_RIGHT) - Input.get_action_strength(Globals.ACTION_LEFT)

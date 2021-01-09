@@ -1,0 +1,11 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://projectile/sprites/projectile_magic_big_missile.png" type="Texture" id=1]
+[ext_resource path="res://projectile/projectile_data.gd" type="Script" id=2]
+
+[resource]
+script = ExtResource( 2 )
+texture = ExtResource( 1 )
+hitbox_radius = 4
+speed = 56.0
+rotation_speed = 0.0

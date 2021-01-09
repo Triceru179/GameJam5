@@ -5,6 +5,7 @@
 [ext_resource path="res://actors/enemies/enemy.gd" type="Script" id=4]
 
 [sub_resource type="ShaderMaterial" id=1]
+resource_local_to_scene = true
 shader = ExtResource( 2 )
 
 [sub_resource type="RectangleShape2D" id=2]
@@ -40,6 +41,9 @@ one_shot = true
 autostart = true
 
 [node name="AttackPoint" type="Position2D" parent="." index="7"]
+
+[node name="BodyPaletteSwapper" parent="." index="9"]
+target_sprite = NodePath("../Pivot/BodyPivot/Body")
 
 [node name="HurtSFX" type="AudioStreamPlayer2D" parent="." index="11"]
 max_distance = 196.0

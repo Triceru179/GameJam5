@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://world/shadow/Shadow.tscn" type="PackedScene" id=1]
 [ext_resource path="res://actors/palette_swapper/PaletteSwapper.tscn" type="PackedScene" id=2]
@@ -14,6 +14,9 @@
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 20.0
 height = 28.0
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 30, 10 )
 
 [sub_resource type="Animation" id=2]
 resource_name = "death"
@@ -65,6 +68,7 @@ random_pitch = 1.2
 extents = Vector2( 30, 56 )
 
 [node name="Tower" type="StaticBody2D"]
+collision_mask = 33
 script = ExtResource( 10 )
 
 [node name="BaseShadow" type="Sprite" parent="."]
@@ -83,12 +87,20 @@ position = Vector2( 1, -1 )
 rotation = 1.5708
 shape = SubResource( 1 )
 
+[node name="PushboxProj" type="StaticBody2D" parent="."]
+position = Vector2( 1, -10 )
+collision_layer = 32
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PushboxProj"]
+shape = SubResource( 6 )
+
 [node name="Sphere" type="Node2D" parent="."]
 
 [node name="Sprite" type="Sprite" parent="Sphere"]
 material = ExtResource( 5 )
 texture = ExtResource( 8 )
-offset = Vector2( 0, -110 )
+offset = Vector2( 0, -112 )
 hframes = 8
 
 [node name="PaletteSwapper" parent="Sphere" instance=ExtResource( 2 )]
@@ -115,7 +127,7 @@ bus = "Sound Effects"
 position = Vector2( 0, -77 )
 monitorable = false
 collision_layer = 0
-collision_mask = 16
+collision_mask = 48
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CheckBodiesInside"]
 shape = SubResource( 5 )

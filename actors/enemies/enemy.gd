@@ -2,6 +2,8 @@ extends Actor
 class_name Enemy
 
 var rnd_spd: float = 1
+var player_min_distance_to_attack = pow(10 * 16, 2)
+var min_distance_to_player = pow(16, 2)
 
 onready var attack_cooldown_timer := $AttackCooldown
 onready var player_detector = get_tree().get_current_scene().get_node("World/PlayerDetector")
@@ -10,8 +12,8 @@ func _ready():
 	._ready()
 	rnd_spd = randf() * 0.4 + 0.8
 
-func move(direction: Vector2):
-	var _er = move_and_slide(direction * actor_data.max_speed * rnd_spd)
+func move(direction: Vector2, spd_mod: float = 1):
+	var _er = move_and_slide(direction * actor_data.max_speed * spd_mod * rnd_spd)
 
 func setup_enemy(color_index: int):
 	$BodyPaletteSwapper.change_palette(color_index)
@@ -33,7 +35,7 @@ func attack(rotation_offset: float = 0):
 
 func _flip_to_player():
 	if player_detector.player != null:
-		_flip(-player_detector.get_player_direction_to(self.global_position))
+		_flip(-player_detector.get_player_direction_to(self.global_position).x)
 
 func try_damaging(proj):
 	if !$InvincibilityTimer.is_stopped():

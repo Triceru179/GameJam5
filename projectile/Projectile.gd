@@ -37,9 +37,6 @@ func destroy_projectile():
 	if destroyed:
 		return
 	
-	#sort_enabled = false
-	#z_index += 5
-	
 	destroyed = true
 	dir = Vector2.ZERO
 	$AnimationPlayer.play(Globals.ANIM_DEATH)
