@@ -48,6 +48,7 @@ func _on_Health_changed(current_health):
 	if current_health <= 0:
 		pause_mode = PAUSE_MODE_STOP
 		$Hurtbox/CollisionShape2D.set_deferred("disabled", true)
+		anim_player.stop()
 		visible = false
 		pause_mode = PAUSE_MODE_STOP
 		emit_signal("died")
