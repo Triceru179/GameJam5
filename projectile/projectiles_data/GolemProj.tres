@@ -7,5 +7,5 @@
 script = ExtResource( 2 )
 texture = ExtResource( 1 )
 hitbox_radius = 4
-speed = 56.0
+speed = 64.0
 rotation_speed = 0.0

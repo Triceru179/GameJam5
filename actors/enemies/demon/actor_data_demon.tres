@@ -1,7 +1,7 @@
 [gd_resource type="Resource" load_steps=3 format=2]
 
 [ext_resource path="res://actors/actor_data.gd" type="Script" id=1]
-[ext_resource path="res://actors/attacks/attack_datas/AttackDemon.tres" type="Resource" id=2]
+[ext_resource path="res://actors/attacks/attack_datas/attack_data_demon.tres" type="Resource" id=2]
 
 [resource]
 script = ExtResource( 1 )

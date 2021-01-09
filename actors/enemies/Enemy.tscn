@@ -1,8 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://actors/Actor.tscn" type="PackedScene" id=1]
 [ext_resource path="res://shader/color_swap.shader" type="Shader" id=2]
+[ext_resource path="res://actors/enemies/demon/sfx/demon_death.wav" type="AudioStream" id=3]
 [ext_resource path="res://actors/enemies/enemy.gd" type="Script" id=4]
+[ext_resource path="res://actors/enemies/demon/sfx/demon_hurt.wav" type="AudioStream" id=5]
 
 [sub_resource type="ShaderMaterial" id=1]
 resource_local_to_scene = true
@@ -16,6 +18,14 @@ extents = Vector2( 5, 2 )
 resource_local_to_scene = true
 extents = Vector2( 4, 8 )
 
+[sub_resource type="AudioStreamRandomPitch" id=5]
+resource_local_to_scene = true
+audio_stream = ExtResource( 5 )
+
+[sub_resource type="AudioStreamRandomPitch" id=6]
+resource_local_to_scene = true
+audio_stream = ExtResource( 3 )
+
 [node name="Enemy" instance=ExtResource( 1 )]
 collision_layer = 4
 collision_mask = 5
@@ -25,7 +35,6 @@ script = ExtResource( 4 )
 material = SubResource( 1 )
 
 [node name="Pushbox" parent="." index="2"]
-visible = true
 shape = SubResource( 2 )
 
 [node name="Hurtbox" parent="." index="3"]
@@ -42,11 +51,14 @@ autostart = true
 
 [node name="AttackPoint" type="Position2D" parent="." index="7"]
 
-[node name="BodyPaletteSwapper" parent="." index="9"]
-target_sprite = NodePath("../Pivot/BodyPivot/Body")
-
 [node name="HurtSFX" type="AudioStreamPlayer2D" parent="." index="11"]
-max_distance = 196.0
+stream = SubResource( 5 )
+max_distance = 160.0
+bus = "Sound Effects"
+
+[node name="DeathSFX" type="AudioStreamPlayer2D" parent="." index="12"]
+stream = SubResource( 6 )
+max_distance = 128.0
 bus = "Sound Effects"
 
 [editable path="Hurtbox"]

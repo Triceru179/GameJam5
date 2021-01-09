@@ -48,20 +48,19 @@ func try_damaging(proj):
 		$InvincibilityTimer.start()
 
 func _on_Health_changed(current_health):
-	$HurtSFX.play()
-	
 	if current_health <= 0:
-		pause_mode = PAUSE_MODE_STOP
-		$Hurtbox/CollisionShape2D.set_deferred("disabled", true)
-		anim_player.stop()
-		visible = false
-		pause_mode = PAUSE_MODE_STOP
 		is_dead = true
 		emit_signal("died")
-		
 		_play_death_particles(Vector2.ZERO)
-		yield(get_tree().create_timer(1), "timeout")
+		
+		var death_sfx = $DeathSFX
+		death_sfx.connect("finished", death_sfx, "queue_free")
+		remove_child(death_sfx)
+		get_parent().add_child(death_sfx)
+		death_sfx.global_position = global_position
+		death_sfx.play()
 		
 		queue_free()
 	else:
+		$HurtSFX.play()
 		Globals.blink_white($BodyPaletteSwapper)

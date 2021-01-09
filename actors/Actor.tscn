@@ -48,6 +48,7 @@ position = Vector2( 0, -1 )
 shape = SubResource( 2 )
 
 [node name="Hurtbox" parent="." instance=ExtResource( 3 )]
+visible = false
 monitoring = true
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
@@ -67,7 +68,7 @@ target_sprite = NodePath("../Pivot/BodyPivot/Body")
 
 [node name="SFX" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource( 4 )
-max_distance = 256.0
+max_distance = 160.0
 bus = "Sound Effects"
 [connection signal="changed" from="Health" to="." method="_on_Health_changed"]
 
