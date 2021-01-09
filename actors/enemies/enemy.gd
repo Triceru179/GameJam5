@@ -1,12 +1,6 @@
 extends Actor
 class_name Enemy
 
-const ENEMY_WAVE_UPGRADE = {
-	"3": 16,
-	"5": 16,
-	"7": 16,
-}
-
 var rnd_spd: float = 1
 
 onready var attack_cooldown_timer := $AttackCooldown
@@ -14,7 +8,7 @@ onready var player_detector = get_tree().get_current_scene().get_node("World/Pla
 
 func _ready():
 	._ready()
-	rnd_spd = randf() * 0.2 + 0.9
+	rnd_spd = randf() * 0.4 + 0.8
 
 func move(direction: Vector2):
 	var _er = move_and_slide(direction * actor_data.max_speed * rnd_spd)
@@ -22,9 +16,6 @@ func move(direction: Vector2):
 func setup_enemy(color_index: int, actual_wave: int = 0):
 	$BodyPaletteSwapper.change_palette(color_index)
 	current_color_index = color_index
-	
-	if ENEMY_WAVE_UPGRADE.has(str(actual_wave)):
-		actor_data.attack.projectile_data.speed += ENEMY_WAVE_UPGRADE[str(actual_wave)]
 
 func attack(rotation_offset: float = 0):
 	var dir = Vector2.RIGHT
