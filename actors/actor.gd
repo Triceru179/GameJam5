@@ -34,7 +34,8 @@ func try_damaging(proj):
 	$Health.do_damage(1)
 	$InvincibilityTimer.start()
 	
-	proj.destroy_projectile()
+	if proj:
+		proj.destroy_projectile()
 
 func _flip(value: float):
 	Globals.flip(body_pivot, value, Vector2.RIGHT, 0.7)

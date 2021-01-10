@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Komiku_-_Poupis_incredible_adventures__-_07_Run_against_the_universe_1.ogg-1c20c38cef8162cd7e39c915e2be0514.oggstr"
+
+[deps]
+
+source_file="res://songs/Komiku_-_Poupis_incredible_adventures__-_07_Run_against_the_universe_1.ogg"
+dest_files=[ "res://.import/Komiku_-_Poupis_incredible_adventures__-_07_Run_against_the_universe_1.ogg-1c20c38cef8162cd7e39c915e2be0514.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

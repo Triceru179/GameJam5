@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://actors/enemies/Enemy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://shader/color_swap.shader" type="Shader" id=2]
@@ -91,6 +91,10 @@ shader_param/palette = ExtResource( 3 )
 resource_local_to_scene = true
 extents = Vector2( 7, 2 )
 
+[sub_resource type="RectangleShape2D" id=11]
+resource_local_to_scene = true
+extents = Vector2( 8, 3 )
+
 [sub_resource type="RectangleShape2D" id=2]
 resource_local_to_scene = true
 extents = Vector2( 9, 16 )
@@ -128,27 +132,30 @@ frame = 11
 [node name="Pushbox" parent="." index="2"]
 shape = SubResource( 1 )
 
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+shape = SubResource( 11 )
+
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 position = Vector2( 0, -16 )
 shape = SubResource( 2 )
 
-[node name="AttackCooldown" parent="." index="6"]
+[node name="AttackCooldown" parent="." index="7"]
 wait_time = 6.0
 
-[node name="BodyPaletteSwapper" parent="." index="9"]
+[node name="BodyPaletteSwapper" parent="." index="10"]
 palette_default = ExtResource( 3 )
 palette_red = ExtResource( 5 )
 palette_blue = ExtResource( 6 )
 palette_yellow = ExtResource( 4 )
 
-[node name="SFX" parent="." index="10"]
+[node name="SFX" parent="." index="11"]
 stream = SubResource( 4 )
 max_distance = 256.0
 
-[node name="HurtSFX" parent="." index="11"]
+[node name="HurtSFX" parent="." index="12"]
 stream = SubResource( 5 )
 
-[node name="DeathSFX" parent="." index="12"]
+[node name="DeathSFX" parent="." index="13"]
 stream = SubResource( 6 )
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 

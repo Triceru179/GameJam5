@@ -10,6 +10,8 @@ onready var selectors = [
 ]
 
 func _ready():
+	MusicPlayer.change_playlist([load("res://songs/Komiku_-_Poupis_incredible_adventures__-_70_Ending_4.ogg")])
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	set_current_selection(0)
 	active = true
 	visible = true

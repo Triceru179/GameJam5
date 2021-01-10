@@ -67,3 +67,8 @@ func _on_Health_changed(current_health):
 	else:
 		$HurtSFX.play()
 		Globals.blink_white($BodyPaletteSwapper)
+
+
+func _on_Hitbox_area_entered(area):
+	if area.get_parent() is Player:
+		area.get_parent().try_damaging(null)

@@ -1,4 +1,5 @@
 extends Actor
+class_name Player
 
 signal wand_color_changed(color_index)
 signal magic_upgraded
@@ -110,8 +111,9 @@ func _physics_process(_delta):
 			_flip(dash_direction.x)
 			var _er = move_and_slide(dash_direction * DASH_SPEED)
 			
-			dash_cooldown_timer.start()
+			
 			if dash_duration_timer.is_stopped():
+				dash_cooldown_timer.start()
 				current_state = State.MOVE
 
 func _cycle_color(value: int):

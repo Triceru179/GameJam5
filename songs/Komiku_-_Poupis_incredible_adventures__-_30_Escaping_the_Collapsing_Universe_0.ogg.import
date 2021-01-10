@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Komiku_-_Poupis_incredible_adventures__-_30_Escaping_the_Collapsing_Universe_0.ogg-4bbe8fa88d0ac0d8fb5a38b6d22f0909.oggstr"
+
+[deps]
+
+source_file="res://songs/Komiku_-_Poupis_incredible_adventures__-_30_Escaping_the_Collapsing_Universe_0.ogg"
+dest_files=[ "res://.import/Komiku_-_Poupis_incredible_adventures__-_30_Escaping_the_Collapsing_Universe_0.ogg-4bbe8fa88d0ac0d8fb5a38b6d22f0909.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

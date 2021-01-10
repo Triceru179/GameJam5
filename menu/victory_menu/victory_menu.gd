@@ -8,6 +8,7 @@ onready var selectors = [
 ]
 
 func _ready():
+	MusicPlayer.change_playlist([load("res://songs/Komiku_-_Poupis_incredible_adventures__-_70_Ending_4.ogg")])
 	set_current_selection(0)
 	set_visible(true)
 

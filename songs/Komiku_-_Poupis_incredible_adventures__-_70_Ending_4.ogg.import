@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Komiku_-_Poupis_incredible_adventures__-_70_Ending_4.ogg-d33e9f3b7f0ae66792c06e1a25709d42.oggstr"
+
+[deps]
+
+source_file="res://songs/Komiku_-_Poupis_incredible_adventures__-_70_Ending_4.ogg"
+dest_files=[ "res://.import/Komiku_-_Poupis_incredible_adventures__-_70_Ending_4.ogg-d33e9f3b7f0ae66792c06e1a25709d42.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

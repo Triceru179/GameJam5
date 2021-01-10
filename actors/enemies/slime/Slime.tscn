@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://actors/enemies/Enemy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://actors/enemies/slime/slime_sheet.png" type="Texture" id=2]
@@ -97,6 +97,18 @@ tracks/5/keys = {
 "args": [ ExtResource( 9 ) ],
 "method": "play_sfx"
 } ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Hitbox:monitoring")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
 }
 
 [sub_resource type="Animation" id=2]
@@ -199,6 +211,18 @@ tracks/5/keys = {
 "method": "play_sfx"
 } ]
 }
+tracks/6/type = "value"
+tracks/6/path = NodePath("Hitbox:monitoring")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0.2, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
 
 [sub_resource type="Animation" id=4]
 length = 0.9
@@ -224,6 +248,10 @@ shader_param/palette = ExtResource( 12 )
 resource_local_to_scene = true
 extents = Vector2( 6, 2 )
 
+[sub_resource type="RectangleShape2D" id=11]
+resource_local_to_scene = true
+extents = Vector2( 7, 3 )
+
 [sub_resource type="RectangleShape2D" id=7]
 resource_local_to_scene = true
 extents = Vector2( 6, 5 )
@@ -239,8 +267,7 @@ resource_local_to_scene = true
 audio_stream = ExtResource( 11 )
 
 [node name="Slime" instance=ExtResource( 1 )]
-collision_layer = 16
-collision_mask = 1
+collision_layer = 20
 script = ExtResource( 6 )
 actor_data = ExtResource( 8 )
 
@@ -256,33 +283,30 @@ material = SubResource( 5 )
 texture = ExtResource( 2 )
 offset = Vector2( 0, -14 )
 hframes = 7
-frame = 5
+frame = 1
 
 [node name="Pushbox" parent="." index="2"]
 position = Vector2( 0, -2 )
 shape = SubResource( 6 )
 
-[node name="Hurtbox" parent="." index="3"]
-monitoring = false
+[node name="Hitbox" parent="." index="3"]
+position = Vector2( 0, -2 )
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+shape = SubResource( 11 )
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 position = Vector2( 0, -5 )
 shape = SubResource( 7 )
 
-[node name="AttackCooldown" parent="." index="6"]
+[node name="AttackCooldown" parent="." index="7"]
 wait_time = 4.0
 
-[node name="AttackPoint" parent="." index="7"]
+[node name="AttackPoint" parent="." index="8"]
 position = Vector2( 0, -1 )
 
 [node name="Tween" type="Tween" parent="." index="9"]
 playback_process_mode = 0
-
-[node name="BodyPaletteSwapper" parent="." index="10"]
-palette_default = ExtResource( 12 )
-palette_red = ExtResource( 4 )
-palette_blue = ExtResource( 3 )
-palette_yellow = ExtResource( 5 )
 
 [node name="JumpDuration" type="Timer" parent="." index="11"]
 one_shot = true
@@ -291,13 +315,19 @@ one_shot = true
 wait_time = 0.1
 one_shot = true
 
-[node name="SFX" parent="." index="13"]
+[node name="BodyPaletteSwapper" parent="." index="13"]
+palette_default = ExtResource( 12 )
+palette_red = ExtResource( 4 )
+palette_blue = ExtResource( 3 )
+palette_yellow = ExtResource( 5 )
+
+[node name="SFX" parent="." index="14"]
 stream = SubResource( 9 )
 
-[node name="HurtSFX" parent="." index="14"]
+[node name="HurtSFX" parent="." index="15"]
 stream = SubResource( 8 )
 
-[node name="DeathSFX" parent="." index="15"]
+[node name="DeathSFX" parent="." index="16"]
 stream = SubResource( 10 )
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 

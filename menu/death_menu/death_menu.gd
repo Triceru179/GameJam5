@@ -56,7 +56,8 @@ func set_visible(is_visible):
 		if node.get_indexed("visible") != null:
 			node.visible = is_visible
 
-func _on_Player_died():	
+func _on_Player_died():
+	MusicPlayer.change_playlist([load("res://songs/Komiku_-_Poupis_incredible_adventures__-_70_Ending_4.ogg")])
 	ScreenAdjuster.adjust_screen_saturation(0, 1)
 	active = !active
 	set_visible(true)
