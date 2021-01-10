@@ -11,6 +11,7 @@ var current_state = State.IDLE
 func _ready():
 	._ready()
 	attack_cooldown_timer.wait_time += (randf() - 0.2) * 5
+	attack_cooldown_timer.start()
 	player_min_distance_to_attack = pow((12 + randi() % 4 + 1) * 16, 2)
 
 func _physics_process(_delta):

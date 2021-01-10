@@ -15,6 +15,7 @@ onready var jump_cooldown_timer := $JumpCooldown
 func _ready():
 	._ready()
 	attack_cooldown_timer.wait_time += (randf() - 0.5) * 2
+	attack_cooldown_timer.start()
 	jump_cooldown_timer.wait_time += (randf() / 5)
 	
 	player_min_distance_to_attack = pow((12 + randi() % 4 + 1) * 16, 2)

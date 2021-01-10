@@ -19,6 +19,7 @@ onready var dash_duration_timer := $DashDuration
 func _ready():
 	._ready()
 	attack_cooldown_timer.wait_time += randf() * 2
+	attack_cooldown_timer.start()
 	dash_cooldown_timer.wait_time -= randf()
 	
 	player_min_distance_to_attack = pow((6 + randi() % 4 + 1) * 16, 2)
