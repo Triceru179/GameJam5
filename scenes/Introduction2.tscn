@@ -33,13 +33,15 @@ margin_right = 310.0
 margin_bottom = 180.0
 rect_min_size = Vector2( 300, 180 )
 custom_fonts/font = SubResource( 1 )
+custom_constants/line_spacing = 0
 text = "The crystal, seeing itself in danger, calls for the one that can protect it. The colorful Mage.
-
-\"Help... Help me... please! I need your help!\"
 
 You, the mage, hearing it's cry, rushes there to aid it.
 
+Remember, you will be connected to the crystal, if you die, it will die too...
+
 Will you be able to protect this beautiful world we live in?
+
 
 
 press spacebar or enter to continue"
