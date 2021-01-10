@@ -36,7 +36,9 @@ custom_fonts/font = SubResource( 1 )
 text = "A long time ago, the gods, watching a boring dark world, created a big round crystal and a tower for holding it high.
 The crystal was responsible for managing all the colors in the world, and for that, it got it's own soul.
 
-But now, after hundreds of years, hordes of monsters coming from the shadows threaten to destroy it and rob all the colors, so that the world can return to being enveloped in darkness once again."
+But now, after hundreds of years, hordes of monsters coming from the shadows threaten to destroy it and rob all the colors, so that the world can return to being enveloped in darkness once again.
+
+press spacebar or enter to continue"
 align = 1
 valign = 1
 autowrap = true
