@@ -39,7 +39,10 @@ text = "The crystal, seeing itself in danger, calls for the one that can protect
 
 You, the mage, hearing it's cry, rushes there to aid it.
 
-Will you be able to protect this beautiful world we live in?"
+Will you be able to protect this beautiful world we live in?
+
+
+press spacebar or enter to continue"
 align = 1
 valign = 1
 autowrap = true
