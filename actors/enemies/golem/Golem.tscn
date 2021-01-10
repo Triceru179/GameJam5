@@ -13,7 +13,7 @@
 [ext_resource path="res://actors/enemies/golem/sfx/golem_death.wav" type="AudioStream" id=11]
 [ext_resource path="res://actors/enemies/golem/sfx/golem_attack.wav" type="AudioStream" id=12]
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=1]
 resource_name = "attack"
 tracks/0/type = "value"
 tracks/0/path = NodePath("Pivot/BodyPivot/Body:frame")
@@ -48,7 +48,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=2]
 resource_name = "idle"
 loop = true
 step = 0.25
@@ -65,7 +65,7 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3 ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=3]
 resource_name = "move"
 length = 0.8
 loop = true
@@ -82,33 +82,33 @@ tracks/0/keys = {
 "values": [ 4, 5, 6, 7 ]
 }
 
-[sub_resource type="ShaderMaterial" id=7]
+[sub_resource type="ShaderMaterial" id=4]
 resource_local_to_scene = true
 shader = ExtResource( 2 )
 shader_param/palette = ExtResource( 3 )
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=5]
 resource_local_to_scene = true
 extents = Vector2( 7, 2 )
 
-[sub_resource type="RectangleShape2D" id=11]
+[sub_resource type="RectangleShape2D" id=6]
 resource_local_to_scene = true
 extents = Vector2( 8, 3 )
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=7]
 resource_local_to_scene = true
 extents = Vector2( 9, 16 )
 
-[sub_resource type="AudioStreamRandomPitch" id=4]
+[sub_resource type="AudioStreamRandomPitch" id=8]
 resource_local_to_scene = true
 random_pitch = 1.6
 
-[sub_resource type="AudioStreamRandomPitch" id=5]
+[sub_resource type="AudioStreamRandomPitch" id=9]
 resource_local_to_scene = true
 audio_stream = ExtResource( 10 )
 random_pitch = 1.6
 
-[sub_resource type="AudioStreamRandomPitch" id=6]
+[sub_resource type="AudioStreamRandomPitch" id=10]
 resource_local_to_scene = true
 audio_stream = ExtResource( 11 )
 random_pitch = 1.4
@@ -118,26 +118,26 @@ script = ExtResource( 8 )
 actor_data = ExtResource( 9 )
 
 [node name="AnimationPlayer" parent="." index="0"]
-anims/attack = SubResource( 10 )
-anims/idle = SubResource( 8 )
-anims/move = SubResource( 9 )
+anims/attack = SubResource( 1 )
+anims/idle = SubResource( 2 )
+anims/move = SubResource( 3 )
 
 [node name="Body" parent="Pivot/BodyPivot" index="1"]
-material = SubResource( 7 )
+material = SubResource( 4 )
 texture = ExtResource( 7 )
 offset = Vector2( 0, -24 )
 hframes = 14
 frame = 11
 
 [node name="Pushbox" parent="." index="2"]
-shape = SubResource( 1 )
+shape = SubResource( 5 )
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
-shape = SubResource( 11 )
+shape = SubResource( 6 )
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 position = Vector2( 0, -16 )
-shape = SubResource( 2 )
+shape = SubResource( 7 )
 
 [node name="AttackCooldown" parent="." index="7"]
 wait_time = 6.0
@@ -149,14 +149,14 @@ palette_blue = ExtResource( 6 )
 palette_yellow = ExtResource( 4 )
 
 [node name="SFX" parent="." index="11"]
-stream = SubResource( 4 )
+stream = SubResource( 8 )
 max_distance = 256.0
 
 [node name="HurtSFX" parent="." index="12"]
-stream = SubResource( 5 )
+stream = SubResource( 9 )
 
 [node name="DeathSFX" parent="." index="13"]
-stream = SubResource( 6 )
+stream = SubResource( 10 )
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 
 [editable path="Hurtbox"]

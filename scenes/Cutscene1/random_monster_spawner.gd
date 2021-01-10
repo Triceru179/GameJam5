@@ -8,6 +8,8 @@ func _ready():
 	
 	var monsters = [
 		load("res://actors/enemies/slime/Slime.tscn"),
+		load("res://actors/enemies/demon/Demon.tscn"),
+		load("res://actors/enemies/golem/Golem.tscn"),
 	]
 	
 	var colors = [
@@ -20,7 +22,7 @@ func _ready():
 		var m = monsters[randi() % monsters.size()].instance()
 		$Monsters.add_child(m)
 		m.global_position = (Vector2(randf() - 0.5, randf() - 0.5) * 148
-			+ Vector2(320 / 2, 180 / 2) - Vector2(312, 0))
+			+ Vector2(320 / 2, 180 / 2) - Vector2(312, 32))
 		
 		m.setup_enemy(colors[randi() % colors.size()])
 
