@@ -68,7 +68,8 @@ _global_script_class_icons={
 
 [application]
 
-config/name="GameJam5"
+config/name="Colorful Tower"
+config/description="You have been called to protect the colors of the world, can you do it?"
 run/main_scene="res://scenes/MainMenu.tscn"
 config/icon="res://icon.png"
 
