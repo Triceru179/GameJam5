@@ -10,7 +10,7 @@ Colorful Tower is a 2D top-down shooter bullet hell game made in two weeks for G
 
 <h2>Game Concept<h2>
 
-    <p>You need to survive against 10 waves of different colored monsters and switch between the colors to deal damage</p>
+    You need to survive against 10 waves of different colored monsters and switch between the colors to deal damage
     
 ![gamejaajscreen1](https://user-images.githubusercontent.com/75907263/104138814-72fef780-5385-11eb-9369-01538d839606.png)
 
