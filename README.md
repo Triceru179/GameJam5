@@ -1,6 +1,6 @@
 <h1>Godot Game<h1>
 
-<h1>Game Jaaj 5 - Developed by Noise and Tricer<h1>
+<h1 style=font-size:20px>Game Jaaj 5 - Developed by Noise and Tricer<h1>
   
 <p>This game was developed in a Game Jam known as Game JAAJ</p>
 
@@ -24,14 +24,3 @@
 <h1>How to play<h1>
   
  Just click the link and download it: https://gamejolt.com/games/colorful_tower/574491
-
-
-<style>
-body {
-  color: white;
-}
-p{
-  font-size: 16px;
-  font-weight: lighter; 
-}
-</style>
