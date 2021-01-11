@@ -6,20 +6,20 @@
 
 ![gamejaaj5](https://user-images.githubusercontent.com/75907263/104138308-0fbf9600-5382-11eb-9645-5e1e224fc3ee.png)
 
-Colorful Tower is a 2D top-down shooter bullet hell game made in two weeks for Game jaaj 5 (http://jams.gamejolt.io/game_jaaj5/games)
+<p>Colorful Tower is a 2D top-down shooter bullet hell game made in two weeks for Game jaaj 5 (http://jams.gamejolt.io/game_jaaj5/games)</p>
 
 <h1>Game Concept<h1>
 
-<p>You need to survive against 10 waves of different colored monsters and switch between the colors to deal damage<p/>
+<p>You need to survive against 10 waves of different colored monsters and switch between the colors to deal damage</p>
     
 ![gamejaajscreen1](https://user-images.githubusercontent.com/75907263/104138814-72fef780-5385-11eb-9369-01538d839606.png)
 
 <h1>Development Process<h1>
 
- We basically used godot engine to do everthing and GLSL to control the system of colors
- Sprites were made in aseprite
+ <p>We basically used godot engine to do everthing and GLSL to control the system of colors</p>
+ <p>Sprites were made in aseprite</p>
     
- Obs: Some scripts are not too much optimized due the time (as menus scripts in general), but we felt that we learnt a lot :)
+ <p>Obs: Some scripts are not too much optimized due the time (as menus scripts in general), but we felt that we learnt a lot :)</p>
     
 <h1>How to play<h1>
   
