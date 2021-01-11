@@ -1,6 +1,6 @@
 <h1>Godot Game<h1>
 
-<h1 style=font-size:1px>Game Jaaj 5 - Developed by Noise and Tricer<h1>
+<h1 style=font-size:1px;>Game Jaaj 5 - Developed by Noise and Tricer<h1>
   
 <p>This game was developed in a Game Jam known as Game JAAJ</p>
 
