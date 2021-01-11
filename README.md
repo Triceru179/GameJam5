@@ -24,3 +24,14 @@
 <h1>How to play<h1>
   
  Just click the link and download it: https://gamejolt.com/games/colorful_tower/574491
+
+
+<style>
+body {
+  color: white;
+}
+p{
+  font-size: 16px;
+  font-weight: lighter; 
+}
+</style>
