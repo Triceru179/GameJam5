@@ -23,4 +23,4 @@ Colorful Tower is a 2D top-down shooter bullet hell game made in two weeks for G
 ## How to play
  Just click the link and download it: https://gamejolt.com/games/colorful_tower/574491
 
- Game Demo: https://www.youtube.com/watch?v=njdlDsR4Qd8
+ Short gameplay video: https://www.youtube.com/watch?v=njdlDsR4Qd8
