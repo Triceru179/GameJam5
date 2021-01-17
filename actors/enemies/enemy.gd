@@ -30,7 +30,7 @@ func attack(rotation_offset: float = 0):
 	dir = Globals.angle_to_vector(angle)
 	
 	attack_spawner.execute_attack(actor_data.attack, dir, $AttackPoint.global_position,
-		Globals.CollisionLayers.EnemyHitbox, Globals.Colors.PURPLE)
+		true, Globals.Colors.PURPLE)
 
 func change_color(color_index):
 	$BodyPaletteSwapper.change_palette(color_index)
@@ -67,7 +67,6 @@ func _on_Health_changed(current_health):
 	else:
 		$HurtSFX.play()
 		Globals.blink_white($BodyPaletteSwapper)
-
 
 func _on_Hitbox_area_entered(area):
 	if area.get_parent() is Player:

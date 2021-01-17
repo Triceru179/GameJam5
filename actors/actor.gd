@@ -33,7 +33,7 @@ func try_damaging(proj):
 	
 	$Health.do_damage(1)
 	$InvincibilityTimer.start()
-	
+
 	if proj:
 		proj.destroy_projectile()
 

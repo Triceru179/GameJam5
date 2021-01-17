@@ -4,7 +4,7 @@ class_name AttackSpawner
 const PROJECTILE_SCENE = preload("res://projectile/Projectile.tscn")
 
 func execute_attack(attack_data: AttackData, direction: Vector2, position: Vector2,
-		collision_layer: int, color_index: int):
+		is_enemy_projectile: bool, color_index: int):
 	var proj_node = get_tree().get_current_scene().get_node_or_null("World/Projectiles")
 	
 	if proj_node == null:
@@ -31,4 +31,4 @@ func execute_attack(attack_data: AttackData, direction: Vector2, position: Vecto
 		proj.position = position
 		proj.rotation = angle
 		proj.setup_projectile(attack_data.projectile_data,
-			rot_vec, collision_layer, color_index)
+			rot_vec, is_enemy_projectile, color_index)

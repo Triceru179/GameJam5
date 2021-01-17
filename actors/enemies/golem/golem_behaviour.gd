@@ -51,6 +51,14 @@ func _physics_process(_delta):
 				anim_player.play(Globals.ANIM_ATTACK)
 
 func change_golem_color():
+	var inv_timer = $InvincibilityTimer
+	if inv_timer.is_stopped():
+		_change_color()
+	else:
+		yield(inv_timer, "timeout")
+		_change_color()
+
+func _change_color():
 	var i = randi() % 2 + 1
 	change_color(wrapi(current_color_index + i, 0, 3))
 

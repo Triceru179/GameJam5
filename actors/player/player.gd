@@ -142,7 +142,7 @@ func attack(rotation_offset: float = 0):
 	
 	attack_spawner.execute_attack(player_attack_data, dir,
 		$Pivot/WeaponPivot/Weapon/AttackPoint.global_position,
-		Globals.CollisionLayers.PlayerHitbox, current_color_index)
+		false, current_color_index)
 	
 	_restart_timer()
 

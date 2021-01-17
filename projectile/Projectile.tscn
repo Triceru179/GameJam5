@@ -10,9 +10,7 @@
 [ext_resource path="res://materials/material_color_swap.tres" type="Material" id=8]
 [ext_resource path="res://projectile/sfx/projectile_hit.wav" type="AudioStream" id=9]
 
-[sub_resource type="CircleShape2D" id=1]
-resource_local_to_scene = true
-radius = 1.0
+[sub_resource type="CircleShape2D" id=5]
 
 [sub_resource type="Animation" id=2]
 resource_name = "death"
@@ -96,13 +94,14 @@ material = ExtResource( 8 )
 rotation = 0.785398
 texture = ExtResource( 2 )
 hframes = 4
+frame = 2
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 16
 collision_mask = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
-shape = SubResource( 1 )
+shape = SubResource( 5 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/death = SubResource( 2 )
@@ -119,10 +118,19 @@ palette_purple = ExtResource( 4 )
 stream = SubResource( 4 )
 volume_db = -20.0
 max_distance = 196.0
+bus = "Sound Effects"
 
 [node name="TimeTilDestroy" type="Timer" parent="."]
 wait_time = 6.0
 one_shot = true
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+process_parent = true
+physics_process_parent = true
 [connection signal="area_entered" from="Hitbox" to="." method="_on_Hitbox_area_entered"]
 [connection signal="body_entered" from="Hitbox" to="." method="_on_Hitbox_body_entered"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="timeout" from="TimeTilDestroy" to="." method="_on_TimeTilDestroy_timeout"]
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="destroy_projectile"]
