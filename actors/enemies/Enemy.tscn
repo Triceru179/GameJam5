@@ -12,21 +12,21 @@ shader = ExtResource( 2 )
 resource_local_to_scene = true
 extents = Vector2( 5, 2 )
 
-[sub_resource type="RectangleShape2D" id=7]
+[sub_resource type="RectangleShape2D" id=3]
 resource_local_to_scene = true
 extents = Vector2( 6, 3 )
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=4]
 resource_local_to_scene = true
 extents = Vector2( 4, 8 )
-
-[sub_resource type="AudioStreamRandomPitch" id=8]
-resource_local_to_scene = true
 
 [sub_resource type="AudioStreamRandomPitch" id=5]
 resource_local_to_scene = true
 
 [sub_resource type="AudioStreamRandomPitch" id=6]
+resource_local_to_scene = true
+
+[sub_resource type="AudioStreamRandomPitch" id=7]
 resource_local_to_scene = true
 
 [node name="Enemy" instance=ExtResource( 1 )]
@@ -48,14 +48,14 @@ collision_layer = 0
 collision_mask = 128
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" index="0"]
-shape = SubResource( 7 )
+shape = SubResource( 3 )
 
 [node name="Hurtbox" parent="." index="4"]
 collision_layer = 512
 collision_mask = 64
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 
 [node name="AttackCooldown" type="Timer" parent="." index="7"]
 wait_time = 5.0
@@ -65,15 +65,15 @@ autostart = true
 [node name="AttackPoint" type="Position2D" parent="." index="8"]
 
 [node name="SFX" parent="." index="11"]
-stream = SubResource( 8 )
+stream = SubResource( 5 )
 
 [node name="HurtSFX" type="AudioStreamPlayer2D" parent="." index="12"]
-stream = SubResource( 5 )
+stream = SubResource( 6 )
 max_distance = 160.0
 bus = "Sound Effects"
 
 [node name="DeathSFX" type="AudioStreamPlayer2D" parent="." index="13"]
-stream = SubResource( 6 )
+stream = SubResource( 7 )
 max_distance = 128.0
 bus = "Sound Effects"
 [connection signal="area_entered" from="Hitbox" to="." method="_on_Hitbox_area_entered"]

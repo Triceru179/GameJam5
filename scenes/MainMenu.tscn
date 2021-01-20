@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://menu/ChiKareGo2.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://menu/Chicago.tres" type="DynamicFont" id=2]
@@ -6,6 +6,12 @@
 [ext_resource path="res://MenuAccept.tscn" type="PackedScene" id=4]
 [ext_resource path="res://MenuSelect.tscn" type="PackedScene" id=5]
 [ext_resource path="res://menu/main_menu/main_options.gd" type="Script" id=6]
+[ext_resource path="res://menu/sprites/slider.png" type="Texture" id=7]
+[ext_resource path="res://menu/sprites/slider_2.png" type="Texture" id=8]
+[ext_resource path="res://menu/sprites/slider_grabber_2.png" type="Texture" id=9]
+[ext_resource path="res://menu/sprites/slider_grabber.png" type="Texture" id=10]
+[ext_resource path="res://menu/sprites/checker_checked.png" type="Texture" id=11]
+[ext_resource path="res://menu/sprites/checker_unchecked.png" type="Texture" id=12]
 
 [sub_resource type="DynamicFont" id=1]
 size = 14
@@ -14,6 +20,20 @@ font_data = ExtResource( 1 )
 [sub_resource type="DynamicFont" id=2]
 size = 24
 font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxTexture" id=4]
+texture = ExtResource( 7 )
+region_rect = Rect2( 0, 0, 9, 9 )
+margin_left = 2.0
+margin_right = 2.0
+margin_top = 1.0
+margin_bottom = 1.0
+
+[sub_resource type="StyleBoxTexture" id=5]
+texture = ExtResource( 8 )
+region_rect = Rect2( 0, 0, 9, 9 )
+margin_left = 2.0
+margin_right = 2.0
 
 [sub_resource type="DynamicFont" id=3]
 size = 10
@@ -35,6 +55,7 @@ __meta__ = {
 }
 
 [node name="MainMenu" type="MarginContainer" parent="."]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 3 )
@@ -155,7 +176,6 @@ text = "Exit"
 [node name="MenuSelect" parent="MainMenu" instance=ExtResource( 5 )]
 
 [node name="OptionsMenu" type="MarginContainer" parent="."]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 6 )
@@ -174,9 +194,9 @@ __meta__ = {
 
 [node name="VBoxContainer" type="VBoxContainer" parent="OptionsMenu/CenterContainer2"]
 margin_left = 67.0
-margin_top = 36.0
+margin_top = 39.0
 margin_right = 252.0
-margin_bottom = 143.0
+margin_bottom = 140.0
 custom_constants/separation = 20
 
 [node name="Title" type="CenterContainer" parent="OptionsMenu/CenterContainer2/VBoxContainer"]
@@ -194,117 +214,132 @@ text = "Options"
 [node name="CenterContainer2" type="CenterContainer" parent="OptionsMenu/CenterContainer2/VBoxContainer"]
 margin_top = 43.0
 margin_right = 185.0
-margin_bottom = 107.0
+margin_bottom = 101.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="OptionsMenu/CenterContainer2/VBoxContainer/CenterContainer2"]
 margin_right = 185.0
-margin_bottom = 64.0
+margin_bottom = 58.0
 alignment = 1
 
 [node name="CenterContainer" type="CenterContainer" parent="OptionsMenu/CenterContainer2/VBoxContainer/CenterContainer2/VBoxContainer"]
 margin_right = 185.0
-margin_bottom = 24.0
+margin_bottom = 22.0
 
 [node name="Fullscreen" type="HBoxContainer" parent="OptionsMenu/CenterContainer2/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer"]
 margin_right = 185.0
-margin_bottom = 24.0
+margin_bottom = 22.0
 rect_min_size = Vector2( 185, 0 )
 alignment = 1
 
 [node name="OptionName" type="Label" parent="OptionsMenu/CenterContainer2/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer/Fullscreen"]
-margin_left = 48.0
-margin_top = 5.0
-margin_right = 109.0
-margin_bottom = 19.0
+margin_left = 50.0
+margin_top = 4.0
+margin_right = 111.0
+margin_bottom = 18.0
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "Fullscreen"
 
 [node name="OptionFullscren" type="CheckBox" parent="OptionsMenu/CenterContainer2/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer/Fullscreen"]
-margin_left = 113.0
-margin_right = 137.0
-margin_bottom = 24.0
+margin_left = 110.0
+margin_right = 130.0
+margin_bottom = 22.0
+grow_horizontal = 2
+grow_vertical = 2
 focus_mode = 0
+custom_icons/radio_checked = ExtResource( 11 )
+custom_icons/checked = ExtResource( 11 )
+custom_icons/radio_unchecked = ExtResource( 12 )
+custom_icons/unchecked = ExtResource( 12 )
 enabled_focus_mode = 0
 
 [node name="CenterContainer3" type="CenterContainer" parent="OptionsMenu/CenterContainer2/VBoxContainer/CenterContainer2/VBoxContainer"]
-margin_top = 28.0
+margin_top = 26.0
 margin_right = 185.0
-margin_bottom = 44.0
+margin_bottom = 40.0
 
 [node name="MusicVolume" type="HBoxContainer" parent="OptionsMenu/CenterContainer2/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer3"]
 margin_right = 185.0
-margin_bottom = 16.0
+margin_bottom = 14.0
 rect_min_size = Vector2( 185, 0 )
 alignment = 2
 
 [node name="OptionName" type="Label" parent="OptionsMenu/CenterContainer2/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer3/MusicVolume"]
-margin_left = 35.0
-margin_top = 1.0
-margin_right = 116.0
-margin_bottom = 15.0
+margin_left = 31.0
+margin_right = 112.0
+margin_bottom = 14.0
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "Music Volume"
 
 [node name="MusicSlider" type="HSlider" parent="OptionsMenu/CenterContainer2/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer3/MusicVolume"]
-margin_left = 120.0
-margin_right = 170.0
-margin_bottom = 16.0
+margin_left = 116.0
+margin_right = 166.0
+margin_bottom = 14.0
 rect_min_size = Vector2( 50, 0 )
 size_flags_vertical = 1
 size_flags_stretch_ratio = 0.0
-max_value = 1.0
-step = 0.05
+custom_icons/grabber_disabled = ExtResource( 9 )
+custom_icons/grabber_highlight = ExtResource( 10 )
+custom_icons/grabber = ExtResource( 10 )
+custom_styles/slider = SubResource( 4 )
+custom_styles/grabber_area_highlight = SubResource( 5 )
+custom_styles/grabber_area = SubResource( 5 )
+max_value = 10.0
+step = 0.1
+rounded = true
 
 [node name="MusicVolume" type="Label" parent="OptionsMenu/CenterContainer2/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer3/MusicVolume"]
-margin_left = 174.0
-margin_top = 1.0
+margin_left = 170.0
 margin_right = 185.0
-margin_bottom = 15.0
-rect_min_size = Vector2( 11, 0 )
+margin_bottom = 14.0
+rect_min_size = Vector2( 15, 0 )
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "0"
 
 [node name="CenterContainer4" type="CenterContainer" parent="OptionsMenu/CenterContainer2/VBoxContainer/CenterContainer2/VBoxContainer"]
-margin_top = 48.0
+margin_top = 44.0
 margin_right = 185.0
-margin_bottom = 64.0
+margin_bottom = 58.0
 rect_min_size = Vector2( 157, 0 )
 
 [node name="FxVolume" type="HBoxContainer" parent="OptionsMenu/CenterContainer2/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer4"]
 margin_right = 185.0
-margin_bottom = 16.0
+margin_bottom = 14.0
 rect_min_size = Vector2( 185, 0 )
 alignment = 2
 
 [node name="OptionName" type="Label" parent="OptionsMenu/CenterContainer2/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer4/FxVolume"]
-margin_left = 55.0
-margin_top = 1.0
-margin_right = 116.0
-margin_bottom = 15.0
+margin_left = 51.0
+margin_right = 112.0
+margin_bottom = 14.0
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "FX Volume"
 
 [node name="FxSlider" type="HSlider" parent="OptionsMenu/CenterContainer2/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer4/FxVolume"]
-margin_left = 120.0
-margin_right = 170.0
-margin_bottom = 16.0
+margin_left = 116.0
+margin_right = 166.0
+margin_bottom = 14.0
 rect_min_size = Vector2( 50, 0 )
-max_value = 1.0
+size_flags_vertical = 1
+size_flags_stretch_ratio = 0.0
+custom_icons/grabber_disabled = ExtResource( 9 )
+custom_icons/grabber_highlight = ExtResource( 10 )
+custom_icons/grabber = ExtResource( 10 )
+custom_styles/slider = SubResource( 4 )
+custom_styles/grabber_area_highlight = SubResource( 5 )
+custom_styles/grabber_area = SubResource( 5 )
+max_value = 10.0
 step = 0.1
-__meta__ = {
-"_edit_use_anchors_": false
-}
+rounded = true
 
 [node name="FxVolume" type="Label" parent="OptionsMenu/CenterContainer2/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer4/FxVolume"]
-margin_left = 174.0
-margin_top = 1.0
+margin_left = 170.0
 margin_right = 185.0
-margin_bottom = 15.0
-rect_min_size = Vector2( 11, 0 )
+margin_bottom = 14.0
+rect_min_size = Vector2( 15, 0 )
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "0"

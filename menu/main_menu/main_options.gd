@@ -7,8 +7,8 @@ func _ready():
 	visible = false
 	
 	$CenterContainer2/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer/Fullscreen/OptionFullscren.pressed = OS.window_fullscreen
-	get_node(slider_fx).value = db2linear(AudioServer.get_bus_volume_db(1))
-	get_node(slider_music).value = db2linear(AudioServer.get_bus_volume_db(2))
+	get_node(slider_fx).value = db2linear(AudioServer.get_bus_volume_db(1)) * 10
+	get_node(slider_music).value = db2linear(AudioServer.get_bus_volume_db(2)) * 10
 
 func _process(_delta):
 	if visible && Input.is_action_just_pressed("ui_cancel"):
@@ -32,11 +32,11 @@ func _return_to_main_menu():
 	main_menu.active = true
 
 func _on_FxSlider_value_changed(value):
-	$CenterContainer2/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer4/FxVolume/FxVolume.text = str(int(value * 10))
-	_adjust_bus_volume(1, value)
+	$CenterContainer2/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer4/FxVolume/FxVolume.text = str(value)
+	_adjust_bus_volume(1, value / 10)
 
 func _on_MusicSlider_value_changed(value):
-	$CenterContainer2/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer3/MusicVolume/MusicVolume.text = str(int(value * 10))
+	$CenterContainer2/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer3/MusicVolume/MusicVolume.text = str(value)
 	_adjust_bus_volume(2, value)
 
 func _on_OptionFullscren_toggled(button_pressed):
